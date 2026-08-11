@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khảo sát — Hive Warfare Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0f;
+    color: #e8e8e8;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 2.5rem; }
+  .brand { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: #b8956a; }
+  .title { font-size: 1.75rem; font-weight: 700; margin-top: 0.5rem; color: #fff; }
+  .subtitle { color: #8a8a9a; margin-top: 0.5rem; font-size: 0.95rem; }
+
+  /* Progress */
+  .progress { margin-bottom: 2rem; }
+  .progress-bar { height: 4px; background: #1e1e28; border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #b8956a, #e8c97a); transition: width 0.4s ease; }
+  .progress-text { text-align: right; font-size: 0.75rem; color: #6a6a7a; margin-top: 0.35rem; }
+
+  /* Question card */
+  .question-card {
+    background: #12121a;
+    border: 1px solid #1e1e2a;
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .q-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #b8956a; margin-bottom: 0.5rem; }
+  .q-text { font-size: 1.05rem; font-weight: 500; color: #e0e0e8; line-height: 1.5; }
+
+  /* Options */
+  .options { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+  .option {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    background: #1a1a24;
+    border: 1px solid #252535;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .option:hover { border-color: #3a3a4a; background: #1e1e2a; }
+  .option.selected { border-color: #b8956a; background: #1e1a14; }
+
+  .option-radio {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid #3a3a4a; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s ease;
+  }
+  .option.selected .option-radio { border-color: #b8956a; }
+  .option.selected .option-radio::after {
+    content: ''; width: 8px; height: 8px; border-radius: 50%; background: #b8956a;
+  }
+  .option-text { font-size: 0.95rem; color: #c0c0cc; }
+
+  /* Text input */
+  .text-input {
+    width: 100%; padding: 0.8rem 1rem;
+    background: #1a1a24; border: 1px solid #252535; border-radius: 8px;
+    color: #e0e0e8; font-size: 0.95rem;
+    outline: none; transition: border-color 0.15s ease;
+  }
+  .text-input:focus { border-color: #b8956a; }
+
+  /* Navigation */
+  .nav { display: flex; gap: 1rem; margin-top: 1.5rem; }
+  .btn {
+    padding: 0.85rem 1.75rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.15s ease;
+  }
+  .btn-primary { background: #b8956a; color: #0a0a0f; }
+  .btn-primary:hover { background: #c9a87a; }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-secondary { background: #1e1e2a; color: #c0c0cc; border: 1px solid #252535; }
+  .btn-secondary:hover { background: #252535; }
+  .btn-block { width: 100%; text-align: center; justify-content: center; display: flex; }
+
+  /* Result */
+  .result-card { text-align: center; padding: 2rem; }
+  .result-emoji { font-size: 3rem; }
+  .result-title { font-size: 1.35rem; font-weight: 700; margin-top: 1rem; }
+  .result-desc { color: #8a8a9a; margin-top: 0.75rem; line-height: 1.6; }
+  .product-card {
+    background: #1a1a24; border: 1px solid #252535; border-radius: 10px;
+    padding: 1.25rem; margin: 1rem 0; text-align: left;
+  }
+  .product-name { font-weight: 600; color: #e0e0e8; }
+  .product-price { color: #b8956a; font-size: 1.1rem; font-weight: 700; margin-top: 0.25rem; }
+  .product-desc { color: #7a7a8a; font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.5; }
+
+  .hidden { display: none !important; }
+  .error { color: #e87c7c; font-size: 0.85rem; margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">Hive Warfare Academy</div>
+    <h1 class="title">Khảo sát cá nhân hóa</h1>
+    <p class="subtitle">3 câu hỏi giúp chúng tôi tìm sản phẩm phù hợp nhất cho bạn</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">1 / 3</div>
+  </div>
+
+  <!-- Form -->
+  <form id="quizForm">
+
+    <!-- Q1: Business experience -->
+    <div class="question-card" id="card-1">
+      <div class="q-label">Câu 1 / 3</div>
+      <div class="q-text">Bạn đã có kinh nghiệm kinh doanh nào chưa?</div>
+      <div class="options">
+        <label class="option" data-q="q1" data-v="0">
+          <div class="option-radio"></div>
+          <span class="option-text">Chưa từng kinh doanh</span>
+        </label>
+        <label class="option" data-q="q1" data-v="1">
+          <div class="option-radio"></div>
+          <span class="option-text">Đã thử nhưng chưa có kết quả ổn định</span>
+        </label>
+        <label class="option" data-q="q1" data-v="2">
+          <div class="option-radio"></div>
+          <span class="option-text">Đang có nguồn thu nhập ổn định, muốn tăng thêm</span>
+        </label>
+        <label class="option" data-q="q1" data-v="3">
+          <div class="option-radio"></div>
+          <span class="option-text">Chuyên nghiệp trong ngành sales/MLM</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q2: Monthly goal -->
+    <div class="question-card" id="card-2">
+      <div class="q-label">Câu 2 / 3</div>
+      <div class="q-text">Mục tiêu thu nhập hàng tháng của bạn?</div>
+      <div class="options">
+        <label class="option" data-q="q2" data-v="1">
+          <div class="option-radio"></div>
+          <span class="option-text">Dưới 5 triệu/tháng</span>
+        </label>
+        <label class="option" data-q="q2" data-v="2">
+          <div class="option-radio"></div>
+          <span class="option-text">5–20 triệu/tháng</span>
+        </label>
+        <label class="option" data-q="q2" data-v="3">
+          <div class="option-radio"></div>
+          <span class="option-text">20–50 triệu/tháng</span>
+        </label>
+        <label class="option" data-q="q2" data-v="4">
+          <div class="option-radio"></div>
+          <span class="option-text">Trên 50 triệu/tháng</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q3: Time commitment -->
+    <div class="question-card" id="card-3">
+      <div class="q-label">Câu 3 / 3</div>
+      <div class="q-text">Bạn có thể dành bao nhiêu giờ mỗi ngày?</div>
+      <div class="options">
+        <label class="option" data-q="q3" data-v="1">
+          <div class="option-radio"></div>
+          <span class="option-text">Dưới 1 giờ</span>
+        </label>
+        <label class="option" data-q="q3" data-v="2">
+          <div class="option-radio"></div>
+          <span class="option-text">1–2 giờ</span>
+        </label>
+        <label class="option" data-q="q3" data-v="3">
+          <div class="option-radio"></div>
+          <span class="option-text">3–4 giờ</span>
+        </label>
+        <label class="option" data-q="q3" data-v="4">
+          <div class="option-radio"></div>
+          <span class="option-text">Full-time (trên 6 giờ)</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Collect info (shown after quiz) -->
+    <div class="question-card hidden" id="card-info">
+      <div class="q-label">Thông tin liên hệ</div>
+      <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.5rem;">
+        <input class="text-input" type="text" id="input-name" placeholder="Họ và tên *" required>
+        <input class="text-input" type="email" id="input-email" placeholder="Email *" required>
+        <input class="text-input" type="tel" id="input-phone" placeholder="SĐT (tùy chọn)">
+        <div class="hidden error" id="info-error">Vui lòng nhập họ tên và email</div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="nav">
+      <button type="button" class="btn btn-secondary hidden" id="btn-prev">← Quay lại</button>
+      <button type="button" class="btn btn-primary" style="flex:1" id="btn-next">Tiếp theo →</button>
+      <button type="button" class="btn btn-primary hidden" id="btn-submit">Xem kết quả →</button>
+    </div>
+  </form>
+
+  <!-- Result -->
+  <div class="hidden" id="resultView">
+    <div class="question-card result-card">
+      <div class="result-emoji" id="resultEmoji">🎯</div>
+      <div class="result-title" id="resultTitle">Gói phù hợp với bạn</div>
+      <div class="result-desc" id="resultDesc"></div>
+      <div id="productList"></div>
+    </div>
+    <button class="btn btn-primary btn-block" id="btn-order">Đăng ký ngay →</button>
+    <button class="btn btn-secondary btn-block" style="margin-top:0.5rem" onclick="location.href='/quiz.html'">Làm lại khảo sát</button>
+  </div>
+
+</div>
+
+<script>
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8787'
+  : location.origin;
+
+const PRODUCTS_BY_SCORE = [
+  { min: 0, max: 4,  emoji: '🌱', title: 'Gói Khởi Động', tier: 1,
+    desc: 'Phù hợp người mới bắt đầu. Tập trung mindset + kỹ năng cơ bản.',
+    price: '590.000đ' },
+  { min: 5,  max: 7,  emoji: '🚀', title: 'Gói Phát Triển', tier: 2,
+    desc: 'Cho người có cơ sở, muốn đạt 5–20tr/tháng. Content + kỹ thuật bán hàng.',
+    price: '3.500.000đ' },
+  { min: 8,  max: 10, emoji: '🏆', title: 'Gói Chuyên Gia', tier: 3,
+    desc: 'Full training + mentor 1-on-1. Target 20tr+/tháng.',
+    price: '12.000.000đ' }
+];
+
+const answers = { q1: null, q2: null, q3: null };
+let currentStep = 1;
+
+function setProgress() {
+  const total = 3;
+  const pct = (currentStep / total) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${currentStep} / ${total}`;
+}
+
+function showCardsUpTo(step) {
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById('card-' + i).classList.toggle('hidden', i > step);
+  }
+  document.getElementById('card-info').classList.toggle('hidden', step !== 4);
+}
+
+function getRecommendation() {
+  const score = (answers.q1 || 0) + (answers.q2 || 0) + (answers.q3 || 0);
+  return PRODUCTS_BY_SCORE.find(p => score >= p.min && score <= p.max) || PRODUCTS_BY_SCORE[0];
+}
+
+function selectOption(q, value, el) {
+  answers[q] = value;
+  document.querySelectorAll(`.option[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+
+  setTimeout(() => {
+    if (currentStep < 3) {
+      currentStep++;
+      showCardsUpTo(currentStep);
+    } else {
+      document.getElementById('card-info').classList.remove('hidden');
+      document.getElementById('btn-next').classList.add('hidden');
+      document.getElementById('btn-prev').classList.remove('hidden');
+      document.getElementById('btn-submit').classList.remove('hidden');
+    }
+    setProgress();
+  }, 300);
+}
+
+function showResult() {
+  const name = document.getElementById('input-name').value.trim();
+  const email = document.getElementById('input-email').value.trim();
+  const phone = document.getElementById('input-phone').value.trim();
+
+  if (!name || !email) {
+    document.getElementById('info-error').classList.remove('hidden');
+    return;
+  }
+
+  const rec = getRecommendation();
+  document.getElementById('quizForm').classList.add('hidden');
+  document.getElementById('resultView').classList.remove('hidden');
+  document.getElementById('resultEmoji').textContent = rec.emoji;
+  document.getElementById('resultTitle').textContent = rec.title;
+  document.getElementById('resultDesc').textContent = rec.desc;
+
+  document.getElementById('productList').innerHTML = `
+    <div class="product-card">
+      <div class="product-name">${rec.emoji} ${rec.title} (Tier ${rec.tier})</div>
+      <div class="product-price">${rec.price}</div>
+      <div class="product-desc">${rec.desc}<br>Bao gồm: Curriculum 4 tuần + AI Coach + 1-on-1 mentor</div>
+    </div>
+  `;
+
+  document.getElementById('btn-order').onclick = () => {
+    window.location.href = `/checkout.html?tier=${rec.tier}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+  };
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = 'Hoàn tất';
+}
+
+// Event listeners
+document.querySelectorAll('.option').forEach(opt => {
+  opt.addEventListener('click', () => selectOption(opt.dataset.q, parseInt(opt.dataset.v), opt));
+});
+
+document.getElementById('btn-next').addEventListener('click', () => {
+  if (currentStep < 3) { currentStep++; showCardsUpTo(currentStep); setProgress(); }
+});
+
+document.getElementById('btn-prev').addEventListener('click', () => {
+  if (currentStep > 1) {
+    currentStep--;
+    showCardsUpTo(currentStep);
+    if (currentStep < 3) {
+      document.getElementById('btn-next').classList.remove('hidden');
+      document.getElementById('btn-submit').classList.add('hidden');
+    }
+    setProgress();
+  }
+});
+
+document.getElementById('btn-submit').addEventListener('click', showResult);
+</script>
+</body>
+</html>

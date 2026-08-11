@@ -1,0 +1,96 @@
+{
+  "module": {
+    "id": "M4",
+    "title": "First Close — Follow-Up Sequence Mastery",
+    "tier": 1,
+    "duration_days": 7,
+    "focus": "Nghệ thuật follow-up và closing — biến connect thành đơn hàng đầu tiên trong 14 ngày",
+    "overview": "Module cuối cùng của Tier 1 dạy Tân Binh cách follow-up hiệu quả và close đơn hàng đầu tiên. Bạn sẽ học 3-7-14 follow-up framework, cách xử lý từ chối, và tạo urgency tự nhiên. Mục tiêu: 3 đơn hàng trong 14 ngày đầu tiên.",
+    "objectives": [
+      "Thành thạo 3-7-14 follow-up framework",
+      "Xử lý 5 objection phổ biến nhất",
+      "Tạo urgency tự nhiên không áp lực",
+      "Close đơn hàng đầu tiên trong 14 ngày",
+      "Xây dựng hệ thống follow-up tự động"
+    ]
+  },
+  "follow_up_framework": {
+    "day_3": { "name": "First Touch", "goal": "Reconnect sau lần gặp đầu tiên", "method": "Message/call" },
+    "day_7": { "name": "Value Add", "goal": "Chia sẻ giá trị — article, tip, story", "method": "Content share" },
+    "day_14": { "name": "The Ask", "goal": "Mời trải nghiệm sản phẩm", "method": "Direct invite" }
+  },
+  "objections": [
+    { "id": "obj-1", "type": "price", "statement": "Đắt quá", "response": "Mình hiểu. Nhưng bạn có biết chi phí chữa bệnh lớn hơn nhiều so với phòng ngừa? Đây là đầu tư cho sức khỏe, không phải chi tiêu." },
+    { "id": "obj-2", "type": "time", "statement": "Để mình suy nghĩ đã", "response": "Chắc chắn rồi. Nhưng sức khỏe không đợi mình suy nghĩ xong. Mỗi ngày trôi qua là một ngày không chăm sóc bản thân. Mình có offer đặc biệt này tuần thôi." },
+    { "id": "obj-3", "type": "trust", "statement": "Mình không biết có hiệu quả không", "response": "Mình cũng từng nghi ngờ như bạn. Nhưng sau 2 tuần áp dụng, cả nhà mình thấy khác hẳn. Mình có thể share experience thật của mình." },
+    { "id": "obj-4", "type": "need", "statement": "Nhà mình chưa cần", "response": "Mình hiểu. Nhưng Medicine 3.0 là phòng ngừa trước khi cần. Đợi khi cần thì đã muộn. Giống như mua bảo hiểm vậy." },
+    { "id": "obj-5", "type": "other", "statement": "Để mình hỏi ý kiến chồng/vợ", "response": "Tuyệt vời! Sức khỏe gia đình là quyết định chung. Mình có thể gửi thông tin để hai vợ chồng cùng tham khảo. Hoặc mình café cả gia đình luôn?" }
+  ],
+  "lessons": [
+    {
+      "day": 1,
+      "title": "Follow-Up Là Chìa Khóa — 3-7-14 Framework",
+      "objective": "Hiểu và áp dụng 3-7-14 follow-up framework",
+      "content": "Chào mừng bạn đến với module cuối cùng của Tier 1! Hôm nay bạn sẽ học kỹ năng quan trọng nhất trong MLM: Follow-Up.\n\n**Sự thật về follow-up:**\n- 80% sales cần 5+ follow-ups\n- 48% salespeople không follow-up lần nào\n- Chỉ 2% sales xảy ra ở lần contact đầu tiên\n- Follow-up trong 24h = 3x conversion rate\n\n**3-7-14 Framework:**\n- **Ngày 3:** 'Vui được gặp bạn! Như mình nói, mình có vài tips về [chủ đề]...'\n- **Ngày 7:** Share giá trị — article, personal story, hoặc tip\n- **Ngày 14:** 'The Ask' — mời trải nghiệm sản phẩm trực tiếp\n\n**Quan trọng:** Mỗi follow-up phải mang giá trị, không phải chỉ 'mua đi'.",
+      "activity": { "title": "Follow-Up Sprint", "description": "Gửi follow-up cho tất cả connects từ M3", "steps": ["Mở danh sách connects từ M3", "Phân loại: ai ở ngày 3, ngày 7, ngày 14", "Gửi follow-up theo framework", "Track response rate"] },
+      "habit_checklist": ["15 connects/ngày", "Follow-up tất cả leads cũ", "5AM + Kaizen journal"]
+    },
+    {
+      "day": 2,
+      "title": "Follow-Up Day 3 — First Touch",
+      "objective": "Thực hành first touch follow-up",
+      "content": "Hôm nay bạn sẽ thực hành first touch — follow-up đầu tiên sau khi connect.\n\n**First Touch Formula:**\n1. Reminder: 'Vui được gặp bạn hôm [ngày]'\n2. Bridge: 'Như mình nói về [chủ đề]...'\n3. Value: Share 1 tip hoặc article\n4. Soft CTA: 'Có gì trao đổi thêm nha'\n\n**Ví dụ:**\n'Chào [Tên], vui quá được gặp bạn hôm thứ 3! Như mình nói về chăm sóc sức khỏe chủ động, mình gửi bạn article hay về Medicine 3.0. Bạn đọc tham khảo nha, có gì café trao đổi thêm!'\n\n**Lưu ý:** Không pitch product trong first touch. Mục tiêu là giữ connection alive.",
+      "activity": { "title": "First Touch — 10 Follow-Ups", "description": "Gửi first touch cho 10 people", "steps": ["Chọn 10 people từ danh sách connects", "Soạn message theo First Touch Formula", "Gửi và track response", "Với người reply → lên lịch conversation"] },
+      "habit_checklist": ["15 connects mới", "10 first touch follow-ups", "5AM + Kaizen journal"]
+    },
+    {
+      "day": 3,
+      "title": "Follow-Up Day 7 — Value Add",
+      "objective": "Share giá trị để build trust",
+      "content": "Hôm nay là ngày 7 — time để share giá trị và deepen relationship.\n\n**Value Add Strategies:**\n1. **Article share:** 'Mình thấy bài này hay, nhớ đến bạn...'\n2. **Personal story:** 'Tuần trước mình áp dụng [tip] và kết quả là...'\n3. **Social proof:** 'Chị A trong nhóm mình đã áp dụng 2 tuần và...'\n4. **Tip of the day:** 'Bạn có biết 80% bệnh có thể phòng ngừa...'\n\n**Quan trọng:** Personal story > Article share. Story tạo emotional connection.\n\n**Ví dụ personal story:**\n'Mình muốn share với bạn experience của mình. 2 tuần trước, cả nhà mình bắt đầu áp dụng 5AM Club + chăm sóc sức khỏe chủ động. Kết quả: mình có nhiều năng lượng hơn, các con ít ốm vặt, và vợ mình ngủ ngon hơn. Mình thấy đây là điều đáng để share!'",
+      "activity": { "title": "Value Add — 10 Follow-Ups", "description": "Share giá trị với 10 people", "steps": ["Chọn 10 people đã nhận first touch", "Soạn value add message (personal story preferred)", "Gửi và track engagement", "Với người hứng thú → lên lịch zoom/café"] },
+      "habit_checklist": ["15 connects mới", "10 value add follow-ups", "1 personal story post trên Facebook", "5AM + Kaizen journal"]
+    },
+    {
+      "day": 4,
+      "title": "Xử Lý Từ Chối — 5 Objections Phổ Biến",
+      "objective": "Học cách xử lý 5 objections phổ biến nhất",
+      "content": "Hôm nay bạn sẽ học cách xử lý từ chối — kỹ năng quan trọng nhất để close.\n\n**5 Objections Phổ Biến:**\n\n1. **'Đắt quá'** → Reframe từ 'chi phí' sang 'đầu tư sức khỏe'\n2. **'Để suy nghĩ đã'** → Tạo urgency nhẹ nhàng\n3. **'Không biết có hiệu quả không'** → Share personal experience\n4. **'Chưa cần'** → Giáo dục về phòng ngừa (Medicine 3.0)\n5. **'Hỏi ý kiến chồng/vợ'** → Involve cả gia đình\n\n**Nguyên tắc xử lý objection:**\n- Lắng nghe trước, không ngắt lời\n- Validate cảm xúc: 'Mình hiểu...'\n- Reframe perspective\n- Share experience, không pitch\n- Soft close: 'Bạn thử trải nghiệm xem sao'\n\n**Thực hành:** Role-play với buddy hôm nay.",
+      "activity": { "title": "Objection Handling Practice", "description": "Role-play 5 objections với buddy", "steps": ["Gặp buddy (zoom hoặc café)", "Một người đóng customer, một đóng seller", "Thực hành xử lý từng objection", "Switch roles và repeat", "Ghi chú: objection nào khó nhất?"] },
+      "habit_checklist": ["15 connects mới", "Role-play 5 objections với buddy", "Viết reflection: objection nào khó nhất?", "5AM + Kaizen journal"]
+    },
+    {
+      "day": 5,
+      "title": "Tạo Urgency Tự Nhiên — Không Áp Lực",
+      "objective": "Học cách tạo urgency mà không pushy",
+      "content": "Hôm nay bạn sẽ học cách tạo urgency tự nhiên — key để close mà không làm khách hàng feel pressured.\n\n**Urgency vs Pressure:**\n- **Pressure:** 'Mua ngay đi, hết hạn rồi!'\n- **Urgency:** 'Offer đặc biệt này chỉ có đến cuối tuần. Mình muốn bạn không bỏ lỡ vì sức khỏe gia đình là quan trọng nhất.'\n\n**Natural Urgency Techniques:**\n1. **Scarcity:** 'Hiện mình chỉ có 5 slots cho chương trình này'\n2. **Time-bound:** 'Offer này valid đến cuối tuần'\n3. **Social proof:** '5 người trong group đã đăng ký hôm nay'\n4. **Health urgency:** 'Mỗi ngày trôi qua là một ngày không chăm sóc sức khỏe'\n5. **Family focus:** 'Bạn muốn gia đình khỏe mạnh, đúng không?'\n\n**Golden Rule:** Urgency phải dựa trên giá trị thật, không phải fake scarcity.",
+      "activity": { "title": "Urgency Practice", "description": "Thực hành tạo urgency tự nhiên", "steps": ["Viết 3 urgency messages cho 3 scenarios khác nhau", "Share với buddy để feedback", "Áp dụng với 3 leads hôm nay", "Track response rate"] },
+      "habit_checklist": ["15 connects mới", "10 follow-ups (mix 3-7-14)", "3 urgency messages với leads", "5AM + Kaizen journal"]
+    },
+    {
+      "day": 6,
+      "title": "The Ask — Close Đơn Hàng Đầu Tiên",
+      "objective": "Close đơn hàng đầu tiên trong 14 ngày",
+      "content": "Hôm nay là ngày quan trọng — The Ask! Bạn sẽ invite leads trải nghiệm sản phẩm.\n\n**The Ask Formula:**\n1. **Bridge:** 'Như mình đã share về [chủ đề]...'\n2. **Value recap:** 'Bạn thấy [benefit] có ý nghĩa với gia đình bạn không?'\n3. **The Ask:** 'Bạn có muốn trải nghiệm không? Mình có offer đặc biệt...'\n4. **Urgency:** 'Offer này valid đến [ngày]...'\n5. **Easy yes:** 'Không cần commit dài hạn, thử 1 tuần xem sao'\n\n**Ví dụ:**\n'Chào [Tên], như mình đã share về chăm sóc sức khỏe chủ động những tuần qua. Bạn thấy phương pháp Medicine 3.0 có ý nghĩa với gia đình bạn không?\n\nMình muốn mời bạn trải nghiệm gói sản phẩm cơ bản. Hiện mình có offer đặc biệt cho người mới — chỉ [giá] cho 2 tuần đầu. Không cần commit dài hạn, thử xem gia đình bạn cảm thấy thế nào.\n\nOffer này valid đến cuối tuần. Bạn có muốn bắt đầu không?'\n\n**Mục tiêu:** 1-2 closes hôm nay.",
+      "activity": { "title": "The Ask — Close Day", "description": "Invite 5 leads trải nghiệm sản phẩm", "steps": ["Chọn 5 leads đã qua 3-7-14 follow-up", "Soạn message theo The Ask Formula", "Gửi và follow-up trong ngày", "Với người yes → hướng dẫn order", "Với người chưa → schedule follow-up"] },
+      "habit_checklist": ["15 connects mới", "5 'The Ask' messages", "Follow-up tất cả responses", "Celebrate every yes!", "5AM + Kaizen journal"]
+    },
+    {
+      "day": 7,
+      "title": "Tier 1 Graduation — Review & Next Steps",
+      "objective": "Review 7 ngày M4 và chuẩn bị cho Tier 2",
+      "content": "Chúc mừng! Bạn đã hoàn thành Tier 1 Training! Hôm nay là ngày graduation.\n\n**Graduation Criteria:**\n- ✅ Hoàn thành 4 modules × 7 ngày = 28 days\n- ✅ Habit score ≥ 4/6 cho 3 tuần liên tiếp\n- ✅ 15 connects/ngày × 28 ngày = 420 connects\n- ✅ 3 đơn hàng trong 14 ngày đầu\n- ✅ Follow-up framework thành thạo\n\n**Review 7 ngày M4:**\n- Follow-ups sent: ___\n- Responses received: ___\n- Conversations started: ___\n- Invites made: ___\n- Orders closed: ___\n- Conversion rate: ___%\n\n**Next Steps — Tier 2 (Chiến Binh → Chỉ Huy):**\n- M5: Recruitment Funnel\n- M6: Leader DNA — DISC coaching\n- M7: PSN Management\n- M8: Coaching Conversations\n\n**Bạn đã sẵn sàng cho cấp độ tiếp theo! 🎉",
+      "activity": { "title": "Tier 1 Graduation Review", "description": "Review toàn bộ Tier 1 và lên kế hoạch Tier 2", "steps": ["Điền graduation criteria", "Tính conversion rates", "Viết reflection: bài học lớn nhất?", "Chia sẻ progress với leader", "Đăng ký Tier 2 training"] },
+      "habit_checklist": ["Hoàn thành graduation review", "Viết reflection 28 ngày", "Share progress với leader", "Đăng ký Tier 2", "5AM + Kaizen journal — celebrate! 🎉"]
+    }
+  ],
+  "metrics": {
+    "follow_up_target_3day": 10,
+    "follow_up_target_7day": 10,
+    "follow_up_target_14day": 5,
+    "objection_handling_practice": 5,
+    "urgency_messages": 3,
+    "close_target": 1,
+    "expected_conversion_rate": 0.10
+  }
+}

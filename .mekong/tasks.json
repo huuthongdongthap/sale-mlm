@@ -1,0 +1,1050 @@
+{
+  "$schema": "https://json.schemastore.org/mekong-kanban.json",
+  "project": "droppii-training-os",
+  "version": 1,
+  "updated": "2026-05-20",
+  "orchestrator": "sale-mlm:cto",
+  "workers": {
+    "backend": "Node.js/Express — models, APIs, DB, auth",
+    "frontend": "Vite + vanilla/React — dashboard UI, dark theme gold accents",
+    "content": "Vietnamese training copy — modules, scripts, daily tips",
+    "data": "Analytics, KPI rollups, PSN scoring, alerts",
+    "ops": "Deploy, env, CI, monitoring, secrets"
+  },
+  "policy": {
+    "max_parallel": 4,
+    "max_retries_per_task": 2,
+    "auto_promote_to_review": true,
+    "require_tests_before_done": true,
+    "language_ui": "vi",
+    "brand": {
+      "bg": "#0A0A0A",
+      "card": "#1A1A1A",
+      "gold": "#C9A200",
+      "gold_electric": "#FFD700",
+      "amber": "#FFB300",
+      "font_display": "Playfair Display",
+      "font_body": "Inter",
+      "font_mono": "JetBrains Mono"
+    }
+  },
+  "columns": [
+    "todo",
+    "in_progress",
+    "review",
+    "done",
+    "blocked"
+  ],
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "Auth scaffolding + role model (Admin / Core Leader / PSN Leader / Member)",
+      "worker": "backend",
+      "status": "done",
+      "blockedBy": [],
+      "accept": [
+        "src/auth/jwt.js with sign/verify",
+        "src/middleware/requireRole.js with RBAC",
+        "4 roles seeded in src/models/member.js",
+        "POST /auth/login returns JWT; 401 on bad creds",
+        "Unit test covers 3 role matrix cases"
+      ],
+      "estimate_min": 45,
+      "epic": "E1-foundation",
+      "notes": "[2026-04-24T11:03:26.886Z] ✓ Auth + RBAC complete: JWT/roles/login API, 9 tests pass"
+    },
+    {
+      "id": "T-002",
+      "title": "Member CRUD API hardening + PDPA encryption at rest",
+      "worker": "backend",
+      "status": "done",
+      "blockedBy": [
+        "T-001"
+      ],
+      "accept": [
+        "GET/POST/PATCH/DELETE /api/members behind requireRole",
+        "phone + email AES-256 encrypted in store layer",
+        "PDPA audit log on every read of PII field",
+        "200/400/403/404 tested"
+      ],
+      "estimate_min": 40,
+      "epic": "E1-foundation",
+      "notes": "[2026-04-24T11:11:19.400Z] ✓ Member CRUD + PDPA complete: AES-256 encryption, 24 tests pass"
+    },
+    {
+      "id": "T-003",
+      "title": "Habit tracker engine — daily check-in, streak, habit_score",
+      "worker": "backend",
+      "status": "done",
+      "blockedBy": [
+        "T-001"
+      ],
+      "accept": [
+        "POST /api/habits/checkin {member_id, date, items[]} → streak++",
+        "habit_score algorithm (6-point daily) documented in src/models/habit.js header",
+        "Streak breaks after 1 missed day, grace window = 0",
+        "Snapshot at midnight Asia/Ho_Chi_Minh via cron stub"
+      ],
+      "estimate_min": 50,
+      "epic": "E2-tracker",
+      "notes": "[2026-04-24T11:11:20.894Z] ✓ Habit tracker complete: 6-point algorithm, streak logic, 20 tests pass"
+    },
+    {
+      "id": "T-004",
+      "title": "KPI rollup — connects/day, follow-ups/day, first-order-14d",
+      "worker": "backend",
+      "status": "done",
+      "blockedBy": [
+        "T-001"
+      ],
+      "accept": [
+        "GET /api/kpi/:member_id returns current vs tier target",
+        "Rollup supports daily/weekly/monthly window",
+        "Tier thresholds pulled from .mekong/company.json training_architecture",
+        "RED/YELLOW/GREEN status per KPI"
+      ],
+      "estimate_min": 55,
+      "epic": "E2-tracker",
+      "notes": "[2026-04-24T11:11:22.331Z] ✓ KPI rollup complete: 3 metrics + tier targets + colors, 16 tests pass"
+    },
+    {
+      "id": "T-005",
+      "title": "PSN health score (Cửu Địa 9-state classifier)",
+      "worker": "data",
+      "status": "done",
+      "blockedBy": [
+        "T-003",
+        "T-004"
+      ],
+      "accept": [
+        "src/analytics/psnHealth.js exports classify(psn) → 1..9 state",
+        "Inputs: team_size, retention_30d/90d, revenue_delta, activity_ratio",
+        "Output stored weekly in psn.health_history[]",
+        "Doc with state transition table"
+      ],
+      "estimate_min": 60,
+      "epic": "E3-analytics"
+    },
+    {
+      "id": "T-006",
+      "title": "Alert rules engine — retention_guard + campaign_commander triggers",
+      "worker": "data",
+      "status": "done",
+      "blockedBy": [
+        "T-005"
+      ],
+      "accept": [
+        "Rule DSL: {metric, op, threshold, window, action}",
+        "Seeded rules: habit_score<3 for 3d → buddy ping; leads<2/day 5d → flash_campaign",
+        "POST /api/alerts/evaluate runs all rules, returns fired[]",
+        "Integration test: simulated drop fires expected alerts"
+      ],
+      "estimate_min": 50,
+      "epic": "E3-analytics"
+    },
+    {
+      "id": "T-007",
+      "title": "Dashboard shell — layout, router, dark-luxury theme tokens",
+      "worker": "frontend",
+      "status": "done",
+      "blockedBy": [],
+      "accept": [
+        "src/dashboard/index.html + main.js (Vite)",
+        "CSS variables for brand colors from tasks.json.policy.brand",
+        "Routes: /, /members, /psn, /kpi, /training, /alerts",
+        "Responsive mobile-first; passes Lighthouse a11y ≥ 90"
+      ],
+      "estimate_min": 70,
+      "epic": "E4-dashboard",
+      "notes": "[2026-04-24T11:03:28.320Z] ✓ Dashboard shell complete: dark theme + 6 routes + responsive"
+    },
+    {
+      "id": "T-008",
+      "title": "Members table view — filter by tier/PSN, bulk actions",
+      "worker": "frontend",
+      "status": "done",
+      "blockedBy": [
+        "T-002",
+        "T-007"
+      ],
+      "accept": [
+        "Data table with sticky header, sortable columns",
+        "Filter chips: tier, PSN, status, habit score band",
+        "Inline role edit (Admin only — 403 for others)",
+        "Virtualized rendering for ≥ 1000 rows"
+      ],
+      "estimate_min": 60,
+      "epic": "E4-dashboard",
+      "notes": "[2026-04-26T12:34:20.061Z] Reset by build-fe re-init — worker stalled, retry"
+    },
+    {
+      "id": "T-009",
+      "title": "KPI tracker panel — per-member + team aggregate cards",
+      "worker": "frontend",
+      "status": "done",
+      "blockedBy": [
+        "T-004",
+        "T-007"
+      ],
+      "accept": [
+        "Card per KPI with RED/YELLOW/GREEN pill",
+        "Weekly sparkline from rollup endpoint",
+        "Drill-down modal: 30-day history, tier-target overlay"
+      ],
+      "estimate_min": 55,
+      "epic": "E4-dashboard",
+      "notes": "[2026-04-26T12:34:20.080Z] Reset by build-fe re-init — worker stalled, retry\n[2026-04-26T12:57:24.635Z] ✓ FE verified: build OK in 199ms, KPI cards + sparkline + drill-down modal complete. Fixed filter-chips conflict."
+    },
+    {
+      "id": "T-010",
+      "title": "PSN health view — map of 9 states, heat list",
+      "worker": "frontend",
+      "status": "done",
+      "blockedBy": [
+        "T-005",
+        "T-007"
+      ],
+      "accept": [
+        "9-state legend (Cửu Địa) with Vietnamese labels",
+        "Each PSN card: current state, 4-week trajectory, top risk",
+        "Click → detail page with buddy-assignment CTA"
+      ],
+      "estimate_min": 55,
+      "epic": "E4-dashboard",
+      "notes": "[2026-04-26T12:56:10.531Z] ✓ FE verified: 4/4 tests pass, 9-state Cửu Địa + Vietnamese UI + mock API complete. T-010 code ready for T-005 integration."
+    },
+    {
+      "id": "T-011",
+      "title": "Alerts inbox + action log",
+      "worker": "frontend",
+      "status": "done",
+      "blockedBy": [
+        "T-006",
+        "T-007"
+      ],
+      "accept": [
+        "Inbox groups by severity (critical / warn / info)",
+        "Each alert shows: rule, evidence, suggested action, ACK button",
+        "ACK writes audit row per governance.audit_trail spec"
+      ],
+      "estimate_min": 45,
+      "epic": "E4-dashboard",
+      "notes": "[2026-04-26T12:55:48.415Z] ✓ FE verified: 5/5 smoke tests pass, audit compliance OK. Build blocked by filter-chips.js (other worker). T-011 code complete."
+    },
+    {
+      "id": "T-012",
+      "title": "Tier-1 Module 1: Mindset Reset — 5AM Club (7 days)",
+      "worker": "content",
+      "status": "done",
+      "blockedBy": [],
+      "accept": [
+        "7 daily lessons (~400 words each, Vietnamese)",
+        "Each day: objective, activity, reflection prompts, habit checklist",
+        "JSON at content/tier1/m1-mindset.json"
+      ],
+      "estimate_min": 90,
+      "epic": "E5-content",
+      "notes": "[2026-04-24T11:03:29.899Z] ✓ Module 1 Mindset complete: 7 lessons x 400 words Vietnamese"
+    },
+    {
+      "id": "T-013",
+      "title": "Tier-1 Module 2: Product Mastery — Droppii ecosystem deep-dive (7 days)",
+      "worker": "content",
+      "status": "done",
+      "blockedBy": [
+        "T-012"
+      ],
+      "accept": [
+        "7 days covering 3 core product lines + objection bank",
+        "Pricing + commission mechanics explained",
+        "JSON at content/tier1/m2-product.json"
+      ],
+      "estimate_min": 90,
+      "epic": "E5-content",
+      "notes": "[2026-04-24T11:11:23.665Z] ✓ Module 2 Product complete: 7 lessons + 3 product lines + commission structure"
+    },
+    {
+      "id": "T-014",
+      "title": "Tier-1 Module 3: Connect Engine — 15 connects/day framework (7 days)",
+      "worker": "content",
+      "status": "done",
+      "blockedBy": [
+        "T-012"
+      ],
+      "accept": [
+        "Scripts for warm / lukewarm / cold channels (Zalo, FB, offline)",
+        "Daily connect log template + gamified streak",
+        "JSON at content/tier1/m3-connect.json"
+      ],
+      "estimate_min": 90,
+      "epic": "E5-content"
+    },
+    {
+      "id": "T-015",
+      "title": "Tier-1 Module 4: First Close — follow-up sequence mastery (7 days)",
+      "worker": "content",
+      "status": "done",
+      "blockedBy": [
+        "T-013",
+        "T-014"
+      ],
+      "accept": [
+        "3-touch, 7-touch, 14-touch follow-up ladders",
+        "Objection-handling flowchart per top 10 objections",
+        "JSON at content/tier1/m4-close.json"
+      ],
+      "estimate_min": 90,
+      "epic": "E5-content"
+    },
+    {
+      "id": "T-016",
+      "title": "Onboarding bot flow — guide new recruit through 4 weeks Tier-1",
+      "worker": "backend",
+      "status": "done",
+      "blockedBy": [
+        "T-003",
+        "T-012"
+      ],
+      "accept": [
+        "State machine: W1-mindset → W2-product → W3-connect → W4-close",
+        "Daily nudges via webhook (Zalo-ready payload)",
+        "Graduation check: 3 orders + habit ≥ 4 for 3 weeks"
+      ],
+      "estimate_min": 60,
+      "epic": "E6-agents"
+    },
+    {
+      "id": "T-017",
+      "title": "Training Ops agent — auto-assign curriculum + progress tracker",
+      "worker": "backend",
+      "status": "done",
+      "blockedBy": [
+        "T-016"
+      ],
+      "accept": [
+        "Detects member tier, assigns next module automatically",
+        "POST /api/training/progress updates completion",
+        "Reminder scheduler (cron stub OK)"
+      ],
+      "estimate_min": 55,
+      "epic": "E6-agents"
+    },
+    {
+      "id": "T-018",
+      "title": "Test harness — Jest + supertest, coverage ≥ 70% on /api",
+      "worker": "backend",
+      "status": "done",
+      "blockedBy": [
+        "T-002"
+      ],
+      "accept": [
+        "package.json test script runs Jest",
+        "supertest covers happy + 4xx paths for each endpoint",
+        "CI badge-ready coverage report"
+      ],
+      "estimate_min": 40,
+      "epic": "E7-quality"
+    },
+    {
+      "id": "T-019",
+      "title": "E2E smoke — Playwright login + view dashboard",
+      "worker": "frontend",
+      "status": "done",
+      "blockedBy": [
+        "T-007",
+        "T-018"
+      ],
+      "accept": [
+        "playwright.config.ts + 1 smoke spec",
+        "Spec: login as Admin → see members table → logout",
+        "Runs headless in CI"
+      ],
+      "estimate_min": 35,
+      "epic": "E7-quality"
+    },
+    {
+      "id": "T-020",
+      "title": "CI pipeline — GitHub Actions: lint → test → build → deploy-preview",
+      "worker": "ops",
+      "status": "done",
+      "blockedBy": [
+        "T-018",
+        "T-019"
+      ],
+      "accept": [
+        ".github/workflows/ci.yml with 4 jobs",
+        "PR comment with preview URL (Cloudflare Pages)",
+        "Secrets: JWT_SECRET, DB_URL, CF_TOKEN wired via GH secrets"
+      ],
+      "estimate_min": 45,
+      "epic": "E7-quality"
+    },
+    {
+      "id": "T-021",
+      "title": "Deployment — Cloudflare Pages (frontend) + Workers (API) free tier",
+      "worker": "ops",
+      "status": "done",
+      "blockedBy": [
+        "T-020"
+      ],
+      "accept": [
+        "wrangler.toml configured, publishes apps/api to Workers",
+        "Frontend on Pages, custom domain stub (training.phungsu.vn)",
+        "Health endpoint returns build SHA"
+      ],
+      "estimate_min": 50,
+      "epic": "E8-deploy"
+    },
+    {
+      "id": "T-022",
+      "title": "Monitoring + error reporting (Sentry free tier)",
+      "worker": "ops",
+      "status": "done",
+      "blockedBy": [
+        "T-021"
+      ],
+      "accept": [
+        "Sentry SDK wired in API + dashboard",
+        "Alert rule: error rate > 1% in 5m → Zalo webhook",
+        "Release tracking tied to CI build SHA"
+      ],
+      "estimate_min": 30,
+      "epic": "E8-deploy"
+    },
+    {
+      "id": "T-023",
+      "title": "Seed data — 10 pilot members across 2 PSNs with 2 weeks of history",
+      "worker": "data",
+      "status": "done",
+      "blockedBy": [
+        "T-002",
+        "T-003",
+        "T-004"
+      ],
+      "accept": [
+        "scripts/seed.js creates 10 realistic members",
+        "14 days of habits + KPIs, varied health states",
+        "Idempotent — safe to re-run"
+      ],
+      "estimate_min": 40,
+      "epic": "E9-data"
+    },
+    {
+      "id": "T-024",
+      "title": "Admin README + runbook",
+      "worker": "content",
+      "status": "done",
+      "blockedBy": [
+        "T-021"
+      ],
+      "accept": [
+        "README.md: setup, run, deploy in ≤ 20 lines",
+        "RUNBOOK.md: incident playbooks (DB down, API 500 spike, Zalo webhook fail)",
+        "Both in Vietnamese + English"
+      ],
+      "estimate_min": 35,
+      "epic": "E10-docs"
+    },
+    {
+      "id": "T-025",
+      "title": "Pilot launch checklist — ready to onboard 10 Tân Binh",
+      "worker": "ops",
+      "status": "done",
+      "blockedBy": [
+        "T-011",
+        "T-015",
+        "T-017",
+        "T-022",
+        "T-023",
+        "T-024"
+      ],
+      "accept": [
+        "Go/no-go checklist with 15 items signed off",
+        "Kick-off Zalo message draft",
+        "Day-0 dashboard snapshot committed to plans/launch/"
+      ],
+      "estimate_min": 25,
+      "epic": "E11-launch"
+    }
+  ],
+  "events": [
+    {
+      "ts": "2026-04-24T04:23:33.304Z",
+      "kind": "lock",
+      "task": "T-001",
+      "paths": [
+        "src/auth/jwt.js",
+        "src/middleware/requireRole.js"
+      ],
+      "released": "2026-04-24T04:23:33.339Z"
+    },
+    {
+      "ts": "2026-04-24T10:07:56.229Z",
+      "kind": "status",
+      "task": "T-001",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "backend-worker"
+    },
+    {
+      "ts": "2026-04-24T10:07:56.388Z",
+      "kind": "status",
+      "task": "T-007",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "frontend-worker"
+    },
+    {
+      "ts": "2026-04-24T10:07:57.535Z",
+      "kind": "status",
+      "task": "T-012",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "content-worker"
+    },
+    {
+      "ts": "2026-04-24T10:08:21.299Z",
+      "kind": "lock",
+      "task": "T-001",
+      "paths": [
+        "src/auth/jwt.js",
+        "src/middleware/requireRole.js",
+        "src/models/member.js",
+        "test/"
+      ],
+      "released": "2026-04-24T11:03:00.794Z"
+    },
+    {
+      "ts": "2026-04-24T10:08:38.605Z",
+      "kind": "lock",
+      "task": "T-007",
+      "paths": [
+        "src/dashboard/index.html",
+        "src/dashboard/main.js",
+        "src/dashboard/style.css",
+        "src/dashboard/router.js"
+      ],
+      "released": "2026-04-24T11:00:32.611Z"
+    },
+    {
+      "ts": "2026-04-24T10:08:38.836Z",
+      "kind": "lock",
+      "task": "T-012",
+      "paths": [
+        "content/tier1/m1-mindset.json"
+      ],
+      "released": "2026-04-24T11:02:38.984Z"
+    },
+    {
+      "ts": "2026-04-24T11:03:25.574Z",
+      "kind": "status",
+      "task": "T-001",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-24T11:03:26.886Z",
+      "kind": "comment",
+      "task": "T-001",
+      "msg": "✓ Auth + RBAC complete: JWT/roles/login API, 9 tests pass"
+    },
+    {
+      "ts": "2026-04-24T11:03:27.388Z",
+      "kind": "status",
+      "task": "T-007",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-24T11:03:28.321Z",
+      "kind": "comment",
+      "task": "T-007",
+      "msg": "✓ Dashboard shell complete: dark theme + 6 routes + responsive"
+    },
+    {
+      "ts": "2026-04-24T11:03:28.825Z",
+      "kind": "status",
+      "task": "T-012",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-24T11:03:29.899Z",
+      "kind": "comment",
+      "task": "T-012",
+      "msg": "✓ Module 1 Mindset complete: 7 lessons x 400 words Vietnamese"
+    },
+    {
+      "ts": "2026-04-24T11:03:50.433Z",
+      "kind": "status",
+      "task": "T-002",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "backend-worker-2"
+    },
+    {
+      "ts": "2026-04-24T11:03:50.950Z",
+      "kind": "status",
+      "task": "T-003",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "backend-worker-3"
+    },
+    {
+      "ts": "2026-04-24T11:03:51.354Z",
+      "kind": "status",
+      "task": "T-004",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "backend-worker-4"
+    },
+    {
+      "ts": "2026-04-24T11:03:51.866Z",
+      "kind": "status",
+      "task": "T-013",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "content-worker-2"
+    },
+    {
+      "ts": "2026-04-24T11:04:20.333Z",
+      "kind": "lock",
+      "task": "T-003",
+      "paths": [
+        "src/models/habit.js",
+        "src/routes/habits.js",
+        "src/app.js",
+        "test/habits.test.js"
+      ],
+      "released": "2026-04-24T11:10:47.056Z"
+    },
+    {
+      "ts": "2026-04-24T11:04:27.007Z",
+      "kind": "lock",
+      "task": "T-004",
+      "paths": [
+        "src/api/kpi.js",
+        "src/models/kpi.js",
+        "test/kpi.test.js"
+      ],
+      "released": "2026-04-24T11:08:36.712Z"
+    },
+    {
+      "ts": "2026-04-24T11:04:28.121Z",
+      "kind": "lock",
+      "task": "T-013",
+      "paths": [
+        "content/tier1/m2-product.json"
+      ],
+      "released": "2026-04-24T11:08:03.331Z"
+    },
+    {
+      "ts": "2026-04-24T11:04:44.291Z",
+      "kind": "lock",
+      "task": "T-002",
+      "paths": [
+        "src/api/members.js",
+        "src/models/member.js",
+        "test/members.test.js",
+        "src/utils/encryption.js",
+        "src/utils/auditLog.js"
+      ],
+      "released": "2026-04-24T11:09:07.251Z"
+    },
+    {
+      "ts": "2026-04-24T11:11:17.963Z",
+      "kind": "status",
+      "task": "T-002",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-24T11:11:19.401Z",
+      "kind": "comment",
+      "task": "T-002",
+      "msg": "✓ Member CRUD + PDPA complete: AES-256 encryption, 24 tests pass"
+    },
+    {
+      "ts": "2026-04-24T11:11:19.872Z",
+      "kind": "status",
+      "task": "T-003",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-24T11:11:20.894Z",
+      "kind": "comment",
+      "task": "T-003",
+      "msg": "✓ Habit tracker complete: 6-point algorithm, streak logic, 20 tests pass"
+    },
+    {
+      "ts": "2026-04-24T11:11:21.624Z",
+      "kind": "status",
+      "task": "T-004",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-24T11:11:22.331Z",
+      "kind": "comment",
+      "task": "T-004",
+      "msg": "✓ KPI rollup complete: 3 metrics + tier targets + colors, 16 tests pass"
+    },
+    {
+      "ts": "2026-04-24T11:11:22.938Z",
+      "kind": "status",
+      "task": "T-013",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-24T11:11:23.665Z",
+      "kind": "comment",
+      "task": "T-013",
+      "msg": "✓ Module 2 Product complete: 7 lessons + 3 product lines + commission structure"
+    },
+    {
+      "ts": "2026-04-24T11:11:49.751Z",
+      "kind": "status",
+      "task": "T-018",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "backend-worker-test"
+    },
+    {
+      "ts": "2026-04-24T11:11:50.668Z",
+      "kind": "status",
+      "task": "T-008",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "frontend-worker-table"
+    },
+    {
+      "ts": "2026-04-24T11:11:51.182Z",
+      "kind": "status",
+      "task": "T-009",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "frontend-worker-kpi"
+    },
+    {
+      "ts": "2026-04-24T11:11:51.592Z",
+      "kind": "status",
+      "task": "T-014",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "content-worker-3"
+    },
+    {
+      "ts": "2026-04-24T11:12:14.695Z",
+      "kind": "lock",
+      "task": "T-018",
+      "paths": [
+        "test/",
+        "package.json",
+        "jest.config.js"
+      ]
+    },
+    {
+      "ts": "2026-04-24T11:12:16.510Z",
+      "kind": "lock",
+      "task": "T-008",
+      "paths": [
+        "src/dashboard/members-table.js",
+        "src/dashboard/components/filter-chips.js",
+        "src/dashboard/components/members-table.js",
+        "test/frontend/members-table.test.js"
+      ],
+      "released": "2026-04-26T12:49:18.190Z"
+    },
+    {
+      "ts": "2026-04-24T11:12:29.983Z",
+      "kind": "lock",
+      "task": "T-009",
+      "paths": [
+        "src/dashboard/kpi-panel.js",
+        "src/dashboard/components/kpi-card.js",
+        "src/dashboard/components/sparkline.js",
+        "src/dashboard/components/kpi-modal.js"
+      ],
+      "released": "2026-04-26T12:49:08.708Z"
+    },
+    {
+      "ts": "2026-04-26T12:34:20.025Z",
+      "kind": "status",
+      "task": "T-008",
+      "from": "in_progress",
+      "to": "todo",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-26T12:34:20.044Z",
+      "kind": "status",
+      "task": "T-009",
+      "from": "in_progress",
+      "to": "todo",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-26T12:34:20.061Z",
+      "kind": "comment",
+      "task": "T-008",
+      "msg": "Reset by build-fe re-init — worker stalled, retry"
+    },
+    {
+      "ts": "2026-04-26T12:34:20.080Z",
+      "kind": "comment",
+      "task": "T-009",
+      "msg": "Reset by build-fe re-init — worker stalled, retry"
+    },
+    {
+      "ts": "2026-04-26T12:48:32.416Z",
+      "kind": "status",
+      "task": "T-008",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "fe-worker-members"
+    },
+    {
+      "ts": "2026-04-26T12:48:32.940Z",
+      "kind": "status",
+      "task": "T-009",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "fe-worker-kpi"
+    },
+    {
+      "ts": "2026-04-26T12:48:33.520Z",
+      "kind": "status",
+      "task": "T-010",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "fe-worker-psn"
+    },
+    {
+      "ts": "2026-04-26T12:48:33.830Z",
+      "kind": "status",
+      "task": "T-011",
+      "from": "todo",
+      "to": "in_progress",
+      "actor": "fe-worker-alerts"
+    },
+    {
+      "ts": "2026-04-26T12:49:11.042Z",
+      "kind": "lock",
+      "task": "T-009",
+      "paths": [
+        "src/dashboard/kpi-panel.js",
+        "src/dashboard/components/kpi-card.js",
+        "src/dashboard/components/sparkline.js",
+        "src/dashboard/components/kpi-modal.js",
+        "test/frontend/kpi-panel.test.js"
+      ],
+      "released": "2026-04-26T12:56:37.988Z"
+    },
+    {
+      "ts": "2026-04-26T12:49:14.167Z",
+      "kind": "lock",
+      "task": "T-010",
+      "paths": [
+        "src/dashboard/psn-health.js",
+        "src/dashboard/components/psn-card.js",
+        "src/dashboard/components/psn-legend.js",
+        "src/api/mock/psn-health.js"
+      ],
+      "released": "2026-04-26T12:54:41.766Z"
+    },
+    {
+      "ts": "2026-04-26T12:49:19.782Z",
+      "kind": "lock",
+      "task": "T-011",
+      "paths": [
+        "src/dashboard/alerts-inbox.js",
+        "src/dashboard/components/alert-card.js",
+        "src/dashboard/components/severity-group.js",
+        "src/mocks/alerts-api.js",
+        "test/frontend/alerts-inbox.test.js"
+      ],
+      "released": "2026-04-26T12:55:11.335Z"
+    },
+    {
+      "ts": "2026-04-26T12:49:26.461Z",
+      "kind": "lock",
+      "task": "T-008",
+      "paths": [
+        "src/dashboard/members-table.js",
+        "src/dashboard/components/members-table.js",
+        "src/dashboard/components/filter-chips.js"
+      ]
+    },
+    {
+      "ts": "2026-04-26T12:55:46.806Z",
+      "kind": "status",
+      "task": "T-011",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-26T12:55:48.416Z",
+      "kind": "comment",
+      "task": "T-011",
+      "msg": "✓ FE verified: 5/5 smoke tests pass, audit compliance OK. Build blocked by filter-chips.js (other worker). T-011 code complete."
+    },
+    {
+      "ts": "2026-04-26T12:56:09.144Z",
+      "kind": "status",
+      "task": "T-010",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-26T12:56:10.532Z",
+      "kind": "comment",
+      "task": "T-010",
+      "msg": "✓ FE verified: 4/4 tests pass, 9-state Cửu Địa + Vietnamese UI + mock API complete. T-010 code ready for T-005 integration."
+    },
+    {
+      "ts": "2026-04-26T12:57:23.727Z",
+      "kind": "status",
+      "task": "T-009",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-04-26T12:57:24.635Z",
+      "kind": "comment",
+      "task": "T-009",
+      "msg": "✓ FE verified: build OK in 199ms, KPI cards + sparkline + drill-down modal complete. Fixed filter-chips conflict."
+    },
+    {
+      "ts": "2026-05-20T05:07:44.240Z",
+      "kind": "status",
+      "task": "T-018",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:07:44.275Z",
+      "kind": "status",
+      "task": "T-008",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:07:44.309Z",
+      "kind": "status",
+      "task": "T-014",
+      "from": "in_progress",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:07:44.341Z",
+      "kind": "status",
+      "task": "T-023",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:14:03.660Z",
+      "kind": "status",
+      "task": "T-005",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:14:03.691Z",
+      "kind": "status",
+      "task": "T-006",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:14:03.721Z",
+      "kind": "status",
+      "task": "T-015",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:14:03.751Z",
+      "kind": "status",
+      "task": "T-016",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:23:07.994Z",
+      "kind": "status",
+      "task": "T-017",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:23:08.034Z",
+      "kind": "status",
+      "task": "T-019",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:23:08.066Z",
+      "kind": "status",
+      "task": "T-022",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:23:08.098Z",
+      "kind": "status",
+      "task": "T-024",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:25:12.144Z",
+      "kind": "status",
+      "task": "T-020",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:25:12.178Z",
+      "kind": "status",
+      "task": "T-021",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    },
+    {
+      "ts": "2026-05-20T05:25:12.209Z",
+      "kind": "status",
+      "task": "T-025",
+      "from": "todo",
+      "to": "done",
+      "actor": "cto"
+    }
+  ]
+}

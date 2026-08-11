@@ -1,0 +1,277 @@
+{
+  "module": {
+    "id": "M3",
+    "title": "Connect Engine — 15 Connects/Day Framework",
+    "tier": 1,
+    "duration_days": 7,
+    "focus": "Xây dựng hệ thống kết nối 15 người mới mỗi ngày qua 3 kênh: Warm Market, Social Media, và Offline Events",
+    "overview": "Module này dạy Tân Binh cách xây dựng Connect Engine — hệ thống kết nối tự động giúp gặp gỡ 15 người mới mỗi ngày. Bạn sẽ học cách phân loại lead (ấm/lạnh), xây dựng kịch tiếp cận cho từng kênh, và duy trì momentum kết nối mà không bị kiệt sức. Connect là oxy của MLM — không connect = không có business.",
+    "objectives": [
+      "Hiểu công thức 15 connects/day và tại sao đây là con số vàng",
+      "Phân loại lead: Warm (5), Lukewarm (5), Cold (5)",
+      "Xây dựng kịch bản tiếp cận cho từng kênh",
+      "Thực hành 15 connects/ngày trong 7 ngày liên tiếp",
+      "Theo dõi conversion rate từ connect → follow-up → close"
+    ]
+  },
+  "connect_framework": {
+    "daily_target": 15,
+    "warm_market": { "target": 5, "channels": ["friends", "family", "former_colleagues", "neighbors"] },
+    "lukewarm_market": { "target": 5, "channels": ["facebook_groups", "zalo_groups", "community_events"] },
+    "cold_market": { "target": 5, "channels": ["social_media_content", "street_approach", "networking_events"] }
+  },
+  "lessons": [
+    {
+      "day": 1,
+      "title": "Connect Là Oxy — Tại Sao 15/Ngày?",
+      "objective": "Hiểu tầm quan trọng của connect và thiết lập danh sách 50 người warm market",
+      "content": "Chào mừng bạn đến với Connect Engine! Hôm nay bạn sẽ hiểu tại sao 15 connects/ngày là con số vàng trong MLM.\n\n**Quy luật số lớn trong MLM:**\n- 15 connects/ngày × 30 ngày = 450 người/tháng\n- Tỷ lệ follow-up: ~30% = 135 người\n- Tỷ lệ close: ~10% = 13-14 đơn hàng/tháng\n- Nếu mỗi đơn hàng = 500K → 6.5-7 triệu/tháng\n\nĐây là toán học đơn giản. Không connect = không có business. Connect engine là trái tim của hệ thống Droppii.\n\n**3 loại lead bạn cần hiểu:**\n1. **Warm Market (5/ngày):** Người đã biết bạn — bạn bè, gia đình, đồng nghiệp cũ. Dễ tiếp cận nhất, trust cao.\n2. **Lukewarm Market (5/ngày):** Người có điểm chung — cùng group Facebook, Zalo, sự kiện cộng đồng. Cần bridge để tạo trust.\n3. **Cold Market (5/ngày):** Người hoàn toàn xa lạ — social media content, networking events. Khó nhất nhưng scale được.\n\n**Bài tập hôm nay:** Lập danh sách 50 người warm market. Viết tên, mối quan hệ, và lý do họ có thể quan tâm đến sức khỏe chủ động.",
+      "activity": {
+        "title": "Warm Market List — 50 Người",
+        "description": "Lập danh sách 50 người bạn đã biết có thể quan tâm đến sản phẩm sức khỏe",
+        "steps": [
+          "Mở điện thoại, vào danh bạ — ghi tên 20 người",
+          "Facebook friends — ghi thêm 15 người",
+          "Đồng nghiệp cũ, hàng xóm — ghi thêm 10 người",
+          "Gia đình mở rộng — ghi thêm 5 người",
+          "Phân loại: Ai quan tâm sức khỏe? Ai có gia đình? Ai U30-U50?"
+        ]
+      },
+      "connect_scripts": {
+        "warm": "Hey [Tên], lâu rồi không gặp! Dạo này gia đình khỏe không? Mình mới tìm hiểu về chăm sóc sức khỏe chủ động, hay lắm. Có gì café kể cho nghe nha!",
+        "lukewarm": "Chào [Tên], mình thấy bạn cũng quan tâm đến sức khỏe gia đình trong group. Mình mới học được phương pháp Medicine 3.0 hay lắm, share cho bạn nha?",
+        "cold": "Chào bạn, mình thấy bạn cũng là mẹ/bố quan tâm đến sức khỏe gia đình. Mình đang tìm hiểu về chăm sóc sức khỏe chủ động, có gì kết nối học hỏi nhau nha!"
+      },
+      "reflection_prompts": [
+        "Bạn cảm thấy thế nào khi lập danh sách 50 người? Dễ hay khó?",
+        "Ai trong danh sách là người dễ tiếp cận nhất? Tại sao?",
+        "Bạn sợ điều gì nhất khi connect với người lạ?"
+      ],
+      "habit_checklist": [
+        "Lập danh sách 50 warm market",
+        "Gửi 5 tin nhắn warm market",
+        "Post 1 bài về sức khỏe lên Facebook cá nhân",
+        "Tham gia 1 group Facebook về sức khỏe/gia đình",
+        "Viết journal: cảm xúc sau khi connect"
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Warm Market Mastery — 5 Connects Đầu Tiên",
+      "objective": "Thực hành 5 connects warm market với kịch bản đã chuẩn bị",
+      "content": "Hôm nay bạn sẽ thực hành 5 connects warm market. Đây là nhóm dễ nhất vì đã có sẵn trust.\n\n**Chiến lược Warm Market:**\n- Không bán hàng ngay — chỉ khơi gợi curiosity\n- Dùng câu hỏi mở: 'Dạo này gia đình khỏe không?'\n- Chia sẻ personal story về sức khỏe của bạn\n- Mời café/zoom để share thêm\n\n**3 bước tiếp cận warm market:**\n1. **Reconnect:** 'Lâu rồi không gặp, bạn sao rồi?'\n2. **Bridge:** 'Mình mới tìm hiểu về chăm sóc sức khỏe chủ động, hay lắm'\n3. **Invite:** 'Cuối tuần café không? Mình share cho nghe'\n\n**Lưu ý quan trọng:** Đừng pitch product trong tin nhắn đầu tiên. Mục tiêu là tạo cuộc trò chuyện, không phải bán hàng.",
+      "activity": {
+        "title": "5 Warm Connects — Thực Hành",
+        "description": "Gửi tin nhắn hoặc gọi điện cho 5 người trong warm market list",
+        "steps": [
+          "Chọn 5 người từ danh sách hôm qua",
+          "Soạn tin nhắn theo kịch bản warm market",
+          "Gửi và theo dõi response",
+          "Ghi lại: Ai reply? Ai không? Ai hứng thú?",
+          "Với người hứng thú → mời café/zoom trong tuần"
+        ]
+      },
+      "connect_scripts": {
+        "warm": "[Tên] ơi, lâu rồi không gặp! Dạo này [tên con/gia đình] khỏe không? Mình mới học được cách chăm sóc sức khỏe chủ động hay lắm, cả gia đình mình áp dụng thấy khác hẳn. Cuối tuần rảnh café không, mình share cho!",
+        "warm_follow_up": "Hey [Tên], hôm trước mình nói về chăm sóc sức khỏe ấy. Mình có vài thông tin hay về [vấn đề họ quan tâm], gửi bạn tham khảo nha. Có gì gọi mình nhé!",
+        "lukewarm": "Chào [Tên], mình thấy bạn comment trong group [tên group] về chủ đề sức khỏe. Mình cũng đang tìm hiểu về Medicine 3.0 — chăm sóc sức khỏe chủ động từ thói quen hàng ngày. Kết nối học hỏi nhau nha!",
+        "cold": "Chào bạn! Mình thấy bạn cũng quan tâm đến sức khỏe gia đình. Mình mới hoàn thành khóa học về chăm sóc sức khỏe chủ động, thấy hay quá muốn share. Có thể kết nối bạn nha?"
+      },
+      "reflection_prompts": [
+        "5 người bạn connect hôm nay phản ứng thế nào?",
+        "Ai hứng thú nhất? Bạn sẽ follow-up với họ ra sao?",
+        "Bạn cảm thấy thoải mái hay awkward khi reconnect? Tại sao?"
+      ],
+      "habit_checklist": [
+        "5 warm connects (đã gửi tin nhắn/gọi điện)",
+        "1 lukewarm connect (group Facebook/Zalo)",
+        "1 cold connect (comment/post social media)",
+        "Ghi nhật ký kết nối: ai reply, ai không",
+        "5AM + Kaizen journal"
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Lukewarm Market — Group & Community",
+      "objective": "Kết nối 5 người lukewarm qua Facebook/Zalo groups",
+      "content": "Hôm nay bạn sẽ mở rộng sang lukewarm market — những người có điểm chung với bạn nhưng chưa quen biết cá nhân.\n\n**Chiến lược Lukewarm Market:**\n- Tham gia 3-5 group về: sức khỏe, làm mẹ, kinh doanh online\n- Comment có giá trị trong các bài viết\n- Tạo bài post chia sẻ experience cá nhân\n- Inbox người có cùng quan tâm\n\n**Công thức 5 lukewarm connects:**\n1. Comment有价值 trong 2 bài viết (2 connects)\n2. Inbox 2 người có cùng quan tâm (2 connects)\n3. Post 1 bài chia sẻ experience (1 connect từ người reply)\n\n**Quan trọng:** Luôn cho giá trị trước khi nhận. Comment helpful, share experience thật, không spam.",
+      "activity": {
+        "title": "5 Lukewarm Connects — Group Strategy",
+        "description": "Sử dụng Facebook/Zalo groups để kết nối 5 người mới",
+        "steps": [
+          "Tham gia 2 group mới về sức khỏe/gia đình",
+          "Comment có giá trị trong 2 bài viết",
+          "Inbox 2 người có cùng quan tâm",
+          "Viết 1 bài post chia sẻ experience cá nhân",
+          "Theo dõi ai reply và hứng thú"
+        ]
+      },
+      "connect_scripts": {
+        "warm": "[Tên] ơi, mình thấy bạn cũng trong group [tên group]. Bài viết của bạn về [chủ đề] hay quá! Mình cũng đang quan tâm, có gì trao đổi thêm nha?",
+        "lukewarm": "Chào [Tên], mình thấy bạn comment trong bài về [chủ đề]. Mình cũng có experience tương tự, muốn share cho bạn. Mình mới học được phương pháp chăm sóc sức khỏe chủ động hay lắm, cả nhà mình áp dụng thấy khỏe hẳn!",
+        "cold": "Chào bạn! Mình thấy bạn post về [chủ đề sức khỏe] trong group. Mình cũng đang tìm hiểu về Medicine 3.0 — phòng ngừa bệnh từ thói quen hàng ngày. Có gì kết nối học hỏi nhau nha!"
+      },
+      "reflection_prompts": [
+        "Lukewarm connect khác warm connect như thế nào?",
+        "Bạn khó khăn gì khi tiếp cận người chưa quen?",
+        "Group nào có engagement cao nhất?"
+      ],
+      "habit_checklist": [
+        "5 lukewarm connects (groups)",
+        "3 warm connects (follow-up từ hôm qua)",
+        "2 cold connects (social media content)",
+        "Comment有价值 trong ít nhất 2 bài viết",
+        "5AM + Kaizen journal"
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Cold Market — Social Media Content Engine",
+      "objective": "Xây dựng content engine để attract cold market",
+      "content": "Hôm nay bạn sẽ học cách dùng social media để attract cold market — những người hoàn toàn xa lạ nhưng có thể trở thành khách hàng.\n\n**Chiến lược Cold Market qua Content:**\n- Post 1 bài/ngày về sức khỏe chủ động\n- Dùng personal story để tạo connection\n- Call-to-action nhẹ nhàng: 'Ai quan tâm inbox mình nha'\n- Consistency là key — post đều mỗi ngày\n\n**3 loại content hiệu quả:**\n1. **Personal Story:** 'Sáng nay mình thức dậy lúc 5AM và cảm thấy...'\n2. **Educational:** 'Bạn có biết 80% bệnh có thể phòng ngừa từ thói quen?'\n3. **Social Proof:** 'Chị A đã áp dụng 2 tuần và cảm thấy khác biệt...'\n\n**Platforms ưu tiên:** Facebook cá nhân > Zalo > TikTok > Instagram\n\n**Mục tiêu:** 5 cold connects từ content hôm nay.",
+      "activity": {
+        "title": "Content Engine — 5 Cold Connects",
+        "description": "Tạo và đăng content để attract 5 cold connects",
+        "steps": [
+          "Viết 1 bài personal story về hành trình sức khỏe",
+          "Viết 1 bài educational về Medicine 3.0",
+          "Post lên Facebook cá nhân + 2 groups",
+          "Reply comment và inbox người quan tâm",
+          "Theo dõi engagement và save người hứng thú"
+        ]
+      },
+      "connect_scripts": {
+        "warm": "[Tên] ơi, bạn thấy bài mình post về sức khỏe không? Có gì trao đổi thêm nha. Mình mới áp dụng 2 tuần thấy khác hẳn!",
+        "lukewarm": "Chào [Tên], cảm ơn bạn đã comment bài của mình! Mình thấy bạn cũng quan tâm đến sức khỏe chủ động. Có gì kết nối sâu hơn nha, mình có vài tips hay lắm!",
+        "cold": "Chào bạn! Cảm ơn bạn đã tương tác bài viết của mình. Mình thấy bạn cũng quan tâm đến chăm sóc sức khỏe gia đình. Mình mới học được phương pháp Medicine 3.0 hay lắm, muốn share cho bạn!"
+      },
+      "reflection_prompts": [
+        "Bài post nào có engagement cao nhất? Tại sao?",
+        "Cold connect từ content có chất lượng thế nào?",
+        "Bạn có comfortable khi share personal story không?"
+      ],
+      "habit_checklist": [
+        "2 bài post social media (personal + educational)",
+        "5 cold connects từ content/comments",
+        "3 warm connects (follow-up)",
+        "3 lukewarm connects (group engagement)",
+        "5AM + Kaizen journal"
+      ]
+    },
+    {
+      "day": 5,
+      "title": "Offline Connects — Sự Kiện & Networking",
+      "objective": "Thực hành offline connects qua sự kiện và networking",
+      "content": "Hôm nay bạn sẽ học cách connect offline — gặp gỡ trực tiếp tại sự kiện, café, hoặc networking events.\n\n**Chiến lược Offline Connects:**\n- Tham gia 1 sự kiện cộng đồng (yoga, chạy bộ, workshop)\n- Elevator pitch 30 giây về bản thân và Droppii\n- Business card hoặc QR code Zalo\n- Follow-up trong 24h sau khi gặp\n\n**Elevator Pitch 30 giây:**\n'Chào bạn, mình là [Tên]. Mình giúp các gia đình chăm sóc sức khỏe chủ động qua phương pháp Medicine 3.0 — không đợi bệnh rồi mới chữa, mà xây thói quen sống khỏe mỗi ngày. Hiện mình đang đồng hành cùng Droppii để mang giải pháp sức khỏe đến nhiều gia đình Việt.'\n\n**Mục tiêu:** 5 offline connects hôm nay.",
+      "activity": {
+        "title": "Offline Connects — Sự Kiện",
+        "description": "Tham gia sự kiện và kết nối 5 người mới",
+        "steps": [
+          "Tìm 1 sự kiện hôm nay (yoga, workshop, café meetup)",
+          "Chuẩn bị elevator pitch 30 giây",
+          "Kết nối ít nhất 5 người mới",
+          "Xin Zalo và follow-up trong 24h",
+          "Ghi chú về từng người gặp"
+        ]
+      },
+      "connect_scripts": {
+        "warm": "[Tên] ơi, cuối tuần này có event [tên event] hay lắm, về sức khỏe ấy. Đi cùng mình không? Mình giới thiệu vài người hay cho bạn!",
+        "lukewarm": "Chào [Tên], mình thấy bạn cũng sẽ tham gia [event]. Mình cũng đi, có gì gặp nhau trao đổi nha. Mình đang làm về chăm sóc sức khỏe chủ động, chắc bạn cũng quan tâm!",
+        "cold": "Chào bạn, mình là [Tên]. Mình thấy bạn cũng quan tâm đến [chủ đề event]. Mình giúp các gia đình chăm sóc sức khỏe chủ động qua Droppii. Có gì kết nối nha!"
+      },
+      "reflection_prompts": [
+        "Offline connect khác online như thế nào?",
+        "Elevator pitch của bạn có tự nhiên không?",
+        "Ai trong 5 người hôm nay tiềm năng nhất?"
+      ],
+      "habit_checklist": [
+        "5 offline connects (sự kiện/networking)",
+        "3 warm connects (follow-up)",
+        "2 lukewarm connects (group online)",
+        "Follow-up 5 người offline trong 24h",
+        "5AM + Kaizen journal"
+      ]
+    },
+    {
+      "day": 6,
+      "title": "Follow-Up Engine — Từ Connect Đến Follow-Up",
+      "objective": "Xây dựng hệ thống follow-up cho tất cả connects",
+      "content": "Hôm nay bạn sẽ học follow-up engine — cách biến connect thành follow-up và cuối cùng là close.\n\n**Quy luật follow-up trong MLM:**\n- 80% sales cần 5+ follow-ups\n- Chỉ 10% people reply lần đầu\n- Follow-up trong 24h = 3x conversion rate\n\n**3-7-14 Follow-Up Framework:**\n- **Ngày 3:** Follow-up đầu tiên sau connect — 'Nice meeting you!'\n- **Ngày 7:** Share giá trị — article, tip, hoặc personal story\n- **Ngày 14:** Invite — café, zoom, hoặc event\n\n**CRM đơn giản:**\nDùng Google Sheets hoặc Zalo Notes để track:\n- Tên, ngày connect, loại lead (warm/lukewarm/cold)\n- Lần follow-up cuối, lần tiếp theo\n- Status: New → Interested → Follow-up → Close\n\n**Mục tiêu:** Follow-up tất cả connects từ 5 ngày qua.",
+      "activity": {
+        "title": "Follow-Up Sprint — 15 Follow-Ups",
+        "description": "Follow-up tất cả connects từ 5 ngày qua",
+        "steps": [
+          "Mở danh sách tất cả connects (warm + lukewarm + cold)",
+          "Phân loại: Ai chưa follow-up? Ai cần follow-up lần 2?",
+          "Gửi 15 follow-up messages theo 3-7-14 framework",
+          "Cập nhật CRM sheet",
+          "Lên lịch follow-up tiếp theo"
+        ]
+      },
+      "connect_scripts": {
+        "warm_3day": "Hey [Tên], vui quá hôm nay gặp bạn! Như mình nói, mình có vài tips về [chủ đề họ quan tâm], gửi bạn nha. Có gì café tuần sau nhé!",
+        "warm_7day": "[Tên] ơi, mình thấy bài này hay hay về [chủ đề], nhớ đến cuộc trò chuyện hôm trước. Bạn đọc tham khảo nha!",
+        "warm_14day": "[Tên] ơi, cuối tuần này rảnh không? Mình mời café, có chuyện hay muốn share về sức khỏe gia đình. Bạn đi nha!",
+        "lukewarm_3day": "Chào [Tên], vui được kết nối với bạn! Mình có vài tips về [chủ đề] muốn share, bạn tham khảo nha!",
+        "cold_3day": "Chào bạn, cảm ơn đã kết nối! Mình thấy bạn cũng quan tâm đến sức khỏe chủ động. Mình có article hay về Medicine 3.0, gửi bạn tham khảo nha!"
+      },
+      "reflection_prompts": [
+        "Follow-up nào có response rate cao nhất?",
+        "Bạn có consistent trong follow-up không?",
+        "CRM của bạn đã organized chưa?"
+      ],
+      "habit_checklist": [
+        "15 follow-ups (3-7-14 framework)",
+        "Cập nhật CRM sheet",
+        "Lên lịch follow-up tuần sau",
+        "1 bài post social media",
+        "5AM + Kaizen journal"
+      ]
+    },
+    {
+      "day": 7,
+      "title": "Connect Engine Review & Momentum",
+      "objective": "Review 7 ngày connect và thiết lập momentum cho tuần sau",
+      "content": "Chúc mừng! Bạn đã hoàn thành 7 ngày Connect Engine. Hôm nay là ngày review và thiết lập momentum.\n\n**Review 7 ngày:**\n- Tổng connects: ___ (target: 105 = 15×7)\n- Warm connects: ___\n- Lukewarm connects: ___\n- Cold connects: ___\n- Follow-ups sent: ___\n- Responses received: ___\n- Conversations started: ___\n- Invites accepted: ___\n\n**Phân tích conversion:**\n- Connect → Response rate: ___%\n- Response → Conversation rate: ___%\n- Conversation → Invite rate: ___%\n\n**Kế hoạch tuần sau:**\n- Duy trì 15 connects/ngày\n- Tăng chất lượng connect (không chỉ số lượng)\n- Focus vào follow-up engine\n- Chuẩn bị cho Module 4: First Close\n\n**Bạn đã xây dựng được Connect Engine — trái tim của MLM business. Tiếp tục duy trì momentum này!",
+      "activity": {
+        "title": "7-Day Connect Review",
+        "description": "Review toàn bộ 7 ngày connect và lập kế hoạch tuần sau",
+        "steps": [
+          "Điền số liệu review vào template trên",
+          "Tính conversion rates",
+          "Identify top 3 channels hiệu quả nhất",
+          "Lên kế hoạch 15 connects/ngày cho tuần sau",
+          "Chia sẻ progress với buddy/leader"
+        ]
+      },
+      "connect_scripts": {
+        "warm": "[Tên] ơi, mình mới hoàn thành 7 ngày connect challenge! 105 connects, học được nhiều lắm. Bạn có muốn thử cùng mình không? Mình buddy cho!",
+        "lukewarm": "Chào [Tên], mình mới hoàn thành challenge kết nối 7 ngày. Học được nhiều điều hay về chăm sóc sức khỏe chủ động. Có gì trao đổi thêm nha!",
+        "cold": "Chào bạn! Mình vừa hoàn thành 7 ngày connect challenge — 105 connects, nhiều conversation hay lắm. Bạn có quan tâm đến sức khỏe chủ động không? Kết nối nha!"
+      },
+      "reflection_prompts": [
+        "7 ngày qua, bạn học được gì về connect?",
+        "Channel nào hiệu quả nhất với bạn?",
+        "Bạn sẽ cải thiện điều gì trong tuần sau?",
+        "Connect có giúp bạn tự tin hơn không?"
+      ],
+      "habit_checklist": [
+        "Hoàn thành 7-day connect review",
+        "Điền conversion rates",
+        "Lên kế hoạch tuần sau",
+        "Share progress với buddy/leader",
+        "5AM + Kaizen journal — celebrate wins!"
+      ]
+    }
+  ],
+  "metrics": {
+    "daily_connects_target": 15,
+    "weekly_connects_target": 105,
+    "warm_ratio": 0.33,
+    "lukewarm_ratio": 0.33,
+    "cold_ratio": 0.34,
+    "expected_response_rate": 0.30,
+    "expected_conversation_rate": 0.50,
+    "expected_invite_rate": 0.20
+  }
+}

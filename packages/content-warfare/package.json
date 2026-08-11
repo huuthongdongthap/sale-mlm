@@ -1,0 +1,23 @@
+{
+  "name": "@droppii/content-warfare",
+  "version": "0.1.0",
+  "description": "Content Warfare Engine — KingContent Spy + Sophia AI Production + Funnel OS Conversion",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "pipeline:spy": "node dist/agents/spy-scout.js",
+    "pipeline:script": "node dist/agents/script-writer.js",
+    "pipeline:video": "node dist/agents/video-dispatch.js",
+    "pipeline:full": "node dist/pipeline.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  }
+}

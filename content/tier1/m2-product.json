@@ -1,0 +1,414 @@
+{
+  "module": {
+    "id": "M2",
+    "title": "Product Mastery — Droppii Ecosystem Deep-Dive",
+    "tier": 1,
+    "duration_days": 7,
+    "focus": "Hiểu sâu hệ sinh thái sản phẩm Droppii theo hướng sức khỏe chủ động cho gia đình, Medicine 3.0 / healthspan, cơ chế hoa hồng và năng lực tư vấn đúng compliance",
+    "overview": "Module này giúp Tân Binh Droppii nắm vững kiến thức sản phẩm theo góc nhìn khách hàng thật: người dùng là cả gia đình từ bé 3 tuổi tới người lớn, còn người ra quyết định mua hàng chủ yếu là phụ nữ 28 tuổi tới U50. Bạn sẽ học cách tư vấn dựa trên Medicine 3.0 / healthspan: chăm sóc sức khỏe chủ động, xây thói quen sống khỏe, hỗ trợ routine gia đình, không dùng claim chữa bệnh hoặc điều trị.",
+    "objectives": [
+      "Nắm vững thông tin sản phẩm Droppii theo nhóm nhu cầu gia đình: tiêu hóa, ngủ, năng lượng, sức đề kháng, làm đẹp, gia dụng xanh",
+      "Hiểu value proposition theo Medicine 3.0 / healthspan: phòng ngừa từ thói quen, chăm sóc chủ động, kéo dài thời gian sống khỏe mạnh",
+      "Xác định đúng buyer chính: phụ nữ 28 tuổi tới U50 quản lý sức khỏe và chi tiêu gia đình",
+      "Thành thạo cơ chế hoa hồng và cách tính commission",
+      "Phát triển khả năng product presentation và storytelling",
+      "Xây dựng objection bank và response scripts đúng compliance, không claim chữa bệnh",
+      "Tạo ra personal product experience và testimonials"
+    ]
+  },
+  "audience_brief": {
+    "source": "Droppii leader brief 2026-05-19",
+    "product_users": "Cả gia đình từ bé 3 tuổi tới người lớn",
+    "purchase_decision_maker": "Phụ nữ 28 tuổi tới U50",
+    "recruitment_targets": "U30, U40, U50; sau này mở rộng tới sinh viên",
+    "positioning": "Medicine 3.0 / healthspan — chăm sóc sức khỏe chủ động, phòng ngừa từ thói quen, kéo dài thời gian sống khỏe mạnh",
+    "guardrails": [
+      "Không claim chữa bệnh",
+      "Không hứa hẹn điều trị triệu chứng",
+      "Không cam kết thu nhập",
+      "Dùng ngôn ngữ hỗ trợ, routine, thói quen, sống khỏe, healthspan"
+    ]
+  },
+  "lessons": [
+    {
+      "day": 1,
+      "title": "Droppii Ecosystem Overview & Vision",
+      "objective": "Hiểu tổng quan về hệ sinh thái Droppii và vị trí của mình trong value chain",
+      "content": "Chào mừng bạn đến với tuần Product Mastery! Hôm nay chúng ta sẽ khám phá big picture của Droppii ecosystem và hiểu vì sao đây là cơ hội kinh doanh đột phá trong thời đại digital.\n\n**Droppii Vision: Democratizing E-commerce in Vietnam**\nDroppii không chỉ là một platform bán hàng. Chúng ta đang build một hệ sinh thái hoàn chỉnh giúp mọi người - từ housewife đến professional - có thể start và scale online business của mình một cách dễ dàng và hiệu quả.\n\n**3 Core Product Lines của Droppii:**\n\n1. **Digital Products & Tools** - Software và digital services hỗ trợ online business\n2. **Physical Products** - Các sản phẩm consumer goods chất lượng cao\n3. **Education & Training** - Knowledge products và coaching services\n\nMỗi product line phục vụ một need khác nhau trong journey của customer, tạo ra multiple touchpoints và revenue streams. Điều này có nghĩa là bạn không chỉ sell product một lần mà build long-term relationship với customers.\n\n**Competitive Advantages:**\n- **Technology Stack:** AI-powered recommendation và automation tools\n- **Supply Chain:** Direct partnerships với manufacturers, better pricing\n- **Community:** Strong support network và training system\n- **Flexibility:** Multi-channel selling (social media, marketplace, website)\n- **Innovation:** Continuous product development based on market feedback\n\nTrong traditional business, bạn cần huge capital để start. Với Droppii, bạn leverage existing infrastructure, products, và support system. Your job là become product expert và relationship builder.\n\n**Your Role as Droppii Consultant:**\nBạn không phải salesperson - bạn là trusted advisor giúp customers find right solutions cho problems của họ. This mindset shift is critical for sustainable success.",
+      "activity": {
+        "title": "Droppii Value Map Creation",
+        "description": "Tạo map về cách Droppii products solve customer problems",
+        "steps": [
+          "List 10 common problems mà target customers face trong online business",
+          "Match mỗi problem với specific Droppii product/service",
+          "Viết value statement cho mỗi match (Why Droppii vs alternatives?)",
+          "Create visual map showing customer journey from problem to solution",
+          "Identify cross-selling opportunities between product lines",
+          "Practice explaining Droppii ecosystem trong 60 seconds"
+        ]
+      },
+      "reflection_prompts": [
+        "Điều gì exciting nhất về Droppii vision với bạn?",
+        "Bạn thấy mình fit vào ecosystem này ở vị trí nào?",
+        "Problems nào bạn từng face mà Droppii có thể solve được?"
+      ],
+      "habit_checklist": [
+        "Study Droppii product catalog trong 30 phút",
+        "Join official Droppii product training groups",
+        "Test ít nhất 1 digital tool của Droppii",
+        "Document questions về products để hỏi mentor",
+        "Share Droppii vision với 1 potential customer",
+        "Set up personal Droppii storefront/profile"
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Digital Products & Tools Deep Dive",
+      "objective": "Thành thạo features, benefits và use cases của digital product line",
+      "content": "Digital products là growth engine của Droppii vì scalability và margin cao. Ngày hôm nay chúng ta sẽ dive deep vào từng tool và hiểu cách position chúng cho different customer segments.\n\n**1. Droppii Automation Suite:**\n- **Auto-posting tools:** Schedule và manage content across platforms\n- **Lead management:** CRM tích hợp với social selling workflow\n- **Analytics dashboard:** Track performance và optimize strategy\n- **Customer service bot:** Auto-respond và qualify leads\n\n*Target customers:* Busy professionals, social media influencers, multi-platform sellers\n*Key benefits:* Save time, increase reach, professional image, data-driven decisions\n*Price point:* 299K-799K/month depending on features\n*Commission:* 30-40% recurring monthly\n\n**2. Website & E-commerce Builder:**\n- **Drag-drop website builder:** No coding required\n- **Mobile-optimized templates:** Professional designs\n- **Payment integration:** VNPay, Momo, bank transfer\n- **SEO optimization:** Built-in tools for search visibility\n\n*Target customers:* Small business owners, service providers, product sellers\n*Key benefits:* Professional presence, increased credibility, 24/7 selling\n*Price point:* 199K-599K/month\n*Commission:* 35% first year, 20% renewals\n\n**3. Training & Course Platform:**\n- **Content delivery system:** Video, audio, documents\n- **Progress tracking:** Student engagement analytics\n- **Certificate generation:** Professional credentials\n- **Community features:** Discussion forums, live sessions\n\n*Target customers:* Coaches, trainers, knowledge entrepreneurs\n*Key benefits:* Monetize expertise, scalable income, global reach\n*Price point:* 399K-1.299M/month\n*Commission:* 25% setup fee + 15% monthly\n\n**Selling Strategy:** Always start với understanding customer's current challenges. Don't lead với features - lead với outcomes they want to achieve.",
+      "activity": {
+        "title": "Digital Products Demo Mastery",
+        "description": "Tạo demo presentation cho mỗi digital product",
+        "steps": [
+          "Sign up và explore mỗi digital tool personally",
+          "Create sample project using each tool",
+          "Record 3-minute demo video cho mỗi product",
+          "Write benefit-focused sales script (not feature-focused)",
+          "Prepare ROI calculation examples for typical customers",
+          "Practice handling 5 common objections per product"
+        ]
+      },
+      "reflection_prompts": [
+        "Digital tool nào bạn thấy useful nhất cho chính mình?",
+        "Customer segment nào bạn có nhiều connections để approach?",
+        "Làm sao bạn có thể combine multiple tools để create compelling package?"
+      ],
+      "habit_checklist": [
+        "Use 1 Droppii digital tool cho own business/content",
+        "Complete product knowledge quiz với 90%+ score",
+        "Create personal case study using Droppii tools",
+        "Reach out to 3 potential customers về digital solutions",
+        "Join product-specific Facebook groups/communities",
+        "Document 10 specific benefits cho mỗi tool"
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Physical Products Portfolio & Positioning",
+      "objective": "Nắm vững physical product lines và cách create compelling product stories",
+      "content": "Physical products tạo ra tangible value và easier để customers understand compared to digital offerings. However, cạnh tranh fierce hơn và margins thấp hơn. Success key là differentiation through branding, quality, và service.\n\n**Health & Wellness Line:**\n- **Supplements:** Vitamin, protein, herbal extracts\n- **Beauty products:** Skincare, cosmetics, personal care\n- **Fitness accessories:** Home workout equipment, wearables\n\n*Positioning:* Premium quality at accessible prices, backed by science\n*Target:* Health-conscious individuals 25-45, middle to upper-middle class\n*Avg commission:* 15-25% per sale\n*Repeat rate:* 60-70% for consumables\n\n**Home & Lifestyle:**\n- **Smart home devices:** IoT gadgets, automation tools\n- **Kitchen appliances:** Innovative cooking solutions\n- **Home décor:** Aesthetic và functional items\n\n*Positioning:* Enhance lifestyle through smart, beautiful, functional products\n*Target:* Homeowners, young families, tech-savvy consumers\n*Avg commission:* 12-20% per sale\n*Repeat rate:* 30-40% (replacement cycle longer)\n\n**Fashion & Accessories:**\n- **Clothing lines:** Trendy, comfortable, versatile pieces\n- **Bags & accessories:** Functional fashion items\n- **Jewelry:** Affordable luxury pieces\n\n*Positioning:* Express personality while maintaining practicality\n*Target:* Fashion-conscious individuals 18-35\n*Avg commission:* 10-18% per sale\n*Repeat rate:* 45-55% seasonal buyers\n\n**Success Strategies for Physical Products:**\n1. **Personal experience:** Use products yourself để create authentic testimonials\n2. **Lifestyle integration:** Show products in context, not isolation\n3. **Social proof:** Leverage customer reviews và user-generated content\n4. **Bundle offerings:** Create themed packages for higher AOV\n5. **Seasonal positioning:** Align với holidays, events, trends",
+      "activity": {
+        "title": "Product Story Development",
+        "description": "Tạo compelling stories cho top 5 physical products",
+        "steps": [
+          "Choose 5 products từ different categories để specialize",
+          "Order và test mỗi product personally (invest in yourself)",
+          "Document detailed experience: unboxing, usage, results",
+          "Create before/after content where applicable",
+          "Write 3 different story angles cho mỗi product (health, convenience, status)",
+          "Develop FAQ addressing common concerns về quality, shipping, returns"
+        ]
+      },
+      "reflection_prompts": [
+        "Products nào align với your personal values và lifestyle?",
+        "Target audience nào bạn có credibility to influence về products này?",
+        "Làm sao bạn có thể differentiate Droppii products từ competitors?"
+      ],
+      "habit_checklist": [
+        "Test 1 new physical product từ each category",
+        "Post authentic review về 1 product you genuinely like",
+        "Connect với 5 people trong target demographic",
+        "Study competitor pricing và positioning",
+        "Create wish list của products để test next",
+        "Practice product demo với family/friends"
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Education & Training Products Expertise",
+      "objective": "Hiểu deep về knowledge products và cách sell transformation thay vì information",
+      "content": "Education products have highest margins và create strongest customer relationships. People don't buy courses - they buy transformation, results, better versions of themselves. Your job là paint vision của who they can become.\n\n**Business & Entrepreneurship Training:**\n- **Online business mastery:** E-commerce, dropshipping, affiliate marketing\n- **Digital marketing courses:** Social media, SEO, paid advertising\n- **Sales & persuasion training:** Closing techniques, negotiation skills\n- **Leadership development:** Team building, management skills\n\n*Transformation promise:* From employee mindset to entrepreneur mindset\n*Target:* Aspiring entrepreneurs, side-hustle seekers, career changers\n*Price range:* 1.999K - 15.999K per course\n*Commission:* 20-40% depending on price tier\n\n**Personal Development & Life Skills:**\n- **Productivity & time management:** Getting things done, focus mastery\n- **Communication skills:** Public speaking, relationship building\n- **Financial literacy:** Investment, saving, wealth building\n- **Health & wellness coaching:** Fitness, nutrition, mental health\n\n*Transformation promise:* From struggling to thriving in key life areas\n*Target:* Anyone wanting to level up specific life skills\n*Price range:* 999K - 7.999K per course\n*Commission:* 25-35%\n\n**Technical & Professional Skills:**\n- **Digital skills:** Website building, graphic design, video editing\n- **Language learning:** English, Chinese, other languages\n- **Certification programs:** Industry-recognized credentials\n- **Software training:** Excel, PowerPoint, specialized tools\n\n*Transformation promise:* From outdated skills to market-relevant expertise\n*Target:* Working professionals, job seekers, career switchers\n*Price range:* 1.499K - 9.999K per program\n*Commission:* 18-30%\n\n**Selling Education Products - The TRANSFORMATION Framework:**\n- **T**arget specific pain point they're experiencing\n- **R**eveal cost of staying where they are\n- **A**gitate consequences of inaction\n- **N**avigate their objections with empathy\n- **S**how success stories of similar people\n- **F**rame the investment as ROI, not expense\n- **O**ffer guarantee to reduce risk\n- **R**emind urgency or scarcity if authentic\n- **M**ake enrollment simple và convenient\n- **A**ffirm their decision và support journey\n- **T**rack progress và celebrate wins\n- **I**ntroduce advanced programs for continued growth\n- **O**ptimize referrals từ satisfied students\n- **N**urture long-term relationship for repeat business",
+      "activity": {
+        "title": "Transformation Sales Script Development",
+        "description": "Create compelling sales conversation framework",
+        "steps": [
+          "Choose 3 education products bạn passionate about",
+          "Interview 2-3 people in target market về their struggles",
+          "Map their current state vs desired state for each product",
+          "Write pain-agitation script highlighting cost of inaction",
+          "Develop success story bank với specific, measurable results",
+          "Create objection-handling responses for top 10 concerns",
+          "Practice full sales conversation với role-play partner"
+        ]
+      },
+      "reflection_prompts": [
+        "Education products nào bạn personally need để level up?",
+        "Transformation nào bạn đã experience mà có thể share authentically?",
+        "Network nào bạn có access để reach target customers?"
+      ],
+      "habit_checklist": [
+        "Enroll trong 1 Droppii course bạn genuinely interested in",
+        "Document learning journey và share progress publicly",
+        "Conduct 2 'research interviews' với potential customers",
+        "Practice transformation sales framework 3 times",
+        "Join communities where target customers gather",
+        "Create lead magnet offering free value related to paid courses"
+      ]
+    },
+    {
+      "day": 5,
+      "title": "Commission Structure & Income Optimization",
+      "objective": "Thành thạo commission mechanics và strategies để maximize earnings",
+      "content": "Understanding commission structure không chỉ để calculate income mà để make strategic decisions về which products to focus, how to structure offers, và when to invest time vào different activities.\n\n**Droppii Commission Tiers:**\n\n**Bronze Level (0-10 sales/month):**\n- Digital products: 25-35%\n- Physical products: 10-20%\n- Education: 20-30%\n- Team building bonus: 5% from direct recruits\n- Monthly minimum: 3 sales to maintain active status\n\n**Silver Level (11-25 sales/month):**\n- Digital products: 30-40%\n- Physical products: 15-25%\n- Education: 25-35%\n- Team building bonus: 8% from direct recruits\n- Leadership bonus: 3% from 2nd level\n- Quarterly bonus: 10% of tier achievement\n\n**Gold Level (26-50 sales/month):**\n- Digital products: 35-45%\n- Physical products: 20-30%\n- Education: 30-40%\n- Team building bonus: 10% from direct recruits\n- Leadership bonus: 5% from 2nd level, 2% from 3rd level\n- Quarterly bonus: 15% of tier achievement\n- Annual recognition trip eligible\n\n**Diamond Level (51+ sales/month):**\n- Digital products: 40-50%\n- Physical products: 25-35%\n- Education: 35-45%\n- Team building bonus: 12% from direct recruits\n- Leadership bonus: 7% from 2nd level, 4% from 3rd level, 2% from 4th level\n- Quarterly bonus: 20% of tier achievement\n- Car bonus eligible\n- Equity participation program\n\n**Income Optimization Strategies:**\n\n1. **Product Mix Strategy:** Focus on higher-commission products initially, use lower-commission as entry points\n2. **Customer Lifetime Value:** Prioritize recurring revenue products (digital subscriptions)\n3. **Team Building:** Recruit seriously - team commissions compound exponentially\n4. **Upselling Ladder:** Start với affordable products, gradually introduce premium offerings\n5. **Seasonal Planning:** Maximize high-demand periods (New Year, summer, holidays)\n6. **Cross-selling:** Bundle complementary products for higher transaction values",
+      "activity": {
+        "title": "Income Projection & Strategy Planning",
+        "description": "Create realistic income goals và roadmap to achieve them",
+        "steps": [
+          "Calculate current potential với existing network (warm market)",
+          "Project income scenarios for Bronze, Silver, Gold levels",
+          "Identify optimal product mix based on your strengths và market",
+          "Create 90-day action plan to reach next tier",
+          "Map team building strategy - who to recruit và when",
+          "Set up tracking system for sales, commissions, và progress",
+          "Plan major purchases/investments từ commission milestones"
+        ]
+      },
+      "reflection_prompts": [
+        "Income level nào sẽ significantly change your life quality?",
+        "Strengths nào bạn có để reach higher commission tiers quickly?",
+        "Team building strategy nào align với your personality và values?"
+      ],
+      "habit_checklist": [
+        "Review commission statement và understand every line item",
+        "Calculate ROI của time invested trong different activities",
+        "Set weekly targets broken down by product category",
+        "Track conversion rates để optimize sales process",
+        "Identify 3 potential recruits từ network",
+        "Plan reinvestment của 30% commissions vào business growth"
+      ]
+    },
+    {
+      "day": 6,
+      "title": "Objection Handling & Competitive Responses",
+      "objective": "Prepare comprehensive responses to common objections và competitive challenges",
+      "content": "Objections aren't roadblocks - they're buying signals. When someone objects, they're engaged và considering. Your job là address concerns genuinely while reinforcing value proposition.\n\n**Category 1: Price Objections**\n\n*'Too expensive compared to alternatives'*\n- **Acknowledge:** 'I understand price is important consideration...'\n- **Reframe:** 'Let's look at cost per result rather than upfront price...'\n- **Evidence:** Share specific ROI examples from existing customers\n- **Value stack:** Itemize everything included vs competitors\n- **Risk reversal:** Mention guarantee/trial period if available\n\n*'Can't afford it right now'*\n- **Empathize:** 'I totally get that timing matters...'\n- **Cost of delay:** 'What's the cost of waiting 6 months to solve this?'\n- **Payment options:** Introduce installment plans if available\n- **ROI timeline:** Show how quickly investment pays for itself\n- **Smaller step:** Offer entry-level version to start\n\n**Category 2: Trust & Credibility Objections**\n\n*'Never heard of Droppii before'*\n- **Social proof:** Share customer count, testimonials, awards\n- **Founder story:** Brief background về leadership team\n- **Track record:** Mention years in business, growth metrics\n- **Partnerships:** Highlight enterprise clients or partnerships\n- **Trial offer:** Suggest low-risk way to experience quality\n\n*'Looks like another MLM scam'*\n- **Address directly:** 'I understand that concern given market reputation...'\n- **Differentiate:** Explain legitimate business model vs pyramid schemes\n- **Focus on products:** Emphasize real value delivered to customers\n- **Success stories:** Share examples of people genuinely helped\n- **Transparency:** Offer to show commission structure và business plan\n\n**Category 3: Timing & Priority Objections**\n\n*'Too busy right now'*\n- **Acknowledge:** 'I know you have a lot on your plate...'\n- **Problem persists:** 'Will being busy make [their problem] easier 3 months from now?'\n- **Time investment:** Show minimal time required vs current pain\n- **Efficiency gain:** Highlight how solution saves time long-term\n- **Flexible support:** Mention self-paced options or flexible scheduling\n\n*'Need to think about it'*\n- **Respect decision:** 'That's a smart approach for important decisions...'\n- **Clarify concerns:** 'What specific aspect would you like to think through?'\n- **Provide framework:** Give them decision criteria to consider\n- **Set follow-up:** 'When would be good time to discuss your thoughts?'\n- **Leave door open:** Offer additional resources for their consideration\n\n**Category 4: Product-Specific Objections**\n\n*'Already using [competitor] and happy'*\n- **Acknowledge success:** 'That's great that you found something working...'\n- **Improvement opportunity:** 'What would make your current solution even better?'\n- **Unique benefits:** Highlight features/benefits not available elsewhere\n- **Migration support:** Offer help switching if they decide to change\n- **Future-proofing:** Discuss long-term advantages của Droppii platform",
+      "activity": {
+        "title": "Objection Response Bank Creation",
+        "description": "Build comprehensive database của practiced responses",
+        "steps": [
+          "List 20 specific objections you've heard or expect to hear",
+          "Write structured response for each using ACKNOWLEDGE → REFRAME → EVIDENCE formula",
+          "Practice responses until they sound natural, not scripted",
+          "Role-play với partner covering all major objection categories",
+          "Create quick-reference guide for phone/video calls",
+          "Update responses based on real objections encountered",
+          "Share effective responses với team for collective improvement"
+        ]
+      },
+      "reflection_prompts": [
+        "Objection nào bạn personally struggle with most?",
+        "Response nào feels most authentic trong your voice?",
+        "Làm sao bạn can turn objections into opportunities for deeper conversation?"
+      ],
+      "habit_checklist": [
+        "Practice 5 objection responses daily until natural",
+        "Record yourself handling objections để improve delivery",
+        "Collect 3 new success stories để use as social proof",
+        "Research competitor pricing và positioning for comparisons",
+        "Ask existing customers về objections they had before buying",
+        "Create visual aids supporting key responses (charts, testimonials)"
+      ]
+    },
+    {
+      "day": 7,
+      "title": "Product Mastery Integration & Action Planning",
+      "objective": "Consolidate learning và create actionable plan for product expertise implementation",
+      "content": "Product knowledge without action is just trivia. Today chúng ta sẽ transform everything you've learned into systematic approach để build expertise, credibility, và income through Droppii products.\n\n**The Product Expert's Daily Routine:**\n\n**Morning (30 minutes):**\n- Review product updates, new launches, policy changes\n- Check competitor activities và market trends\n- Plan daily product-focused activities\n\n**Midday (45 minutes):**\n- Create 1 piece of product-focused content (review, demo, comparison)\n- Engage với potential customers about their product needs\n- Follow up with prospects từ previous conversations\n\n**Evening (15 minutes):**\n- Document lessons learned từ customer interactions\n- Update objection responses based on real feedback\n- Plan tomorrow's product focus area\n\n**Weekly Product Mastery Habits:**\n- Test 1 new product thoroughly\n- Interview 1 satisfied customer for case study\n- Attend product training or webinar\n- Update personal product portfolio\n- Analyze sales data để identify trends\n- Refine target customer profiles\n- Collaborate với team on product strategies\n\n**Building Product Authority Online:**\n1. **Content Creation:** Regular posts về product experiences\n2. **Live Demonstrations:** Weekly product showcases\n3. **Customer Interviews:** Feature success stories\n4. **Comparison Content:** Help customers choose right solutions\n5. **Educational Series:** Teach broader concepts related to products\n6. **Behind-Scenes:** Share your journey learning về products\n7. **Community Building:** Create groups around product interests\n\n**Measuring Product Mastery Success:**\n- **Knowledge Metrics:** Quiz scores, certification achievements\n- **Engagement Metrics:** Questions answered, consultations provided\n- **Conversion Metrics:** Inquiry-to-sale ratios by product category\n- **Repeat Business:** Customer lifetime value và referral rates\n- **Team Impact:** How your expertise helps others succeed\n- **Industry Recognition:** Speaking opportunities, media mentions\n\n**90-Day Product Mastery Roadmap:**\n\n**Days 1-30: Foundation Building**\n- Complete all product certifications\n- Test top 10 products personally\n- Create initial content library\n- Build prospect database\n\n**Days 31-60: Market Engagement**\n- Launch regular content schedule\n- Conduct customer interviews\n- Refine sales process\n- Start team training others\n\n**Days 61-90: Authority Establishment**\n- Speak at events or webinars\n- Publish case studies\n- Mentor new team members\n- Expand into new product categories",
+      "activity": {
+        "title": "Personal Product Mastery Blueprint",
+        "description": "Create comprehensive plan for becoming recognized product expert",
+        "steps": [
+          "Assess current product knowledge level (1-10) for each category",
+          "Choose 2 product categories to specialize in first",
+          "Create 90-day learning và testing schedule",
+          "Design content calendar featuring different products",
+          "Plan customer interview schedule for case study development",
+          "Set up tracking system for knowledge, engagement, và sales metrics",
+          "Identify speaking or teaching opportunities để demonstrate expertise",
+          "Create accountability system với mentor hoặc peer group"
+        ]
+      },
+      "reflection_prompts": [
+        "Product categories nào align best với your passion và expertise?",
+        "Content formats nào you're most comfortable creating?",
+        "Authority-building activities nào excite you most?",
+        "Success metrics nào would indicate you've achieved product mastery?"
+      ],
+      "habit_checklist": [
+        "Complete comprehensive product knowledge assessment",
+        "Choose specialization focus areas và create learning plan",
+        "Set up daily/weekly product mastery routine",
+        "Create first piece of expert-level product content",
+        "Schedule first customer interview for case study",
+        "Join industry groups related to your product specializations",
+        "Set 30/60/90-day milestones với specific measurable goals"
+      ]
+    }
+  ],
+  "objection_bank": {
+    "price_objections": [
+      {
+        "objection": "Đắt hơn so với competitors",
+        "response": "Tôi hiểu concern về giá cả. Hãy cùng xem value bạn receive so với alternatives. [Chi tiết comparison table + ROI calculation + customer success stories]",
+        "supporting_materials": ["price_comparison_chart.pdf", "roi_calculator.xlsx", "customer_testimonials.mp4"]
+      },
+      {
+        "objection": "Không có budget lúc này",
+        "response": "Timing is important consideration. What's the cost của việc delay solving this issue thêm 6 tháng? [Cost of inaction analysis + payment plan options]",
+        "supporting_materials": ["cost_of_delay_worksheet.pdf", "payment_options_flyer.jpg"]
+      },
+      {
+        "objection": "Cần approval từ spouse/partner",
+        "response": "That's totally understandable - major decisions should be discussed. Would it help if I provided materials để share, or would you prefer I explain benefits directly to both of you?",
+        "supporting_materials": ["family_decision_guide.pdf", "spouse_presentation_slides.pptx"]
+      }
+    ],
+    "trust_objections": [
+      {
+        "objection": "Chưa nghe về Droppii",
+        "response": "Fair point! Let me share some background - chúng tôi đã serve over 50,000+ customers, featured trong VnExpress và TechTalks. Here's what existing customers say... [Social proof package]",
+        "supporting_materials": ["company_overview.pdf", "media_mentions.jpg", "customer_reviews_compilation.mp4"]
+      },
+      {
+        "objection": "Looks like MLM/pyramid scheme",
+        "response": "I appreciate your directness. Let me clarify - legitimate MLM focuses on real products serving real customers. Here's how we're different... [Business model explanation + FTC compliance]",
+        "supporting_materials": ["business_model_explained.pdf", "product_catalog.pdf", "compliance_certificate.jpg"]
+      }
+    ],
+    "timing_objections": [
+      {
+        "objection": "Too busy right now",
+        "response": "I completely understand - everyone's swamped. The question is: will being busy make [their problem] easier to solve 3 months from now? Our solution actually saves time long-term...",
+        "supporting_materials": ["time_saving_benefits.pdf", "quick_start_guide.pdf"]
+      },
+      {
+        "objection": "Need to think about it",
+        "response": "Absolutely smart approach for important decisions. What specific aspects would you like to think through? I'm happy to provide additional information...",
+        "supporting_materials": ["decision_checklist.pdf", "faq_comprehensive.pdf"]
+      }
+    ],
+    "competitor_objections": [
+      {
+        "objection": "Already using [competitor] happily",
+        "response": "That's great you found something working! What would make your current solution even better? Let me show you some unique advantages... [Feature comparison]",
+        "supporting_materials": ["competitor_comparison_matrix.xlsx", "migration_guide.pdf", "unique_benefits_overview.pdf"]
+      },
+      {
+        "objection": "Can get similar cheaper elsewhere",
+        "response": "Price is definitely factor to consider. However, total cost of ownership includes setup, training, support, và results achieved. Let's compare apples to apples...",
+        "supporting_materials": ["total_cost_comparison.xlsx", "value_proposition_summary.pdf"]
+      }
+    ]
+  },
+  "commission_structure": {
+    "tiers": {
+      "bronze": {
+        "requirements": "0-10 sales/month",
+        "digital_commission": "25-35%",
+        "physical_commission": "10-20%",
+        "education_commission": "20-30%",
+        "team_bonus": "5% from direct recruits",
+        "monthly_minimum": "3 sales to maintain active status"
+      },
+      "silver": {
+        "requirements": "11-25 sales/month",
+        "digital_commission": "30-40%",
+        "physical_commission": "15-25%",
+        "education_commission": "25-35%",
+        "team_bonus": "8% from direct recruits",
+        "leadership_bonus": "3% from 2nd level",
+        "quarterly_bonus": "10% of tier achievement"
+      },
+      "gold": {
+        "requirements": "26-50 sales/month",
+        "digital_commission": "35-45%",
+        "physical_commission": "20-30%",
+        "education_commission": "30-40%",
+        "team_bonus": "10% from direct recruits",
+        "leadership_bonus": "5% from 2nd level, 2% from 3rd level",
+        "quarterly_bonus": "15% of tier achievement",
+        "perks": ["Annual recognition trip eligible"]
+      },
+      "diamond": {
+        "requirements": "51+ sales/month",
+        "digital_commission": "40-50%",
+        "physical_commission": "25-35%",
+        "education_commission": "35-45%",
+        "team_bonus": "12% from direct recruits",
+        "leadership_bonus": "7% from 2nd level, 4% from 3rd level, 2% from 4th level",
+        "quarterly_bonus": "20% of tier achievement",
+        "perks": ["Car bonus eligible", "Equity participation program"]
+      }
+    },
+    "optimization_strategies": [
+      "Focus on higher-commission digital products initially",
+      "Use physical products as entry points for customer relationships",
+      "Prioritize recurring revenue education subscriptions",
+      "Build team for compound commission growth",
+      "Upsell customers through product value ladder",
+      "Maximize seasonal high-demand periods"
+    ]
+  },
+  "assessment": {
+    "daily_scoring": {
+      "product_knowledge": {
+        "complete_daily_learning": 2,
+        "partial_learning": 1,
+        "no_learning": 0
+      },
+      "practical_application": {
+        "tested_used_products": 2,
+        "researched_only": 1,
+        "no_action": 0
+      },
+      "customer_interaction": {
+        "meaningful_conversations": 2,
+        "basic_outreach": 1,
+        "no_interaction": 0
+      },
+      "total_possible": 6,
+      "graduation_threshold": 4
+    },
+    "weekly_reflection": [
+      "Tôi có thể explain value proposition của ít nhất 5 Droppii products confidently",
+      "Tôi đã test personally ít nhất 2 products và có authentic experience",
+      "Tôi understand commission structure và có plan để optimize earnings",
+      "Tôi comfortable handling common objections với empathy và evidence",
+      "Tôi có clear action plan cho 90 ngày tới để build product expertise"
+    ]
+  },
+  "resources": {
+    "training_materials": [
+      "Official Droppii Product Catalog (updated monthly)",
+      "Commission Calculator Spreadsheet",
+      "Objection Handling Video Series",
+      "Competitor Analysis Reports"
+    ],
+    "tools": [
+      "Product demonstration apps",
+      "ROI calculation templates",
+      "Customer interview guides",
+      "Content creation templates"
+    ],
+    "community": {
+      "product_experts_group": "Private Facebook group for advanced product discussions",
+      "weekly_product_training": "Live sessions with product managers",
+      "customer_success_stories": "Database of case studies và testimonials"
+    }
+  },
+  "next_steps": {
+    "module_3_prep": "Prepare for Connect Engine module với solid product foundation",
+    "specialization_focus": "Choose 2 product categories để develop deep expertise",
+    "customer_validation": "Start conversations với target customers để validate product-market fit understanding"
+  }
+}

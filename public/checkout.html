@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng ký — Hive Warfare Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0f; color: #e8e8e8; min-height: 100vh;
+  }
+  .container { max-width: 600px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .header { text-align: center; margin-bottom: 2rem; }
+  .brand { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: #b8956a; }
+  .title { font-size: 1.5rem; font-weight: 700; margin-top: 0.5rem; }
+
+  .order-card {
+    background: #12121a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .order-row { display: flex; justify-content: space-between; padding: 0.5rem 0; }
+  .order-label { color: #7a7a8a; font-size: 0.9rem; }
+  .order-value { font-weight: 600; }
+  .order-total {
+    border-top: 1px solid #1e1e2a; margin-top: 0.5rem; padding-top: 0.75rem;
+    display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700;
+  }
+  .price { color: #b8956a; }
+
+  .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #b8956a; margin-bottom: 0.5rem; }
+  .form-card { background: #12121a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group:last-child { margin-bottom: 0; }
+  .form-label { display: block; font-size: 0.85rem; color: #8a8a9a; margin-bottom: 0.35rem; }
+  .form-input {
+    width: 100%; padding: 0.75rem 1rem;
+    background: #1a1a24; border: 1px solid #252535; border-radius: 8px;
+    color: #e0e0e8; font-size: 0.95rem; outline: none;
+  }
+  .form-input:focus { border-color: #b8956a; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .btn {
+    width: 100%; padding: 1rem; border: none; border-radius: 8px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-primary { background: #b8956a; color: #0a0a0f; }
+  .btn-primary:hover { background: #c9a87a; }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-back { background: none; color: #6a6a7a; text-decoration: underline; padding: 0.5rem; font-size: 0.85rem; }
+  .error { color: #e87c7c; font-size: 0.85rem; margin-top: 0.35rem; }
+  .success { text-align: center; padding: 2rem; }
+  .success-icon { font-size: 3rem; }
+  .success-title { font-size: 1.3rem; font-weight: 700; margin-top: 1rem; }
+  .success-text { color: #8a8a9a; margin-top: 0.5rem; line-height: 1.6; }
+  .steps { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
+  .step { flex: 1; height: 3px; background: #1e1e2a; border-radius: 2px; }
+  .step.done { background: #b8956a; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand">Hive Warfare Academy</div>
+    <h1 class="title">Hoàn tất đăng ký</h1>
+  </div>
+
+  <div class="steps">
+    <div class="step done"></div>
+    <div class="step done"></div>
+    <div class="step" id="stepIndicator"></div>
+  </div>
+
+  <!-- Order info -->
+  <div class="order-card">
+    <div class="order-row"><span class="order-label">Gói</span><span class="order-value" id="d-tier">—</span></div>
+    <div class="order-row"><span class="order-label">Họ tên</span><span class="order-value" id="d-name">—</span></div>
+    <div class="order-row"><span class="order-label">Email</span><span class="order-value" id="d-email">—</span></div>
+    <div class="order-total"><span>Tổng</span><span class="price" id="d-price">—</span></div>
+  </div>
+
+  <!-- Payment form -->
+  <form id="checkoutForm">
+    <div class="form-card">
+      <div class="section-label">Thông tin liên hệ</div>
+      <div class="form-group"><label class="form-label">Họ và tên *</label><input class="form-input" id="f-name" required></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" id="f-email" required></div>
+        <div class="form-group"><label class="form-label">SĐT</label><input class="form-input" type="tel" id="f-phone"></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="section-label">Phương thức thanh toán</div>
+      <div class="form-group">
+        <select class="form-input" id="f-method">
+          <option value="bank_transfer">Chuyển khoản ngân hàng</option>
+          <option value="momo">Ví MoMo</option>
+          <option value="zalopay">ZaloPay</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Ghi chú / Mã giao dịch (nếu có)</label><input class="form-input" id="f-notes" placeholder="Ví dụ: CK từ VPBank lúc 14:30"></div>
+    </div>
+
+    <div id="checkoutError" class="error hidden" style="text-align:center; margin-bottom:1rem;"></div>
+
+    <button type="submit" class="btn btn-primary" id="btn-submit">Đăng ký và gửi yêu cầu →</button>
+    <div style="text-align:center; margin-top:0.75rem;"><a class="btn-back" href="/quiz.html">← Quay lại khảo sát</a></div>
+  </form>
+
+  <!-- Success -->
+  <div id="successView" class="hidden">
+    <div class="order-card success">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Đăng ký thành công!</div>
+      <div class="success-text" id="successMsg">Chúng tôi sẽ liên hệ với bạn trong 24h để xác nhận thanh toán và kích hoạt tài khoản.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8787'
+  : location.origin;
+
+const PRODUCTS = {
+  1: { name: 'Gói Khởi Động', price: 590000, tier: 1 },
+  2: { name: 'Gói Phát Triển', price: 3500000, tier: 2 },
+  3: { name: 'Gói Chuyên Gia', price: 12000000, tier: 3 }
+};
+
+const params = new URLSearchParams(location.search);
+const tier = parseInt(params.get('tier')) || 1;
+const name = params.get('name') || '';
+const email = params.get('email') || '';
+const phone = params.get('phone') || '';
+const product = PRODUCTS[tier] || PRODUCTS[1];
+
+function fmt(n) { return n.toLocaleString('vi-VN') + 'đ'; }
+
+document.getElementById('d-tier').textContent = product.name + ' (Tier ' + product.tier + ')';
+document.getElementById('d-name').textContent = name;
+document.getElementById('d-email').textContent = email;
+document.getElementById('d-price').textContent = fmt(product.price);
+
+document.getElementById('f-name').value = name;
+document.getElementById('f-email').value = email;
+document.getElementById('f-phone').value = phone;
+
+document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true; btn.textContent = 'Đang xử lý...';
+  document.getElementById('checkoutError').classList.add('hidden');
+
+  const payload = {
+    name: document.getElementById('f-name').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    phone_encrypted: document.getElementById('f-phone').value.trim() || null,
+    product_id: 'tier' + product.tier + '-seed',
+    payment_method: document.getElementById('f-method').value,
+    notes: document.getElementById('f-notes').value.trim() || null
+  };
+
+  if (!payload.name || !payload.email) {
+    document.getElementById('checkoutError').textContent = 'Vui lòng nhập họ tên và email';
+    document.getElementById('checkoutError').classList.remove('hidden');
+    btn.disabled = false; btn.textContent = 'Đăng ký và gửi';
+    return;
+  }
+
+  try {
+    // Create lead
+    const leadRes = await fetch(API + '/api/leads', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: payload.name, email: payload.email, phone_encrypted: payload.phone_encrypted, source: 'public_checkout', intent_score: product.tier })
+    });
+    const leadData = await leadRes.json();
+
+    // Create order
+    const orderRes = await fetch(API + '/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lead_id: leadData.id, product_id: payload.product_id, quantity: 1, payment_method: payload.payment_method, notes: payload.notes })
+    });
+    const orderData = await orderRes.json();
+
+    document.getElementById('checkoutForm').classList.add('hidden');
+    document.getElementById('successView').classList.remove('hidden');
+    document.getElementById('stepIndicator').classList.add('done');
+    document.getElementById('successMsg').innerHTML = `
+      Đơn hàng <strong>#${orderData.id.slice(0,8)}</strong> đang chờ thanh toán.<br>
+      Tổng: <strong style="color:#b8956a">${fmt(orderData.total_vnd)}</strong><br><br>
+      Chuyển khoản đến:<br>
+      <span style="color:#e0e0e8">VPBank — 0123456789 — HIVE WARFARE</span><br><br>
+      Sau khi chuyển khoản, leader sẽ xác nhận trong 24h.
+    `;
+  } catch (err) {
+    document.getElementById('checkoutError').textContent = 'Lỗi kết nối. Vui lòng thử lại sau.';
+    document.getElementById('checkoutError').classList.remove('hidden');
+    btn.disabled = false; btn.textContent = 'Thử lại';
+  }
+});
+</script>
+</body>
+</html>

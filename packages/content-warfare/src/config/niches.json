@@ -1,0 +1,180 @@
+{
+  "audience_strategy": {
+    "source": "Droppii leader brief 2026-05-19",
+    "product_users": "Ca gia dinh, tu be 3 tuoi den nguoi lon",
+    "purchase_decision_maker": "Phu nu 28 tuoi den U50",
+    "recruitment_targets": ["U30", "U40", "U50"],
+    "future_recruitment_target": "Sinh vien",
+    "positioning": "Medicine 3.0 / healthspan: cham soc suc khoe chu dong, phong ngua tu thoi quen, keo dai thoi gian song khoe manh",
+    "compliance_guardrails": [
+      "Khong claim chua benh",
+      "Khong claim dieu tri trieu chung",
+      "Khong cam ket thu nhap",
+      "Dung ngon ngu ho tro, routine, thoi quen, healthspan, cham soc chu dong"
+    ]
+  },
+  "niches": [
+    {
+      "id": "detox-giam-can",
+      "name": "Detox & Quản lý cân nặng",
+      "keywords": ["detox", "giam can", "nuoc ep", "thanh loc", "giam mo", "an sach", "clean eating"],
+      "kingcontent_category": "Sức khỏe",
+      "funnel_level": "L0",
+      "droppii_products": ["bot-can-tay", "tra-detox", "probiotics", "tpcn-tieu-hoa"],
+      "personas": ["chi-ha", "em-thao"],
+      "content_pillars": ["edutainment", "simplified"],
+      "content_formats": ["list_tips", "recipe", "myth_busting", "quick_recipe"],
+      "cta_template": "quiz",
+      "quiz_type": "quiz-suc-khoe",
+      "target_audience": "Phụ nữ 28-U50 ra quyết định mua hàng cho gia đình; quan tâm quản lý cân nặng an toàn, tiêu hóa, routine sống khỏe cho cả nhà",
+      "compliance_notes": "KHÔNG dùng 'giảm cân nhanh', 'đốt mỡ'. Dùng 'hỗ trợ quản lý cân nặng'"
+    },
+    {
+      "id": "skincare-tu-nhien",
+      "name": "Duy trì làn da khỏe mạnh",
+      "keywords": ["da dep", "lam dep", "skincare", "collagen", "chong lao hoa", "glow up"],
+      "kingcontent_category": "Làm đẹp",
+      "funnel_level": "L0",
+      "droppii_products": ["collagen-thuy-phan", "collagen-nuoc", "vitamin-e", "vitamin-c"],
+      "personas": ["em-thao", "chi-ha"],
+      "content_pillars": ["edutainment", "simplified", "behind_scenes"],
+      "content_formats": ["morning_routine", "list_tips", "myth_busting", "comparison"],
+      "cta_template": "quiz",
+      "quiz_type": "quiz-lam-dep",
+      "target_audience": "Phụ nữ 28-U50 muốn duy trì làn da khỏe mạnh tự nhiên, đồng thời chăm sóc sức khỏe chủ động cho gia đình",
+      "compliance_notes": "KHÔNG dùng 'trẻ hóa', 'xóa nếp nhăn'. Dùng 'hỗ trợ duy trì làn da khỏe mạnh'"
+    },
+    {
+      "id": "giac-ngu-nang-luong",
+      "name": "Hỗ trợ giấc ngủ & Năng lượng",
+      "keywords": ["ngu ngon", "mat ngu", "nang luong", "stress", "met moi", "dong trung ha thao"],
+      "kingcontent_category": "Sức khỏe",
+      "funnel_level": "L0",
+      "droppii_products": ["tpcn-giac-ngu", "dong-trung-ha-thao", "nhan-sam-canada"],
+      "personas": ["anh-minh", "co-lan"],
+      "content_pillars": ["edutainment", "simplified"],
+      "content_formats": ["list_tips", "myth_busting", "morning_routine"],
+      "cta_template": "quiz",
+      "quiz_type": "quiz-giac-ngu",
+      "target_audience": "Gia đình có người lớn đi làm, phụ nữ 28-U50 quản lý nhịp sống gia đình; quan tâm giấc ngủ, stress, năng lượng tự nhiên",
+      "compliance_notes": "KHÔNG dùng 'trị mất ngủ', 'thay thế thuốc ngủ'. Dùng 'hỗ trợ giấc ngủ ngon hơn'"
+    },
+    {
+      "id": "gia-dung-xanh",
+      "name": "Gia dụng xanh cho gia đình",
+      "keywords": ["may loc nuoc", "ion kiem", "bep sach", "gia dung", "loc khong khi"],
+      "kingcontent_category": "Gia dụng",
+      "funnel_level": "L1",
+      "droppii_products": ["may-loc-nuoc-ion-kiem", "may-loc-khong-khi", "noi-chien-khong-dau"],
+      "personas": ["chi-ha", "co-lan"],
+      "content_pillars": ["behind_scenes", "edutainment"],
+      "content_formats": ["review", "comparison", "unboxing"],
+      "cta_template": "shop",
+      "quiz_type": null,
+      "target_audience": "Gia đình có trẻ từ 3 tuổi và người lớn; phụ nữ 28-U50 quyết định mua gia dụng xanh, quan tâm môi trường sống an toàn",
+      "compliance_notes": "Gia dụng ít rủi ro compliance. Tập trung vào tiêu chuẩn an toàn, chứng nhận"
+    },
+    {
+      "id": "mien-dich-tong-quat",
+      "name": "Hỗ trợ sức đề kháng",
+      "keywords": ["mien dich", "de khang", "vitamin", "sua non", "suc khoe tong quat"],
+      "kingcontent_category": "Sức khỏe",
+      "funnel_level": "L1",
+      "droppii_products": ["vitamin-tong-hop", "sua-non", "nhan-sam-canada", "probiotics"],
+      "personas": ["co-lan", "chi-ha"],
+      "content_pillars": ["edutainment", "social_proof"],
+      "content_formats": ["list_tips", "comparison", "myth_busting"],
+      "cta_template": "shop",
+      "quiz_type": "quiz-suc-khoe",
+      "target_audience": "Cả gia đình từ bé 3 tuổi tới người lớn; phụ nữ 28-U50 muốn xây routine hỗ trợ sức khỏe chủ động cho nhà mình",
+      "compliance_notes": "KHÔNG dùng 'tăng cường miễn dịch'. Dùng 'hỗ trợ sức đề kháng'"
+    },
+    {
+      "id": "health-journey-30ngay",
+      "name": "Hành trình sức khỏe 30 ngày",
+      "keywords": ["30 ngay", "thu thach", "thay doi", "ket qua", "health active"],
+      "kingcontent_category": "Sức khỏe",
+      "funnel_level": "L2",
+      "droppii_products": ["goi-health-active-30", "goi-health-active-45"],
+      "personas": ["chi-ha", "anh-minh", "em-thao"],
+      "content_pillars": ["social_proof", "community"],
+      "content_formats": ["journey_log", "daily_vlog", "progress_update"],
+      "cta_template": "shop_l2",
+      "quiz_type": null,
+      "target_audience": "Khách gia đình đã mua L1, đặc biệt phụ nữ 28-U50 sẵn sàng cam kết hành trình 30-45 ngày cho sức khỏe chủ động",
+      "compliance_notes": "Journey log = cảm nhận chủ quan, KHÔNG dùng số liệu y khoa. KHÔNG before/after ngụ ý chữa bệnh"
+    },
+    {
+      "id": "chuyen-hoa-doi-tac",
+      "name": "Câu chuyện chuyển hóa & Đối tác",
+      "keywords": ["thanh cong", "doi thay doi", "tu khach thanh doi tac", "thu nhap them"],
+      "kingcontent_category": "Kinh doanh",
+      "funnel_level": "L3",
+      "droppii_products": ["combo-90-ngay", "ctv-droppii"],
+      "personas": ["chi-ha", "co-lan"],
+      "content_pillars": ["social_proof", "community"],
+      "content_formats": ["testimonial", "interview", "transformation"],
+      "cta_template": "partner",
+      "quiz_type": null,
+      "target_audience": "Khách L2/L3, chủ yếu phụ nữ U30/U40/U50 có trải nghiệm sản phẩm và muốn chia sẻ để tạo thu nhập thêm; sau MVP mở rộng sinh viên",
+      "compliance_notes": "Storytelling về hành trình cá nhân, KHÔNG cam kết thu nhập cụ thể. Tuân thủ MLM disclosure"
+    }
+  ],
+  "personas": {
+    "chi-ha": {
+      "name": "Chị Hà",
+      "age_range": "28-38",
+      "description": "Mẹ trẻ/nhân viên văn phòng, là người quyết định mua hàng sức khỏe cho gia đình, ưu tiên routine an toàn cho con từ 3 tuổi và người lớn",
+      "channels": ["facebook_groups", "zalo_mom_groups", "tiktok"],
+      "trigger": "Review từ mẹ bỉm khác, KOC có con nhỏ, nội dung Medicine 3.0 dễ hiểu"
+    },
+    "anh-minh": {
+      "name": "Anh Minh",
+      "age_range": "28-40",
+      "description": "Nhân viên VP, stress, ngồi nhiều, đau lưng, ngủ kém",
+      "channels": ["tiktok", "youtube_shorts"],
+      "trigger": "Content 'mẹo dân văn phòng', số liệu khoa học"
+    },
+    "co-lan": {
+      "name": "Cô Lan",
+      "age_range": "45-55",
+      "description": "Phụ nữ U50 lo sức khỏe gia đình, quan tâm phòng ngừa chủ động, nguồn gốc rõ ràng và routine dễ duy trì",
+      "channels": ["zalo", "facebook_health_groups"],
+      "trigger": "Lời khuyên người quen, KOL y khoa, thông điệp healthspan, bằng chứng nguồn gốc"
+    },
+    "em-thao": {
+      "name": "Em Thảo",
+      "age_range": "20-27",
+      "description": "Gen Z/sinh viên, nhánh tuyển dụng tương lai; quan tâm glow up, clean eating, thu nhập thêm, kỹ năng bán hàng",
+      "channels": ["tiktok", "instagram", "shopee"],
+      "trigger": "KOC review, UGC, trending hashtag, thử thách 30 ngày"
+    },
+    "chi-phuong": {
+      "name": "Chị Phương",
+      "age_range": "39-50",
+      "description": "Phụ nữ U40-U50 quản lý sức khỏe cả nhà, có ngân sách cho gia dụng xanh và gói chăm sóc dài ngày, phù hợp cả buyer và recruitment",
+      "channels": ["zalo", "facebook_groups", "facebook_health_groups"],
+      "trigger": "Nội dung chăm sóc chủ động cho gia đình, Medicine 3.0, lời chứng thực từ phụ nữ cùng độ tuổi"
+    }
+  },
+  "platforms": {
+    "facebook": { "format": "9:16", "max_duration": 60, "hashtags_limit": 5, "best_times": ["08:00", "12:00", "19:00"] },
+    "tiktok": { "format": "9:16", "max_duration": 60, "hashtags_limit": 8, "best_times": ["07:00", "12:30", "20:00"] },
+    "youtube_shorts": { "format": "9:16", "max_duration": 60, "hashtags_limit": 3, "best_times": ["09:00", "18:00"] },
+    "zalo_oa": { "format": "16:9", "max_duration": 120, "hashtags_limit": 0, "best_times": ["08:30", "14:00"] },
+    "instagram_reels": { "format": "9:16", "max_duration": 90, "hashtags_limit": 10, "best_times": ["11:00", "19:30"] }
+  },
+  "daily_quota": {
+    "videos_per_day": 3,
+    "weekday_niches": ["detox-giam-can", "skincare-tu-nhien", "giac-ngu-nang-luong"],
+    "weekend_niches": ["health-journey-30ngay", "chuyen-hoa-doi-tac"],
+    "rotation_strategy": "Round-robin weekday niches, story-based weekends"
+  },
+  "content_pillars": {
+    "edutainment": { "percentage": 40, "description": "Giáo dục + giải trí, myth-busting, so sánh" },
+    "simplified": { "percentage": 25, "description": "Mẹo nhanh, routine đơn giản, ai cũng làm được" },
+    "social_proof": { "percentage": 20, "description": "Journey log, interview, câu chuyện thực" },
+    "behind_scenes": { "percentage": 10, "description": "Nhà máy, unboxing, chứng nhận, supply chain" },
+    "community": { "percentage": 5, "description": "Q&A, challenges, flash sale, partner invite" }
+  }
+}

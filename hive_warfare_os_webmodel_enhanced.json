@@ -1,0 +1,690 @@
+{
+  "meta": {
+    "name": "HIVE_WARFARE_OS_WebModel_Enhanced",
+    "version": "1.1",
+    "author": "assistant for Tuệ Minh",
+    "created_at": "2025-12-08T10:05:31.341385Z",
+    "description": "Enhanced data model + metrics + alert rules + UI layout combining First Things First (20%), Sun Tzu (13 chapters) and Hive Warfare OS patterns."
+  },
+  "config": {
+    "palette": {
+      "primary": "#004CE3",
+      "hive_gold": "#FFC734",
+      "hive_black": "#1A1A1A",
+      "accent_orange": "#FF8A00",
+      "success_green": "#57D697",
+      "alert_red": "#D7263D",
+      "soft_sky": "#D7E6FF"
+    },
+    "team": {
+      "name": "PHỤNG SỰ 100 ĐỘ C",
+      "psn_preference": "DISC",
+      "max_direct_reports_per_leader": 12,
+      "default_currency": "VND"
+    },
+    "thresholds": {
+      "habit_weekly_target": 6,
+      "habit_min_active": 3,
+      "conversion_alert_pct": 15,
+      "lead_drop_threshold_weekly": 100,
+      "psn_avg_habit_low": 3,
+      "retention_energy_low": 55,
+      "retention_habit_low": 3
+    },
+    "kpi_weights": {
+      "habit_weight": 0.4,
+      "conversion_weight": 0.3,
+      "revenue_weight": 0.3
+    }
+  },
+  "compass": {
+    "mission": "Phụng sự 100 độ C – Win Together",
+    "values": [
+      "Growth",
+      "Discipline",
+      "Love",
+      "Impact"
+    ],
+    "north_star_metrics": [
+      "Retention Rate",
+      "Habit Completion",
+      "PSN Health"
+    ],
+    "priorities": [
+      "Protect retention",
+      "Build habits (Quadrant II)",
+      "Sustain revenue"
+    ]
+  },
+  "quadrant_engine": {
+    "description": "Auto-classify tasks/activities into Covey Quadrants to prioritize Quadrant II work.",
+    "rules": [
+      {
+        "name": "Q1",
+        "label": "Urgent & Important",
+        "criteria": [
+          "deadline_today",
+          "customer_issue",
+          "regulatory"
+        ]
+      },
+      {
+        "name": "Q2",
+        "label": "Important Not Urgent",
+        "criteria": [
+          "training",
+          "habit_building",
+          "planning",
+          "coaching",
+          "system_improvement"
+        ]
+      },
+      {
+        "name": "Q3",
+        "label": "Urgent Not Important",
+        "criteria": [
+          "interruptions",
+          "non-core_meetings"
+        ]
+      },
+      {
+        "name": "Q4",
+        "label": "Not Urgent Not Important",
+        "criteria": [
+          "distractions",
+          "low-value_tasks"
+        ]
+      }
+    ],
+    "actions_on_classification": {
+      "Q2": "auto_schedule_weekly_block; assign_owner",
+      "Q1": "escalate_to_leader",
+      "Q3": "defer_or_delegate",
+      "Q4": "eliminate"
+    }
+  },
+  "human_needs": {
+    "live": [
+      "income_stability_score",
+      "health_score"
+    ],
+    "love": [
+      "team_connection_score",
+      "peer_support_actions"
+    ],
+    "learn": [
+      "training_hours",
+      "skill_badges_earned"
+    ],
+    "legacy": [
+      "contribution_score",
+      "mentorship_actions"
+    ]
+  },
+  "sun_tzu": {
+    "mapping": [
+      {
+        "chapter": "Kế",
+        "meaning": "Plan & calculation",
+        "apply": "dashboard_planning, north_star"
+      },
+      {
+        "chapter": "Tác chiến",
+        "meaning": "Resource costs",
+        "apply": "campaign_costs, burn_rates"
+      },
+      {
+        "chapter": "Mưu công",
+        "meaning": "Winning by strategy",
+        "apply": "psn_targeting, quadrant_strategy"
+      },
+      {
+        "chapter": "Hình",
+        "meaning": "Formations",
+        "apply": "team_structure, role_mapping"
+      },
+      {
+        "chapter": "Thế",
+        "meaning": "Momentum",
+        "apply": "habit_streaks, momentum_score"
+      },
+      {
+        "chapter": "Hư thực",
+        "meaning": "Feints & deception",
+        "apply": "test_offers, A/B funnels"
+      },
+      {
+        "chapter": "Quân tranh",
+        "meaning": "Mobility",
+        "apply": "rapid_campaigns, alerts"
+      },
+      {
+        "chapter": "Cửu biến",
+        "meaning": "Adaptation",
+        "apply": "adaptive_coaching, scenario_playbooks"
+      },
+      {
+        "chapter": "Hành quân",
+        "meaning": "Morale & logistics",
+        "apply": "energy_monitor, capacity_planning"
+      },
+      {
+        "chapter": "Địa hình",
+        "meaning": "Terrain use",
+        "apply": "market_segmentation, channel_fit"
+      },
+      {
+        "chapter": "Cửu địa",
+        "meaning": "Nine situations",
+        "apply": "psn_states, escalation_paths"
+      },
+      {
+        "chapter": "Hỏa công",
+        "meaning": "Decisive strikes",
+        "apply": "flash_campaigns, launch_events"
+      },
+      {
+        "chapter": "Dụng gián",
+        "meaning": "Spies/intel",
+        "apply": "data_analytics, feedback_loops"
+      }
+    ]
+  },
+  "hive_intel": {
+    "pheromone_signals": [
+      "success_signal",
+      "danger_signal",
+      "engagement_signal"
+    ],
+    "queen_health": "leader_kpi_score",
+    "worker_load_balance": "task_distribution_index",
+    "swarm_alerts": [
+      "psn_drop",
+      "habit_collapse",
+      "conversion_crash"
+    ],
+    "intel_actions": [
+      "broadcast_alert",
+      "escalate",
+      "assign_buddy",
+      "start_campaign"
+    ]
+  },
+  "data_schema": {
+    "members": {
+      "fields": [
+        {
+          "name": "member_id",
+          "type": "string",
+          "pk": true
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "name": "psn",
+          "type": "string"
+        },
+        {
+          "name": "role",
+          "type": "string"
+        },
+        {
+          "name": "disc",
+          "type": "string"
+        },
+        {
+          "name": "join_date",
+          "type": "date",
+          "optional": true
+        }
+      ]
+    },
+    "habit_tracker": {
+      "fields": [
+        {
+          "name": "member_id",
+          "type": "string",
+          "fk": "members.member_id"
+        },
+        {
+          "name": "week_start",
+          "type": "date"
+        },
+        {
+          "name": "5am",
+          "type": "boolean"
+        },
+        {
+          "name": "kaizen",
+          "type": "boolean"
+        },
+        {
+          "name": "zoom",
+          "type": "boolean"
+        },
+        {
+          "name": "avg_connect_per_day",
+          "type": "number"
+        },
+        {
+          "name": "follow_up_per_day",
+          "type": "number"
+        },
+        {
+          "name": "learning",
+          "type": "boolean"
+        },
+        {
+          "name": "weekly_score",
+          "type": "number"
+        }
+      ]
+    },
+    "individual_kpi": {
+      "fields": [
+        {
+          "name": "member_id",
+          "type": "string",
+          "fk": "members.member_id"
+        },
+        {
+          "name": "week_start",
+          "type": "date"
+        },
+        {
+          "name": "new_leads",
+          "type": "integer"
+        },
+        {
+          "name": "warm_leads",
+          "type": "integer"
+        },
+        {
+          "name": "hot_leads",
+          "type": "integer"
+        },
+        {
+          "name": "orders",
+          "type": "integer"
+        },
+        {
+          "name": "revenue",
+          "type": "number"
+        },
+        {
+          "name": "conversion_pct",
+          "type": "number"
+        },
+        {
+          "name": "kpi_score",
+          "type": "number"
+        }
+      ]
+    },
+    "retention_monitor": {
+      "fields": [
+        {
+          "name": "member_id",
+          "type": "string",
+          "fk": "members.member_id"
+        },
+        {
+          "name": "date",
+          "type": "date"
+        },
+        {
+          "name": "energy_score",
+          "type": "number"
+        },
+        {
+          "name": "emotion",
+          "type": "string"
+        },
+        {
+          "name": "zoom_count_7d",
+          "type": "integer"
+        },
+        {
+          "name": "habit_count_7d",
+          "type": "integer"
+        },
+        {
+          "name": "risk_level",
+          "type": "string"
+        },
+        {
+          "name": "action",
+          "type": "string"
+        }
+      ]
+    },
+    "group_psn": {
+      "fields": [
+        {
+          "name": "psn_id",
+          "type": "string",
+          "pk": true
+        },
+        {
+          "name": "leader_id",
+          "type": "string",
+          "fk": "members.member_id"
+        },
+        {
+          "name": "members_count",
+          "type": "integer"
+        },
+        {
+          "name": "avg_habit_score",
+          "type": "number"
+        },
+        {
+          "name": "weekly_orders",
+          "type": "integer"
+        },
+        {
+          "name": "weekly_revenue",
+          "type": "number"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        }
+      ]
+    },
+    "sales_funnel": {
+      "fields": [
+        {
+          "name": "stage",
+          "type": "string"
+        },
+        {
+          "name": "count",
+          "type": "integer"
+        }
+      ]
+    },
+    "tasks": {
+      "fields": [
+        {
+          "name": "task_id",
+          "type": "string",
+          "pk": true
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "owner_id",
+          "type": "string",
+          "fk": "members.member_id"
+        },
+        {
+          "name": "psn_id",
+          "type": "string"
+        },
+        {
+          "name": "quadrant",
+          "type": "string"
+        },
+        {
+          "name": "due_date",
+          "type": "date"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime"
+        }
+      ]
+    }
+  },
+  "sample_data": {
+    "note": "use previous demo file as seed; omitted for brevity"
+  },
+  "computed_metrics": {
+    "weekly_score_calc": {
+      "formula": "weekly_score = (5am?1:0)+(kaizen?1:0)+(zoom?1:0)+(learning?1:0)+(avg_connect_per_day>=15?1:0)+(follow_up_per_day>=3?1:0)",
+      "type": "integer",
+      "range": "0..6"
+    },
+    "conversion_pct_calc": {
+      "formula": "conversion_pct = new_leads>0 ? (orders/new_leads*100) : 0",
+      "type": "percent"
+    },
+    "kpi_score_calc": {
+      "formula": "kpi_score = config.kpi_weights.habit_weight*(weekly_score/config.thresholds.habit_weekly_target*100) + config.kpi_weights.conversion_weight*conversion_pct + config.kpi_weights.revenue_weight*(revenue/1000000)",
+      "notes": "revenue scaled by 1M VND"
+    },
+    "psn_score": {
+      "formula": "psn_score = AVG(kpi_score WHERE member.psn == psn_id)"
+    },
+    "retention_risk_logic": {
+      "formula": "risk = (energy_score < config.thresholds.retention_energy_low OR habit_count_7d < config.thresholds.retention_habit_low) ? 'High' : (energy_score < (config.thresholds.retention_energy_low+10) ? 'Medium' : 'Low')"
+    }
+  },
+  "alerts_rules": [
+    {
+      "id": "ALERT_001",
+      "name": "Conversion Low",
+      "trigger": "conversion_pct < config.thresholds.conversion_alert_pct",
+      "severity": "high",
+      "action": [
+        "notify_leader",
+        "add_to_watchlist"
+      ]
+    },
+    {
+      "id": "ALERT_002",
+      "name": "Lead Drop",
+      "trigger": "weekly_new_leads_total < config.thresholds.lead_drop_threshold_weekly",
+      "severity": "medium",
+      "action": [
+        "trigger_campaign('MiniBoost')",
+        "notify_core_leaders"
+      ]
+    },
+    {
+      "id": "ALERT_003",
+      "name": "Habit Drop Member",
+      "trigger": "weekly_score < config.thresholds.habit_min_active",
+      "severity": "high",
+      "action": [
+        "assign_buddy(member_id)",
+        "schedule_1to1(member_id)"
+      ]
+    },
+    {
+      "id": "ALERT_004",
+      "name": "PSN Weak",
+      "trigger": "avg_habit_score < config.thresholds.psn_avg_habit_low OR status == 'At Risk'",
+      "severity": "high",
+      "action": [
+        "escalate_to_core_leader(psn_id)",
+        "deploy_coaching_pack(psn_id)"
+      ]
+    },
+    {
+      "id": "ALERT_005",
+      "name": "Retention High Risk",
+      "trigger": "risk_level == 'High'",
+      "severity": "critical",
+      "action": [
+        "immediate_1to1(member_id)",
+        "create_retention_ticket(member_id)"
+      ]
+    },
+    {
+      "id": "ALERT_006",
+      "name": "Quadrant II Neglect",
+      "trigger": "percent_tasks_q2_completed < 40",
+      "severity": "high",
+      "action": [
+        "block_time_for_q2",
+        "notify_leader"
+      ]
+    }
+  ],
+  "ui_layout": {
+    "dashboard": {
+      "layout": "2x2 grid",
+      "blocks": [
+        {
+          "id": "revenue_block",
+          "title": "Doanh số",
+          "primary_metric": "revenue_weekly_total",
+          "signals": [
+            "conversion_low_count",
+            "leads_drop_flag",
+            "orders_total"
+          ],
+          "chart": "revenue_trend_6weeks"
+        },
+        {
+          "id": "habit_block",
+          "title": "Thói quen",
+          "primary_metric": "habit_completion_rate_pct",
+          "signals": [
+            "no_5am_count",
+            "zoom_low_attendance_count",
+            "connect_avg_below_threshold_flag"
+          ],
+          "chart": "habit_heatmap_week"
+        },
+        {
+          "id": "psn_block",
+          "title": "PSN",
+          "primary_metric": "psn_score_leaderboard",
+          "signals": [
+            "psn_low_count",
+            "psn_high_risk_count"
+          ],
+          "chart": "psn_radar_chart"
+        },
+        {
+          "id": "retention_block",
+          "title": "Retention",
+          "primary_metric": "retention_rate_30d",
+          "signals": [
+            "zoom0_5d_count",
+            "lost_habits_count",
+            "avg_energy_score"
+          ],
+          "chart": "energy_trend_4weeks"
+        }
+      ]
+    },
+    "member_profile": {
+      "sections": [
+        "summary",
+        "habit_timeline",
+        "kpi_history",
+        "retention_history",
+        "coach_notes",
+        "action_buttons"
+      ],
+      "actions": [
+        "mark_habit_done",
+        "add_note",
+        "request_coaching",
+        "assign_buddy",
+        "escalate"
+      ]
+    },
+    "psn_view": {
+      "columns": [
+        "rank",
+        "leader",
+        "members_count",
+        "avg_kpi",
+        "avg_habit",
+        "weekly_orders",
+        "weekly_revenue",
+        "status"
+      ],
+      "filters": [
+        "disc_type",
+        "status",
+        "risk_level"
+      ]
+    }
+  },
+  "api_endpoints": {
+    "members": {
+      "list": "GET /api/members",
+      "get": "GET /api/members/{member_id}",
+      "create": "POST /api/members",
+      "update": "PUT /api/members/{member_id}",
+      "delete": "DELETE /api/members/{member_id}"
+    },
+    "habit": {
+      "add_week": "POST /api/habit",
+      "update_week": "PUT /api/habit/{member_id}/{week_start}",
+      "list_by_week": "GET /api/habit?week_start=YYYY-MM-DD"
+    },
+    "kpi": {
+      "report_week": "POST /api/kpi",
+      "list": "GET /api/kpi?week_start=YYYY-MM-DD"
+    },
+    "retention": {
+      "report": "POST /api/retention",
+      "list": "GET /api/retention?date=YYYY-MM-DD"
+    },
+    "dashboard": {
+      "get": "GET /api/dashboard?week_start=YYYY-MM-DD",
+      "export": "GET /api/dashboard/export?format=pdf|xlsx"
+    },
+    "actions": {
+      "assign_buddy": "POST /api/actions/assign_buddy",
+      "schedule_1to1": "POST /api/actions/schedule_1to1",
+      "trigger_campaign": "POST /api/actions/trigger_campaign"
+    }
+  },
+  "workflows": {
+    "weekly_sync": {
+      "trigger": "cron 0 6 * * MON",
+      "steps": [
+        "aggregate weekly habit scores for last Monday",
+        "aggregate weekly KPI (leads,orders,revenue)",
+        "compute kpi_score for each member",
+        "update psn summary (avg habit, orders, revenue)",
+        "evaluate alerts (run alerts_rules)",
+        "send summary email to core leaders with top signals"
+      ]
+    },
+    "retention_watch": {
+      "trigger": "on retention_monitor insert OR weekly_sync",
+      "steps": [
+        "if risk_level == 'High' then create immediate ticket and schedule 1:1 within 24h",
+        "if risk_level == 'Medium' then assign buddy and schedule coaching within 72h",
+        "log action and update member.status"
+      ]
+    },
+    "campaign_boost": {
+      "trigger": "alert ALRET_002 Lead Drop OR manual by lead",
+      "steps": [
+        "create 7-day Mini Boost campaign template",
+        "assign PSN targets and daily tasks",
+        "track campaign progress daily and show in dashboard",
+        "post-campaign analysis"
+      ]
+    }
+  },
+  "implementation_notes": {
+    "backend_recommendation": "Node.js + Express or Firebase Cloud Functions. Use Postgres or Firestore. Scheduled jobs via cron (Cloud Functions or Cloud Run).",
+    "frontend_recommendation": "React (Vite) + Tailwind; Recharts or Chart.js for charts; TanStack Table for tables.",
+    "security": "Role-based access: admin/core_leader/psn_leader/member; audit logs for actions.",
+    "scalability": "Design to support 2000+ members; use paginated endpoints for lists."
+  }
+}

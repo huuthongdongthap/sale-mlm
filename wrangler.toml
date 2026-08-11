@@ -1,0 +1,48 @@
+name = "hive-warfare-os"
+main = "src/workers/index.js"
+compatibility_date = "2026-05-01"
+
+# Cloudflare Workers free tier limits:
+# - 100K requests/day
+# - 10ms CPU time per request
+# - 128MB memory
+
+[vars]
+NODE_ENV = "production"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hive-warfare-db"
+database_id = "def140e1-c5bb-48e5-a79f-e9368321c9d0"
+
+# KV namespace not configured — code uses D1 only
+# [[kv_namespaces]]
+# binding = "SESSIONS"
+# id = "hive-warfare-sessions"
+
+# KV namespace for caching
+[[kv_namespaces]]
+binding = "CACHE"
+id = "b6bbaefaf3984faa8f47d2b65fdcbfa4"
+
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "hive-warfare-storage"
+
+[build]
+command = "npm ci --production"
+
+[triggers]
+crons = ["0 0 * * *"]
+
+[env.staging]
+name = "hive-warfare-os-staging"
+[env.staging.vars]
+NODE_ENV = "staging"
+
+[env.production]
+name = "hive-warfare-os"
+[env.production.vars]
+NODE_ENV = "production"
+
+

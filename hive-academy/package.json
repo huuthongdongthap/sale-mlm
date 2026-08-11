@@ -1,0 +1,26 @@
+{
+  "name": "hive-academy",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "deploy": "npx @cloudflare/next-on-pages"
+  },
+  "dependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "date-fns": "^4.4.0",
+    "js-cookie": "^3.0.8",
+    "lucide-react": "^1.25.0",
+    "next": "^14.3.0-canary.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.0.0",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "typescript": "5.4.5"
+  }
+}

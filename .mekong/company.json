@@ -1,0 +1,118 @@
+{
+  "name": "DROPPII SALES TRAINING OS — HIVE WARFARE ACADEMY",
+  "stage": "pmf",
+  "model": "MLM Training-as-a-Service (TaaS) + Network Leadership Platform",
+  "target_arr": "$500K",
+  "icp": "Droppii distributors, PSN leaders, core team members seeking structured training to scale recruitment & retention",
+  "moat": "Hive Warfare OS proprietary methodology (Sun Tzu × Covey × Hive Colony) + AI-driven coaching + real-time PSN health analytics",
+  "industry": "MLM/Network Marketing Training & Management",
+  "geography": "Vietnam (HCM, Hà Nội, Đà Nẵng)",
+  "team_name": "PHỤNG SỰ 100 ĐỘ C",
+
+  "training_architecture": {
+    "tier_1_warrior": {
+      "name": "Tân Binh → Chiến Binh (New Recruit → Warrior)",
+      "duration_weeks": 4,
+      "focus": "Habit Foundation + Product Knowledge + First 10 Leads",
+      "modules": [
+        "M1: Mindset Reset — 5AM Club + Kaizen journaling",
+        "M2: Product Mastery — Droppii ecosystem deep-dive",
+        "M3: Connect Engine — 15 connects/day framework",
+        "M4: First Close — Follow-up sequence mastery"
+      ],
+      "kpis": {
+        "habit_score_min": 4,
+        "connects_per_day": 15,
+        "follow_ups_per_day": 3,
+        "first_order_deadline_days": 14
+      },
+      "graduation": "3 orders + habit score ≥ 4/6 for 3 consecutive weeks"
+    },
+    "tier_2_commander": {
+      "name": "Chiến Binh → Chỉ Huy (Warrior → Commander)",
+      "duration_weeks": 8,
+      "focus": "Team Building + PSN Leadership + Coaching Skills",
+      "modules": [
+        "M5: Recruitment Funnel — Online/Offline lead generation",
+        "M6: Leader DNA — DISC personality coaching",
+        "M7: PSN Management — Group formation + metric tracking",
+        "M8: Coaching Conversations — 1:1 framework + buddy system"
+      ],
+      "kpis": {
+        "team_size_min": 5,
+        "team_retention_rate": 70,
+        "personal_revenue_monthly": 10000000,
+        "coaching_sessions_weekly": 3
+      },
+      "graduation": "PSN score ≥ 65 + team size ≥ 5 active members"
+    },
+    "tier_3_general": {
+      "name": "Chỉ Huy → Tướng Quân (Commander → General)",
+      "duration_weeks": 12,
+      "focus": "Multi-PSN Strategy + Campaign Leadership + System Thinking",
+      "modules": [
+        "M9: Sun Tzu Applied — 13 chapters in sales warfare",
+        "M10: Campaign Warfare — Flash campaigns + A/B funnels",
+        "M11: Data Commander — Dashboard mastery + alert response",
+        "M12: Legacy Builder — Mentorship multiplication system"
+      ],
+      "kpis": {
+        "psn_count_managed": 3,
+        "total_network_size": 30,
+        "monthly_team_revenue": 100000000,
+        "retention_rate_90d": 75
+      },
+      "graduation": "3+ active PSN lines + 75% 90-day retention + recognized by Droppii rank"
+    }
+  },
+
+  "sun_tzu_curriculum": {
+    "description": "13 chương Binh Pháp ứng dụng vào Sale MLM",
+    "chapters": [
+      { "chapter": "Kế", "sales_application": "Lập kế hoạch tuần/tháng, target setting, north star alignment" },
+      { "chapter": "Tác Chiến", "sales_application": "Quản lý chi phí thời gian/năng lượng, ROI từng hoạt động" },
+      { "chapter": "Mưu Công", "sales_application": "Thắng bằng chiến lược — warm market trước, cold market sau" },
+      { "chapter": "Hình", "sales_application": "Cấu trúc đội nhóm — PSN formation, role assignment" },
+      { "chapter": "Thế", "sales_application": "Tạo đà — habit streaks, momentum score, tận dụng sóng" },
+      { "chapter": "Hư Thực", "sales_application": "Test offer, A/B content, thử nghiệm trước khi all-in" },
+      { "chapter": "Quân Tranh", "sales_application": "Tốc độ triển khai — rapid campaigns, blitz week" },
+      { "chapter": "Cửu Biến", "sales_application": "Linh hoạt coaching theo tình huống — adaptive playbook" },
+      { "chapter": "Hành Quân", "sales_application": "Giữ sĩ khí — energy monitoring, team events, celebration" },
+      { "chapter": "Địa Hình", "sales_application": "Phân khúc thị trường — segment targeting, channel fit" },
+      { "chapter": "Cửu Địa", "sales_application": "9 tình huống PSN — từ healthy đến critical, escalation paths" },
+      { "chapter": "Hỏa Công", "sales_application": "Đòn quyết định — launch events, flash sales, big push" },
+      { "chapter": "Dụng Gián", "sales_application": "Thu thập data — feedback loops, customer insights, analytics" }
+    ]
+  },
+
+  "agents": {
+    "training_ops": "AI Training Coach — auto-assign curriculum, track progress, send reminders",
+    "retention_guard": "AI Retention Agent — monitor energy/habit drop, trigger buddy system",
+    "campaign_commander": "AI Campaign Agent — deploy flash campaigns when leads drop",
+    "psn_analyst": "AI PSN Analyst — weekly PSN health report, rank leaders",
+    "content_engine": "AI Content Agent — generate training materials, daily tips, zoom scripts",
+    "onboarding_bot": "AI Onboarding Bot — guide new recruits through Tier 1 modules"
+  },
+
+  "okrs": [
+    "Q2-2026: Launch Tier 1 training for 50 members, achieve 70% habit completion rate",
+    "Q3-2026: Scale to 200 active members, 3 PSN lines achieving Commander tier",
+    "Q4-2026: 500+ members, training platform automated, 80% Tier 1 graduation rate",
+    "Q1-2027: Franchise training model to other Droppii teams, $500K ARR target"
+  ],
+
+  "governance": {
+    "roles": ["Admin", "Core Leader", "PSN Leader", "Member"],
+    "audit_trail": "All coaching actions logged with timestamps",
+    "compliance": "Droppii corporate guidelines compliance layer",
+    "data_privacy": "Member data encrypted, PDPA Vietnam ready"
+  },
+
+  "next_steps": [
+    "1. Deploy Hive Warfare OS web dashboard (from existing JSON model)",
+    "2. Create Tier 1 training module content (4 modules × 7 days each)",
+    "3. Setup habit tracker + KPI automations in dashboard",
+    "4. Recruit 10 pilot Tier 1 trainees from current team",
+    "5. Launch Week 1 with 5AM Club + daily connects tracking"
+  ]
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hive Warfare OS - MVP Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* M3 Style Overrides */
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-8 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-extrabold text-gray-900">Hive Warfare OS</h1>
+                <p class="text-gray-500 mt-1">Phụng Sự 100 Độ C - Win Together</p>
+            </div>
+            <div class="px-4 py-2 bg-[#004CE3] text-white font-bold rounded-lg shadow-md cursor-pointer hover:bg-blue-700">
+                Làm mới (Sync)
+            </div>
+        </header>
+
+        <!-- 2x2 Grid from data_schema -> ui_layout.dashboard -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Revenue Block -->
+            <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 5h2v2H9V5zm0 4h2v6H9V9z"></path></svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">💰 Doanh Số</h2>
+                <div class="text-4xl font-extrabold text-[#57D697] mb-2 tracking-tight">34,500K</div>
+                <div class="flex items-center text-sm text-gray-500">
+                    <span class="text-red-500 font-medium mr-2 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                        -5% so với tuần trước
+                    </span>
+                    (Alert: Conversion Low)
+                </div>
+            </div>
+
+            <!-- Habit Block -->
+            <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">📅 Thói Quen (Habits)</h2>
+                <div class="text-4xl font-extrabold text-[#004CE3] mb-2 tracking-tight">85%</div>
+                <div class="flex items-center text-sm text-gray-500">
+                    <span class="text-green-500 font-medium mr-2 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        34/40 members đạt 5AM Club
+                    </span>
+                </div>
+            </div>
+
+            <!-- PSN Block -->
+            <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path></svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">👥 Sức khỏe PSN</h2>
+                <div class="text-4xl font-extrabold text-[#FF8A00] mb-2 tracking-tight">6.8 / 10</div>
+                <div class="flex flex-col text-sm text-gray-500">
+                    <span class="text-red-500 font-medium mr-2 flex items-center mb-1">
+                        ⚠️ 2 PSN "At Risk" (Dưới chuẩn thói quen)
+                    </span>
+                    <span>Hành động: Escalate tới Core Leader</span>
+                </div>
+            </div>
+
+            <!-- Retention Block -->
+            <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">💚 Retention 30d</h2>
+                <div class="text-4xl font-extrabold text-[#FFC734] mb-2 tracking-tight">92%</div>
+                <div class="flex items-center text-sm text-gray-500">
+                    <span class="text-gray-600 font-medium mr-2">
+                        Zoom attendance drop: 3 members
+                    </span>
+                    (Energy Trend ổn định)
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Generated by DeepSeek-R1 MLX Local Brain via Extracted CTO Worker -->
+        <footer class="mt-8 text-center text-xs text-gray-400">
+            Deployed by OpenClaw v6.0 PEV CTO Worker • MLX Model: DeepSeek-R1-32B-Local
+        </footer>
+    </div>
+</body>
+</html>

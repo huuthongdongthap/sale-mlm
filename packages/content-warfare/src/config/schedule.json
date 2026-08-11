@@ -1,0 +1,33 @@
+{
+  "schedule": {
+    "spy_time": "06:00",
+    "script_time": "07:00",
+    "produce_time": "08:00",
+    "distribute_time": "10:00"
+  },
+  "posting_schedule": {
+    "facebook": ["08:00", "12:00", "19:00"],
+    "tiktok": ["07:00", "12:30", "20:00"],
+    "youtube_shorts": ["09:00", "18:00"],
+    "zalo_oa": ["08:30", "14:00"]
+  },
+  "kingcontent": {
+    "base_url": "https://kingcontent.pro",
+    "account": "Babepig",
+    "plan": "VIP3A",
+    "video_style": "Cinematic",
+    "frame": "9:16",
+    "voice": "auto"
+  },
+  "sophia": {
+    "base_url": "http://localhost:3000",
+    "fallback": true
+  },
+  "utm_base": "droppii-funnel.pages.dev",
+  "cta_links": {
+    "quiz": "/quiz/khoi-dau",
+    "shop": "/shop",
+    "shop_l2": "/shop?level=L2",
+    "partner": "/khach-hang/tro-thanh-ctv"
+  }
+}

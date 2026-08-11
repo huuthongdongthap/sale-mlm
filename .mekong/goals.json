@@ -1,0 +1,114 @@
+{
+  "project": "droppii-training-os",
+  "generated": "2026-05-20",
+  "mode": "auto",
+  "mission": "Complete Droppii Sales Training OS MVP and launch pilot for 10 Tân Binh",
+  "north_star": "Q2-2026: Launch Tier 1 training for 50 members, achieve 70% habit completion rate",
+  
+  "goals": [
+    {
+      "id": "G1",
+      "name": "Unblock In-Progress Tasks",
+      "status": "pending",
+      "priority": "P0",
+      "est_hours": 1.5,
+      "tasks": ["T-018", "T-008", "T-014"],
+      "accept": [
+        "npm test passes with Jest config",
+        "Members table renders with working filters",
+        "M3 Connect Engine content JSON complete (7 days × 3 channels)"
+      ]
+    },
+    {
+      "id": "G2",
+      "name": "Analytics Pipeline — PSN Health + Alerts",
+      "status": "pending",
+      "priority": "P0",
+      "est_hours": 3,
+      "tasks": ["T-005", "T-006"],
+      "accept": [
+        "psnHealth.js classifies 9 states correctly",
+        "Alert rules engine evaluates and fires rules",
+        "POST /api/alerts/evaluate returns fired[]"
+      ]
+    },
+    {
+      "id": "G3",
+      "name": "AI Agents + Tier-1 Content Complete",
+      "status": "pending",
+      "priority": "P1",
+      "est_hours": 3,
+      "tasks": ["T-016", "T-017", "T-015"],
+      "accept": [
+        "Onboarding bot flows through W1→W2→W3→W4",
+        "Training Ops auto-assigns curriculum + tracks progress",
+        "M4 First Close content complete (7 days, follow-up ladders)"
+      ]
+    },
+    {
+      "id": "G4",
+      "name": "Data + CI/CD Pipeline",
+      "status": "pending",
+      "priority": "P1",
+      "est_hours": 2.5,
+      "tasks": ["T-023", "T-019", "T-020"],
+      "accept": [
+        "10 pilot members seeded with 14-day history",
+        "Playwright E2E test passes (login + dashboard)",
+        "GitHub Actions CI: lint → test → build → deploy-preview"
+      ]
+    },
+    {
+      "id": "G5",
+      "name": "Deploy + Monitoring",
+      "status": "pending",
+      "priority": "P1",
+      "est_hours": 2,
+      "tasks": ["T-021", "T-022"],
+      "accept": [
+        "Live URL on Cloudflare Pages + Workers",
+        "Sentry SDK integrated, errors captured",
+        "Zalo webhook alert fires on threshold"
+      ]
+    },
+    {
+      "id": "G6",
+      "name": "Pilot Launch — 10 Tân Binh",
+      "status": "pending",
+      "priority": "P0",
+      "est_hours": 1,
+      "tasks": ["T-024", "T-025"],
+      "accept": [
+        "README + RUNBOOK complete (VN + EN)",
+        "All 25 tasks = done",
+        "Launch checklist passes → Ready for 10 Tân Binh"
+      ]
+    }
+  ],
+
+  "execution_plan": {
+    "strategy": "4-worker parallel",
+    "rounds": [
+      { "round": 1, "goals": ["G1"], "tasks": ["T-018", "T-008", "T-014", "T-023"], "est_hours": 1.5 },
+      { "round": 2, "goals": ["G2", "G3"], "tasks": ["T-005", "T-006", "T-015", "T-016"], "est_hours": 2 },
+      { "round": 3, "goals": ["G3", "G4"], "tasks": ["T-017", "T-019", "T-024", "T-022"], "est_hours": 2 },
+      { "round": 4, "goals": ["G5", "G6"], "tasks": ["T-020", "T-021", "T-025"], "est_hours": 1.5 }
+    ],
+    "total_est_hours": "6-8h real time (4 parallel workers)"
+  },
+
+  "risks": [
+    { "risk": "No real DB (in-memory only)", "impact": "high", "mitigation": "Use D1 (Cloudflare SQLite) for T-021" },
+    { "risk": "Hardcoded encryption key in src/utils/encryption.js", "impact": "medium", "mitigation": "Rotate key, use env vars before T-025" },
+    { "risk": "T-008 FE reset by build-fe re-init", "impact": "low", "mitigation": "Verify filter-chips.js, re-test" }
+  ],
+
+  "success_criteria": {
+    "all_tasks_done": true,
+    "test_coverage_min": 70,
+    "live_url_required": true,
+    "seed_data_verified": true,
+    "docs_complete": true,
+    "pilot_ready": "10 Tân Binh onboarded"
+  }
+}
