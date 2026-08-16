@@ -156,4 +156,117 @@ describe('T-019: E2E Smoke Tests', () => {
     const jsPath = path.join(__dirname, '../src/dashboard/main.js');
     expect(fs.existsSync(jsPath)).toBe(true);
   });
+
+  /* ---- Extended API surface tests ---- */
+
+  test('GET /api/training/active returns 200 with trainees array', async () => {
+    const res = await request(serverApp).get('/api/training/active');
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('trainees');
+    expect(Array.isArray(res.body.trainees)).toBe(true);
+  });
+
+  test('GET /api/training/attention returns 200 with needing_attention array', async () => {
+    const res = await request(serverApp).get('/api/training/attention');
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('needing_attention');
+    expect(Array.isArray(res.body.needing_attention)).toBe(true);
+  });
+
+  test('POST /api/orders creates order and returns id + success', async () => {
+    const token = jwt.sign({ id: 'admin-001', role: 'Admin' }, process.env.JWT_SECRET);
+    const res = await request(serverApp)
+      .post('/api/orders')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        leadName: 'E2E Test Lead',
+        productName: 'Tinh Hoa Yen Sao',
+        productTier: 2,
+        quantity: 1,
+        unitPriceVND: 1500000,
+      });
+    expect(res.status).toBe(201);
+    expect(res.body).toHaveProperty('order');
+    expect(res.body.order).toHaveProperty('id');
+    expect(res.body.order.productTier).toBe(2);
+  });
+
+  test('POST /api/orders/mark-paid marks an existing order as paid', async () => {
+    const token = jwt.sign({ id: 'admin-001', role: 'Admin' }, process.env.JWT_SECRET);
+    // First create an order
+    const createRes = await request(serverApp)
+      .post('/api/orders')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        leadName: 'E2E Mark-Paid Lead',
+        productName: 'Tinh Hoa Yen Sao',
+        productTier: 1,
+        quantity: 1,
+        unitPriceVND: 500000,
+      });
+    expect(createRes.status).toBe(201);
+    const orderId = createRes.body.order.id;
+
+    // Then mark it paid
+    const res = await request(serverApp)
+      .post('/api/orders/mark-paid')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ orderId, paymentReference: 'E2E-REF-001', paymentMethod: 'bank_transfer' });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('order');
+    expect(res.body.order.paymentStatus).toBe('paid');
+  });
+
+  test('GET /api/leads returns 200 with leads array', async () => {
+    const token = jwt.sign({ id: 'admin-001', role: 'Admin' }, process.env.JWT_SECRET);
+    const res = await request(serverApp)
+      .get('/api/leads')
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('leads');
+    expect(Array.isArray(res.body.leads)).toBe(true);
+  });
+
+  test('POST /api/leads creates lead and returns 201 with id', async () => {
+    const token = jwt.sign({ id: 'admin-001', role: 'Admin' }, process.env.JWT_SECRET);
+    const res = await request(serverApp)
+      .post('/api/leads')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        name: 'E2E New Lead',
+        phone: '+84901234567',
+        source: 'e2e-test',
+      });
+    expect(res.status).toBe(201);
+    expect(res.body).toHaveProperty('id');
+    expect(res.body.name).toBe('E2E New Lead');
+  });
+
+  test('GET /ready returns 200 with status property', async () => {
+    const res = await request(serverApp).get('/ready');
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('status');
+    expect(res.body.status).toBe('ready');
+  });
+
+  test('GET /metrics returns 200', async () => {
+    const res = await request(serverApp).get('/metrics');
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('uptime');
+    expect(res.body).toHaveProperty('timestamp');
+  });
+
+  test('GET /api/monitoring/summary returns 200 with auth', async () => {
+    const token = jwt.sign({ id: 'admin-001', role: 'Admin' }, process.env.JWT_SECRET);
+    const res = await request(serverApp)
+      .get('/api/monitoring/summary')
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('total');
+  });
+
+  test('GET /api/monitoring/summary returns 401 without auth', async () => {
+    const res = await request(serverApp).get('/api/monitoring/summary');
+    expect(res.status).toBe(401);
+  });
 });

@@ -251,6 +251,30 @@ jobs:
           cache: 'npm'
           cache-dependency-path: src/dashboard/package-lock.json
 
+      - name: Validate Cloudflare secrets
+        run: |
+          missing=0
+          echo "--- Cloudflare Secrets Check ---"
+          if [ -z "${{ secrets.CF_API_TOKEN }}" ]; then
+            echo "⚠️  CF_API_TOKEN is NOT set — Workers & Pages deploy will be SKIPPED"
+            missing=1
+          else
+            echo "✅ CF_API_TOKEN is configured"
+          fi
+          if [ -z "${{ secrets.CF_ACCOUNT_ID }}" ]; then
+            echo "⚠️  CF_ACCOUNT_ID is NOT set — Workers & Pages deploy will be SKIPPED"
+            missing=1
+          else
+            echo "✅ CF_ACCOUNT_ID is configured"
+          fi
+          echo "--------------------------------"
+          if [ "$missing" -eq 1 ]; then
+            echo "⚠️  WARNING: Deployment steps will be skipped due to missing secrets."
+            echo "   Add secrets in GitHub repo: Settings > Secrets and variables > Actions"
+            echo "   Required: CF_API_TOKEN, CF_ACCOUNT_ID"
+            echo "   See: docs/05_TASKS/cloudflare-secrets-guide.md"
+          fi
+
       - name: Install dashboard dependencies
         working-directory: src/dashboard
         run: npm ci --silent

@@ -13,7 +13,8 @@ module.exports = {
     'test/kpi-simple.test.js',
     'test/members-table.test.js',
     'test/frontend/',
-    'test/alerts-smoke.test.js'
+    'test/alerts-smoke.test.js',
+    '.claude/worktrees/'
   ],
   collectCoverageFrom: [
     'src/api/**/*.js',
@@ -27,10 +28,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      statements: 25,
-      branches: 15,
-      functions: 15,
-      lines: 30
+      statements: 70,
+      branches: 60,
+      functions: 60,
+      lines: 70
     }
   },
   setupFilesAfterEnv: ['<rootDir>/test/setup.js'],

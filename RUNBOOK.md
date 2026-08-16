@@ -2,6 +2,17 @@
 
 > Operations guide for admin and PSN leaders
 
+## Production URLs
+
+| Service | URL | Notes |
+|---------|-----|-------|
+| API (Workers) | `https://api.droppii.vn` | Cloudflare Workers — edge |
+| Dashboard (Pages) | `https://hive.droppii.vn` | Cloudflare Pages — static |
+| Local dev (API) | `http://localhost:3000` | Express dev server |
+| Local dev (Dashboard) | `http://localhost:3001` | Vite dev server |
+
+> Replace placeholders with actual URLs after DNS configuration.
+
 ## Daily Operations
 
 ### Morning Check (5AM)
@@ -113,12 +124,14 @@ curl http://localhost:3000/api/monitoring/errors?limit=20
 curl http://localhost:3000/api/monitoring/summary
 ```
 
-### Health Check Endpoints
-| Endpoint | Description |
-|----------|-------------|
-| `GET /health` | Full health with subsystem status |
-| `GET /api/monitoring/errors` | Error log |
-| `GET /api/monitoring/summary` | Error summary |
+### Health Check & Monitoring Endpoints
+| Endpoint | Method | Auth | Description |
+|----------|--------|------|-------------|
+| `/health` | GET | No | Full health with subsystem status |
+| `/ready` | GET | No | Readiness probe |
+| `/metrics` | GET | No | Performance metrics (uptime, memory, error count) |
+| `/api/monitoring/errors` | GET | Admin | Error log (query param: `limit`) |
+| `/api/monitoring/summary` | GET | Admin | Error summary (total, by level) |
 
 ### Zalo Alert Setup
 Set `ZALO_ALERT_WEBHOOK` env var to enable critical error alerts via Zalo.
@@ -164,6 +177,65 @@ curl -X POST http://localhost:3000/api/members \
 3. Set up Sentry for error tracking
 4. Configure Zalo webhook for alerts
 5. Set up CI/CD pipeline
+
+## Cloudflare Troubleshooting
+
+### Tail Live Logs
+```bash
+# Stream real-time Worker logs
+wrangler tail --format pretty
+
+# Filter by status code
+wrangler tail --format pretty | grep "status\":5"
+```
+
+### Dashboard Logs
+1. Go to Cloudflare Dashboard > Workers & Pages
+2. Select the worker > Logs tab
+3. Filter by date range and status code
+
+### Rollback
+```bash
+# List recent deployments
+wrangler deployments list
+
+# Rollback to previous version
+wrangler rollback <version-id>
+```
+
+### Common Issues
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| 502 Bad Gateway | Worker exceeded CPU time | Optimize hot path, reduce DB queries |
+| CORS errors | ALLOWED_ORIGIN mismatch | Update env var to include production domain |
+| 413 Payload Too Large | Request body > 100KB | Compress payloads, use streaming upload |
+| Cold start latency | First request after idle | Worker wakes in ~50ms; consider keep-alive |
+
+## Cloudflare Free Tier Limits
+
+| Resource | Free Tier Limit | Notes |
+|----------|-----------------|-------|
+| Worker requests | 100,000/day | Resets at midnight UTC |
+| Worker CPU time | 10ms per request | 50ms on paid plans |
+| Worker memory | 128MB | Per isolate |
+| KV reads | 100,000/day | For caching layer |
+| KV writes | 1,000/day | Plan accordingly for D1 |
+| Pages builds | 500/month | CI/CD builds |
+| D1 rows read | 5,000,000/day | SQLite queries |
+| D1 rows written | 100,000/day | Inserts/updates |
+
+> Monitor usage via Cloudflare Dashboard > Workers & Pages > Analytics.
+
+## Monitoring Endpoints
+
+| Endpoint | Auth | Description |
+|----------|------|-------------|
+| `GET /health` | None | Full health with subsystem status, build SHA |
+| `GET /ready` | None | Readiness probe (DB, cache, external deps) |
+| `GET /metrics` | None | Prometheus-format metrics (requests, latency, errors) |
+| `GET /api/monitoring/errors` | Admin | Error log with timestamps and stack traces |
+| `GET /api/monitoring/summary` | Admin | Aggregated error counts by type and endpoint |
 
 ## Contact
 

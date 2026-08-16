@@ -14,6 +14,7 @@ const analyticsFunnelRoutes = require('./api/analytics-funnel');
 const { initRules, evaluateAll, getRules, getAlertLog, getAlertSummary, acknowledgeAlert, addRule, updateRule, deleteRule } = require('./analytics/alertEngine');
 const { startOnboarding, getSession, advanceDay, generateNudge, getProgress, getActiveSessions, checkGraduation } = require('./agents/onboardingBot');
 const { assignCurriculum, getRecord, updateProgress, getProgress: getTrainingProgress, getActiveTrainees, getTraineesNeedingAttention, getTraineesByPSN } = require('./agents/trainingOps');
+const { requireAuth } = require('./middleware/requireRole');
 const { errorMiddleware, notFoundMiddleware, getHealthStatus, monitoring } = require('./utils/monitoring');
 const { classifyPSNHealth } = require('./analytics/psnHealth');
 const { getStore: getMembers, initStore: initMembersStore } = require('./models/member');
@@ -377,6 +378,15 @@ app.post('/api/training/progress', (req, res) => {
   res.json(result);
 });
 
+// Static routes must come before parameterized routes
+app.get('/api/training/active', (req, res) => {
+  res.json({ trainees: getActiveTrainees() });
+});
+
+app.get('/api/training/attention', (req, res) => {
+  res.json({ needing_attention: getTraineesNeedingAttention() });
+});
+
 app.get('/api/training/:memberId', (req, res) => {
   const record = getRecord(req.params.memberId);
   if (!record) return res.status(404).json({ error: 'Record not found' });
@@ -387,14 +397,6 @@ app.get('/api/training/:memberId/progress', (req, res) => {
   const progress = getTrainingProgress(req.params.memberId);
   if (progress.error) return res.status(404).json(progress);
   res.json(progress);
-});
-
-app.get('/api/training/active', (req, res) => {
-  res.json({ trainees: getActiveTrainees() });
-});
-
-app.get('/api/training/attention', (req, res) => {
-  res.json({ needing_attention: getTraineesNeedingAttention() });
 });
 
 app.get('/api/training/psn/:psnId', (req, res) => {
@@ -448,18 +450,33 @@ app.use('/api/leads', leadsRoutes);
 app.use('/api/analytics/funnel', analyticsFunnelRoutes);
 ordersHandler(app);
 
+// Readiness check
+app.get('/ready', (req, res) => {
+  res.json({ status: 'ready', timestamp: new Date().toISOString() });
+});
+
+// Metrics endpoint
+app.get('/metrics', (req, res) => {
+  res.json({
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    memoryUsage: process.memoryUsage(),
+    errorCount: monitoring.getErrorSummary().total,
+  });
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json(getHealthStatus());
 });
 
 // Monitoring routes
-app.get('/api/monitoring/errors', (req, res) => {
+app.get('/api/monitoring/errors', requireAuth, (req, res) => {
   const limit = parseInt(req.query.limit) || 50;
   res.json({ errors: monitoring.getErrorLog(limit) });
 });
 
-app.get('/api/monitoring/summary', (req, res) => {
+app.get('/api/monitoring/summary', requireAuth, (req, res) => {
   res.json(monitoring.getErrorSummary());
 });
 

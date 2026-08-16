@@ -1,0 +1,4 @@
+{"event_id": "41ced465db04", "kind": "workflow_started", "timestamp": 1786528761.262392, "workflow_id": "2191ecbcb612", "step_order": null, "data": {"recipe": "Plan: next", "steps": 1}}
+{"event_id": "7436ffd49a65", "kind": "step_scheduled", "timestamp": 1786528761.2636921, "workflow_id": "2191ecbcb612", "step_order": 1, "data": {}}
+{"event_id": "ec91a20abe61", "kind": "step_completed", "timestamp": 1786528763.816732, "workflow_id": "2191ecbcb612", "step_order": 1, "data": {}}
+{"event_id": "b143bde4bf29", "kind": "workflow_completed", "timestamp": 1786528763.8169012, "workflow_id": "2191ecbcb612", "step_order": null, "data": {"success_rate": 100.0}}

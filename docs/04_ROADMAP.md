@@ -3,9 +3,9 @@
 ## Project Timeline
 
 **Project:** droppii-training-os
-**Current Version:** 1.1.0
+**Current Version:** 1.1.1
 **Planning Date:** 2026-06-23
-**Last Updated:** 2026-07-21
+**Last Updated:** 2026-08-16
 
 ### Legend
 
@@ -24,6 +24,7 @@
 |---------|------|--------------|--------|
 | 1.0.0 | 2026-06-23 | Core platform: Auth, Members, Habits, KPI, PSN Health, Alerts, Dashboard shell, 4 Tier-1 modules, Onboarding bot, Training Ops agent, Test harness, CI pipeline, Cloudflare deployment, Monitoring, Seed data, Admin docs, Pilot checklist | ✅ |
 | 1.1.0 | 2026-07-21 | API expansion: Leads management (8 endpoints), Funnel analytics (3 endpoints), Health/monitoring endpoints, Seed script env fix, CI pipeline hardening, Test env config | ✅ |
+| 1.1.1 | 2026-08-16 | E2E smoke hardening, CI coverage enforcement (70/60/60/70), Cloudflare deploy secrets guide, Monitoring endpoint verification, Route shadowing bugfix (kpi.js leaderboard) | ✅ |
 
 ---
 
@@ -31,7 +32,7 @@
 
 **Phase:** Pilot Launch Preparation (E11)
 **Timeline:** 2026-07-21 → 2026-07-28
-**Progress:** 95%
+**Progress:** 100% (Complete)
 
 ### Current Phase Objectives
 
@@ -158,7 +159,7 @@ gantt
     section Docs
     E10: Admin README + Runbook        :done,    e10, 2026-07-21, 1d
     section Launch
-    E11: Pilot Launch Prep             :active,  e11, 2026-07-21, 7d
+    E11: Pilot Launch Prep             :done,  e11, 2026-07-21, 7d
     section Scale
     Pilot Execution (G0)               :e11,    2026-07-28, 28d
     Phase 2: 50 Members                :e11,    2026-08-25, 56d
@@ -167,4 +168,4 @@ gantt
 
 ---
 
-*Last updated: 2026-07-21 — All T-001 through T-025 complete. Pilot launch evidence capture in progress.*
+*Last updated: 2026-08-16 — All T-001 through T-024 complete. Pilot launch (T-025) ready for execution.*

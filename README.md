@@ -1,6 +1,7 @@
 # Droppii Sales Training OS — Hive Warfare Academy
 
 > AI-operated MLM Training Platform | Team: PHỤNG SỰ 100 ĐỘ C | Target: $500K ARR
+> **Version:** v1.1.1 | **Runbook:** [RUNBOOK.md](./RUNBOOK.md)
 
 ## Quick Start
 
@@ -98,23 +99,11 @@ Server runs at `http://localhost:3000`
 
 ## Training Architecture
 
-### Tier 1: Tân Binh → Chiến Binh (4 weeks)
-- M1: Mindset Reset — 5AM Club
-- M2: Product Mastery — Droppii Ecosystem
-- M3: Connect Engine — 15 Connects/Day
-- M4: First Close — Follow-Up Mastery
-
-### Tier 2: Chiến Binh → Chỉ Huy (8 weeks)
-- M5: Recruitment Funnel
-- M6: Leader DNA — DISC Coaching
-- M7: PSN Management
-- M8: Coaching Conversations
-
-### Tier 3: Chỉ Huy → Tướng Quân (12 weeks)
-- M9: Sun Tzu Applied — 13 Chapters
-- M10: Campaign Warfare
-- M11: Data Commander
-- M12: Legacy Builder
+| Tier | Path | Weeks | Modules |
+|------|------|-------|---------|
+| 1 | Tan Binh → Chien Binh | 4 | M1 Mindset, M2 Product, M3 Connect, M4 Close |
+| 2 | Chien Binh → Chi Huy | 8 | M5 Recruitment, M6 Leader DNA, M7 PSN, M8 Coaching |
+| 3 | Chi Huy → Tuong Quan | 12 | M9 Sun Tzu, M10 Campaign, M11 Data, M12 Legacy |
 
 ## PSN Health — Cửu Địa 9 States
 
@@ -165,6 +154,9 @@ wrangler deploy
 |----------|-------------|---------|
 | `PORT` | Server port | 3000 |
 | `JWT_SECRET` | JWT signing secret | (change in prod!) |
+| `ENCRYPTION_KEY` | AES-256 key for PII encryption (32 bytes) | (required) |
+| `ALLOWED_ORIGIN` | CORS origins (comma-separated) | `http://localhost:3000` |
+| `PASSWORD_SALT` | Bcrypt salt rounds for password hashing | (required) |
 | `SENTRY_DSN` | Sentry DSN for error tracking | (disabled) |
 | `ZALO_ALERT_WEBHOOK` | Zalo webhook for critical alerts | (disabled) |
 | `NODE_ENV` | Environment | development |
@@ -179,28 +171,11 @@ Creates 10 pilot members across 2 PSNs with 14-day history.
 
 ## Project Status
 
-- [x] Auth + RBAC (T-001)
-- [x] Member CRUD + PDPA (T-002)
-- [x] Habit tracker (T-003)
-- [x] KPI rollup (T-004)
-- [x] PSN health score (T-005)
-- [x] Alert rules engine (T-006)
-- [x] Dashboard shell (T-007)
-- [x] Members table (T-008)
-- [x] KPI panel (T-009)
-- [x] PSN health view (T-010)
-- [x] Alerts inbox (T-011)
-- [x] Tier-1 Module 1 (T-012)
-- [x] Tier-1 Module 2 (T-013)
-- [x] Tier-1 Module 3 (T-014)
-- [x] Tier-1 Module 4 (T-015)
-- [x] Onboarding bot (T-016)
-- [x] Training ops agent (T-017)
-- [x] Test harness (T-018)
-- [ ] E2E smoke test (T-019)
-- [ ] CI pipeline (T-020)
-- [ ] Cloudflare deploy (T-021)
-- [ ] Monitoring (T-022)
-- [x] Seed data (T-023)
-- [ ] Admin docs (T-024)
-- [ ] Pilot launch (T-025)
+- [x] T-001 to T-018: Core platform, dashboard, agents, tests
+- [x] T-019: E2E smoke hardening
+- [x] T-020: CI coverage enforcement (70/60/60/70)
+- [x] T-021: Cloudflare Workers + Pages deploy
+- [x] T-022: Monitoring endpoints
+- [x] T-023: Seed data
+- [x] T-024: Admin docs (README + RUNBOOK)
+- [ ] T-025: Pilot launch

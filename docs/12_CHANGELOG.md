@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.1] - 2026-08-16
+
+### Added
+- E2E smoke hardening: training, leads, orders, monitoring endpoints
+- CI coverage enforcement: thresholds 70/60/60/70 (statements/branches/functions/lines)
+- Cloudflare deploy secrets guide
+- Monitoring endpoint verification
+
+### Fixed
+- Route shadowing bug in kpi.js (leaderboard unreachable)
+
+---
+
 ## [1.1.0] - 2026-07-21
 
 ### Added

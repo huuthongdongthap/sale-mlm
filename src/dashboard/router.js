@@ -54,7 +54,10 @@ class Router {
     this.routes.set('/members', () => this.renderMembersPage());
     this.routes.set('/psn', () => this.renderPSNPage());
     this.routes.set('/kpi', () => this.renderKPIPage());
-    this.routes.set('/training', () => this.renderTrainingPage());
+    this.routes.set('/training', async () => {
+    const { default: TrainingView } = await import('./training-view.js');
+    return new TrainingView();
+  });
     this.routes.set('/alerts', () => this.renderAlertsPage());
     this.routes.set('/funnel', () => this.renderFunnelPage());
     this.routes.set('/orders', () => this.renderOrdersPage());
@@ -127,8 +130,12 @@ class Router {
     const routeHandler = this.routes.get(this.currentRoute);
     if (routeHandler) {
       try {
-        const content = await routeHandler();
-        this.contentContainer.innerHTML = content;
+        const result = await routeHandler();
+        if (typeof result === "string") {
+                this.contentContainer.innerHTML = result;
+        } else if (result && typeof result.render === "function") {
+                await result.render(this.contentContainer);
+        }
       } catch (error) {
         console.error('Error rendering route:', error);
         this.contentContainer.innerHTML = this.renderNotFound();
@@ -307,27 +314,8 @@ class Router {
   }
 
   renderTrainingPage() {
-    return `
-      <div class="page-header">
-        <h1 class="page-title">Hệ thống đào tạo</h1>
-        <p class="page-subtitle">Curriculum 3 tầng từ Tân Binh đến Tướng Quân</p>
-      </div>
-
-      <div class="card">
-        <h3 class="card-title">🎓 Training Modules</h3>
-        <p>4 modules Tier-1 đang được phát triển bởi content worker:</p>
-        <ul style="margin-top: 1rem; color: var(--text-secondary);">
-          <li>M1: Mindset Reset — 5AM Club + Kaizen journaling</li>
-          <li>M2: Product Mastery — Droppii ecosystem deep-dive</li>
-          <li>M3: Connect Engine — 15 connects/day framework</li>
-          <li>M4: First Close — Follow-up sequence mastery</li>
-        </ul>
-        <div class="coming-soon">
-          Chờ content worker T-012 đến T-015 hoàn thành
-        </div>
-      </div>
-    `;
-  }
+ return new TrainingView();
+ }
 
   renderAlertsPage() {
     // Load the alerts inbox component
