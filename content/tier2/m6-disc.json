@@ -1,148 +1,544 @@
 {
-"module": {
-"id": "M6",
-"title": "Leader DNA — DISC Personality Coaching",
-"tier": 2,
-"duration_days": 14,
-"focus": "Hiểu và coaching theo 4 DISC personality types — Dominant, Influential, Steady, Conscientious",
-"overview": "Module này dạy Chiến Binh cách nhận diện và coaching theo 4 DISC personality types. Mỗi type có motivation, communication style, và leadership approach khác nhau. Hiểu DISC = coaching hiệu quả = retention cao. Bạn sẽ học cách adapt phong cách leadership của mình để phù hợp với từng type, và xây dựng team balance với diverse personalities.",
-"objectives": [
-"Nhận diện 4 DISC types trong PSN members",
-"Adapt coaching style theo từng type",
-"Xây dựng team balance với diverse personalities",
-"Thực hành DISC-based 1:1 coaching conversations",
-"Tạo personalized development plan cho mỗi member"
-]
-},
-"audience_brief": {
-"source": "Droppii leader brief 2026-05-19",
-"product_users": "Cả gia đình từ bé 3 tuổi tới người lớn",
-"purchase_decision_maker": "Phụ nữ 28 tuổi tới U50",
-"recruitment_targets": "U30, U40, U50; sau này mở rộng tới sinh viên",
-"positioning": "Medicine 3.0 / healthspan — chăm sóc sức khỏe chủ động, phòng ngừa từ thói quen, kéo dài thời gian sống khỏe mạnh"
-},
-"disc_types": {
-"D": {
-"name": "Dominant (Quyết đoán)",
-"percentage": "10% population",
-"traits": ["Direct", "Decisive", "Results-oriented", "Competitive", "Independent"],
-"motivators": ["Achievement", "Recognition", "Control", "New challenges"],
-"stressors": ["Wasting time", "Weakness", "Loss of control", "Boring routine"],
-"communication": "Nói trực tiếp, ngắn gọn. Không cần small talk. Focus trên results và options.",
-"coaching_style": "Give them goals, not process. Let them run. Check results, not activities. Challenge them with stretch targets. Don't micromanage."
-},
-"I": {
-"name": "Influential (Giao tiếp)",
-"percentage": "30% population",
-"traits": ["Enthusiastic", "Optimistic", "Social", "Impulsive", "Talkative"],
-"motivators": ["Recognition", "Social approval", "Fun", "Creative expression"],
-"stressors": ["Being ignored", "Routine/boredom", "Criticism in public", "Too many details"],
-"communication": "Nói nhiều, nhanh, với cảm xúc. Thích kể chuyện. Cần encouragement và public recognition.",
-"coaching_style": "Encourage and praise publicly. Make training fun. Give them platform to shine. Check in personally — they need connection. Don't overwhelm with data."
-},
-"S": {
-"name": "Steady (Ổn định)",
-"percentage": "40% population",
-"traits": ["Patient", "Reliable", "Supportive", "Calm", "Team-oriented"],
-"motivators": ["Stability", "Harmony", "Helping others", "Appreciation"],
-"stressors": ["Sudden change", "Conflict", "Pressure", "Being rushed"],
-"communication": "Nói nhẹ nhàng, cần thời gian suy nghĩ. Thích hỏi ý kiến trước. Cần trust trước khi mở lòng.",
-"coaching_style": "Be patient, build trust gradually. Give them time to adapt. Appreciate their loyalty. Don't push too hard — gentle guidance works better. Give clear, step-by-step plans."
-},
-"C": {
-"name": "Conscientious (Cẩn thận)",
-"percentage": "20% population",
-"traits": ["Analytical", "Precise", "Systematic", "Perfectionist", "Cautious"],
-"motivators": ["Accuracy", "Quality", "Logic", "Clear standards"],
-"stressors": ["Criticism", "Chaos", "Vagueness", "Emotional pressure"],
-"communication": "Nói có logic, cần data và facts. Hỏi nhiều câu. Cần thời gian phân tích trước khi quyết định.",
-"coaching_style": "Give them data, reports, and systems. Let them analyze before acting. Appreciate their attention to detail. Don't rush them. Give written materials — they read and process."
-}
-},
-"lessons": [
-{
-"day": 1,
-"title": "DISC Overview — Bản đồ personality trong PSN",
-"objective": "Hiểu 4 loại personality DISC và tại sao nó quan trọng với leader",
-"content": "Chào mừng Chiến Binh đến Module 6! Trước khi bạn có thể coach người khác, bạn phải hiểu họ. DISC là công cụ đơn giản nhất để phân loại personality — đã được dùng bởi Fortune 500 companies trong 40 năm.\n\n4 NGÔN NGỮ CỦA LEADERSHIP:\nMỗi DISC type 'nói' một ngôn ngữ khác nhau. Nếu bạn nói D-language cho S-type, họ sẽ không hiểu. Nếu bạn nói C-language cho I-type, họ sẽ ngán.\n\nTỔNG QUAN 4 TYPES:\n\nD — DOMINANT (10%): 'Tôi muốn WIN'\n- Nhanh, quyết đoán, results-driven\n- Impatient với process\n- Thích leadership positions\n- Trong Droppii: Thường là top performers, muốn rank up nhanh\n\nI — INFLUENTIAL (30%): 'Tôi muốn CONNECT'\n- Nhiệt tình, social, optimistic\n- Thích giao tiếp, thuyết trình\n- Dễ bored với routine\n- Trong Droppii: Tốt cho recruitment, event hosting, content creation\n\nS — STEADY (40%): 'Tôi muốn HELP'\n- Kiên nhẫn, reliable, supportive\n- Thích stability, teamwork\n- Không thích change đột ngột\n- Trong Droppii: Lõi của PSN — loyal members, good retention, steady performers\n\nC — CONSCIENTIOUS (20%): 'Tôi muốn BE RIGHT'\n- Phân tích, detail-oriented, systematic\n- Cần data trước khi decide\n- High standards cho quality\n- Trong Droppii: Good at planning, training design, analytics\n\nĐIỀU QUAN TRỌNG NHẤT:\nKhông có type nào tốt hơn type nào. Mỗi type có strengths riêng. Great team cần balance của cả 4 types. Nếu PSN của bạn chỉ có D-types → nhiều conngười nhưng turnover cao. Nếu chỉ có S-types → team ổn định nhưng không grow.\n\nAction items:\n1. Làm DISC assessment cho bản thân (search 'DISC test free online')\n2. Phân loại 10 members trong PSN của bạn theo DISC\n3. Note lại: Bạn đang communicate theo style nào? Members nào đang bị 'misunderstood'?"
-},
-{
-"day": 2,
-"title": "D-Type Coaching — Lãnh đạo quyết đoán",
-"objective": "Học cách coach D-type members (Dominant) hiệu quả",
-"content": "D-types là những người muốn WIN. Họ nhanh, quyết đoán, và muốn kết quả ngay. Nếu bạn không đưa ra goals rõ ràng và challenges thú vị, họ sẽ chán và move on.\n\nNHẬN DIỆN D-TYPE:\n- Nói nhanh, quyết định nhanh\n- Thích từ: 'win', 'top', 'target', 'result'\n- Không kiên nhẫn với explanation dài\n- Muốn làm leader ngay\n- Thích competition\n- Direct — nói thẳng, không vòng vo\n\nCOACHING D-TYPE:\n\nDO's:\n✓ Give them CHALLENGES, not instructions\n✓ Set clear GOALS with deadlines\n✓ Give them leadership opportunities early\n✓ Acknowledge results publicly\n✓ Let them do things their way (if results are good)\n✓ Be direct — don't beat around the bush\n✓ Give them autonomy — they hate micromanagement\n\nDON'Ts:\n✗ Long explanations — they stopped listening after 30 seconds\n✗ Micromanage process — give outcome, let them figure out how\n✗ Weak leadership — they will challenge you if you seem uncertain\n✗ Slow decision-making — they need speed\n✗ Public criticism — humiliates them badly\n\nCOACHING CONVERSATION WITH D-TYPE:\nLeader: 'Tuần này target của bạn là 3 recruits. Bạn nghĩ sao?'\nD: 'Được, tôi làm 5.'\nLeader: 'Great. Bạn cần support gì không?'\nD: 'Không, tôi tự lo được.'\nLeader: 'OK. Check-in cuối tuần để review.'\n\nThat's it. D-types don't need hand-holding. They need goals and autonomy.\n\nPOTENTIAL ISSUES VỚI D-TYPE:\n1. Too aggressive → Teach them empathy và soft skills\n2. Burnout → They push too hard, remind them about balance\n3. Disrespecting others → Coach onEQ và team collaboration\n4. Impatient with S/C types → Teach them to adapt communication\n\nAction items:\n1. Identify D-types trong PSN (thường là top 20% performers)\n2. Give 1 D-type member a stretch goal tuần này\n3. Practice giving direct, concise feedback\n4. Read thêm về 'situational leadership' để adapt style"
-},
-{
-"day": 3,
-"title": "I-Type Coaching — Năng động và giao tiếp",
-"objective": "Học cách coach I-type members (Influential) hiệu quả",
-"content": "I-types là energy của team. Họ mang enthusiasm, connection, và optimism. Nếu bạn quản lý họ đúng cách, họ sẽ là best recruiters và motivators. Nếu sai, họ sẽ distract team và lose focus.\n\nNHẬN DIỆN I-TYPE:\n- Nói nhiều, nhanh, với cảm xúc\n- Thích kể chuyện, joke, entertain\n- Enthusiastic về new ideas\n- Dễ excited, dễ bored\n- Thích spotlight — center of attention\n- Spontaneous — không thích plan chi tiết\n\nCOACHING I-TYPE:\n\nDO's:\n✓ Encourage và praise — họ cần recognition\n✓ Make training FUN — games, roleplay, challenges\n✓ Give them public platform — events, presentations\n✓ Channel their energy vào productive activities\n✓ Be warm và enthusiastic\n✓ Give variety — change activities often\n\nDON'Ts:\n✗ Criticize in front of others — họ sẽ shutdown\n✗ Boring, monotonous training — họ will check out\n✗ Overwhelm với details và data\n✗ Force them to work alone — they need social interaction\n✗ Too structured — give them flexibility\n\nMANAGING I-TYPE CHALLENGES:\n1. Losing focus → Give them short, varied tasks. Break big goals into fun milestones.\n2. Talking too much → Gently redirect: 'Great point! Bây giờ hãy lắng nghe X chia sẻ nhé'\n3. Overpromising → Teach them to under-promise, over-deliver\n4. Disorganization → Give them a buddy C-type để keep them on track\n\nCOACHING CONVERSATION WITH I-TYPE:\nLeader: 'Tuần này bạn thấy sao? Có gì fun không?'\nI: 'Ồ tuần này rồi! Tôi đã gặp 1 chị rất thích sản phẩm, chị ấy đang suy nghĩ...'\nLeader: 'Awesome! Kể thêm về chị ấy đi — bạn đã connect thế nào?'\nI: 'Ồ thì... [kể câu chuyện đầy chi tiết]'\nLeader: 'Perfect! Để tôi giúp bạn close deal này. Còn về tuần sau, tôi muốn bạn host buổi sharing nhỏ với team — bạn ok không?'\nI: 'Ồ được! Tôi sẽ chuẩn bị!'\n\nAction items:\n1. Identify I-types trong PSN — thường là most social members\n2. Assign 1 speaking task (host sharing, present at event)\n3. Give public praise cho 1 I-type member tuần này\n4. Create fun training activities cho tuần tới"
-},
-{
-"day": 4,
-"title": "S-Type Coaching — Kiên nhẫn và ổn định",
-"objective": "Học cách coach S-type members (Steady) hiệu quả — lõi của PSN",
-"content": "S-types là backbone của PSN. Họ không phải người nói to nhất, không phải người bán được nhiều nhất trong tháng đầu, nhưng họ là người STAY. Retention cao, loyal, và reliable. Một PSN có nhiều S-types sẽ ổn định và bền vững.\n\nNHẬN DIỆN S-TYPE:\n- Nói nhẹ nhàng, chậm rãi\n- Thích lắng nghe hơn nói\n- Team-oriented — care về group harmony\n- Không thích conflict\n- Cần thời gian để mở lòng\n- Loyal với leader và team một khi đã trust\n- Steady performers — không flashy nhưng consistent\n\nCOACHING S-TYPE:\n\nDO's:\n✓ Build TRUST first — take time để họ mở lòng\n✓ Be PATIENT — don't rush them\n✓ Show genuine CARE — ask về family, feelings\n✓ Give STABILITY — clear plans, no sudden changes\n✓ Appreciate quietly — sincere 1:1 praise > public shoutout\n✓ Give them SUPPORTIVE roles — buddy system, peer support\n✓ Provide SECURITY — stable income plan, clear path forward\n\nDON'Ts:\n✗ Push too hard — họ will withdraw\n✗ Sudden changes — give advance notice, gradual transition\n✗ Public criticism — deeply hurts them\n✗ Overwhelm với choices — give them 2 options, not 10\n✗ Ignore their input — they have valuable insights, just share quietly\n\nBUILDING TRUST WITH S-TYPES:\n- Consistency: Be on time for meetings, follow through on promises\n- Listening: Remember details about their life (family, health, goals)\n- Patience: Don't expect them to open up in first meeting\n- Safety: Create judgment-free environment\n- Small wins: Celebrate progress gradually\n\nS-TYPE TRIGGER WORDS:\n- Security, stability, team, family, support, care\n- 'Cùng nhau', 'đồng hành', 'ổn định', 'lâu dài'\n- Avoid: 'urgent', 'pressure', 'competition', 'cut throat'\n\nCOACHING CONVERSATION WITH S-TYPE:\nLeader: 'Tuần này bạn thấy thế nào? Có khó khăn gì không?'\nS: 'Ừ... có chút vất vả. Người nhà hỏi sao phải dành thời gian cho cái này.'\nLeader: 'Tôi hiểu. Tôi cũng từng vậy. Chúng ta cùng tìm cách giải thích cho gia đình nhé. Bạn có muốn tôi giúp không?'\nS: 'Cảm ơn leader. Tôi sẽ thử.'\nLeader: 'Không vội đâu. Tuần này chỉ cần share 1 post thôi, được không? Tôi sẽ cùng bạn.'\nS: 'Được rồi, cảm ơn leader nhiều.'\n\nAction items:\n1. Identify S-types trong PSN — thường là silent majority\n2. Have 1 deep 1:1 conversation với mỗi S-type (20+ phút)\n3. Assign buddy role cho 1 S-type member\n4. Write personalized encouragement note cho S-type yếu thế nhất trong team"
-},
-{
-"day": 5,
-"title": "C-Type Coaching — Cẩn thận và phân tích",
-"objective": "Học cách coach C-type members (Conscientious) hiệu quả",
-"content": "C-types là quality control của PSN. Hồ họ chú ý đến detail, cần data trước khi decide, và có standards cao. Nếu bạn quản lý họ đúng cách, họ sẽ làm việc chính xác, đáng tin cậy, và đóng góp ý kiến chất lượng.\n\nNHẬN DIỆN C-TYPE:\n- Nói chậm, có logic, dẫn chứng\n- Cần thông tin đầy đủ trước khi decide\n- Thích đọc, research trước khi act\n- Critical thinking — hỏi sâu, không tin ngay\n- Perfectionist — muốn làm đúng hoặc không làm\n- Tích cực nhưng cần time to process\n\nCOACHING C-TYPE:\n\nDO's:\n✓ Give them DATA — reports, numbers, research\n✓ Let them ANALYZE — don't rush their decision\n✓ Provide CLEAR, DETAILED instructions\n✓ Give them QUALITY tasks — they hate sloppy work\n✓ Respect their questions — they're trying to understand\n✓ Give WRITTEN materials — they process better by reading\n✓ Be LOGICAL — don't use emotional appeals\n\nDON'Ts:\n✗ Rush them — 'just do it, don't overthink'\n✗ Vague instructions — 'do your best' is not enough\n✗ Public criticism of their work — takes it personally\n✗ 'Trust me' without evidence\n✗ Over-the-top enthusiasm — feels fake to them\n✗ Ignoring their suggestions — they often spot problems others miss\n\nC-TYPE TRIGGER WORDS:\n- Data, analysis, systematic, quality, accuracy, research\n- 'Căn cứ vào data', 'phân tích kỹ', 'đảm bảo chất lượng'\n- Avoid: 'just do it', 'trust me', 'feel the vibe'\n\nCOACHING CONVERSATION WITH C-TYPE:\nLeader: 'Tuần này tôi muốn bạn thử cách mới để recruit'\nC: 'Làm thế nào? Có data nào chứng minh cách này hiệu quả không? Tôi đã đọc và thấy conversion rate của các method khác là...'\nLeader: 'Câu hỏi hay. Data thì tôi chưa có test rộng, nhưng 2 leader khác đã thử và kết quả tốt. Tôi sẽ gửi bạn case studies của họ.'\nC: 'OK, tôi sẽ đọc trước khi quyết định.'\nLeader: 'Perfect. Cho tôi biết sau khi bạn phân tích nhé.'\n\nAction items:\n1. Identify C-types — thường là best question-askers trong team\n2. Prepare data/reports cho C-type members trong 1:1 meeting\n3. Ask a C-type member để review training materials\n4. Don't rush — give them time to process and respond"
-},
-{
-"day": 6,
-"title": "DISC Team Balance — Xây dựng PSN cân bằng",
-"objective": "Phân tích và balance DISC composition trong PSN",
-"content": "Một PSN healthy cần cả 4 types. Nếu thiếu 1 type, team có weaknesses rõ ràng. Module này giúp bạn audit PSN composition và build balanced team.\n\nPSN COMPOSITION ANALYSIS:\n\nĐếm số members theo từng type trong PSN của bạn:\nD-types: ___ → Role: Fast starters, rank climbers, competition drivers\nI-types: ___ → Role: Recruiters, event hosts, morale boosters\nS-types: ___ → Role: Retention, team glue, steady income\nC-types: ___ → Role: Quality, planning, systems, training\n\nIDEAL RATIO: D(15%) : I(25%) : S(40%) : C(20%)\n\nCOMMON IMBALANCES:\n\n1. Too many D-types (no S/C):\n- Team năng động nhưng unstable\n- High turnover, burnout, conflict\n- Fix: Recruit S-types với message về stability, team support\n\n2. Too many S-types (no D/I):\n- Team ổn định nhưng không grow\n- Nobody takes initiative, no urgency\n- Fix: Develop 1-2 D-types, give them stretch goals\n\n3. Too many I-types (no S/C):\n- Fun team nhưng không produce results\n- Lots of activity, little income\n- Fix: Hire C-type để build systems, S-type để stabilize\n\n4. Too many C-types (no D/I):\n- Analysis paralysis — everyone researching, nobody doing\n- Perfect plans, zero execution\n- Fix: Give them D-type buddy để push action\n\nRECRUITMENT STRATEGY BY TYPE:\n- Recruit D: 'Become a leader, build your own team, unlimited income'\n- Recruit I: 'Great community, fun events, make friends while earning'\n- Recruit S: 'Stable income, supportive team, work from home, flexible'\n- Recruit C: 'Proven system, data-driven, trackable results, quality products'\n\nTEAM ROLES BY TYPE:\nD: Target setter, competition leader, rank climber motivator\nI: Recruitment captain, event MC, content creator, team motivator\nS: Buddy coordinator, retention manager, team caretaker, peer supporter\nC: Training designer, analytics manager, quality control, system builder\n\nAction items:\n1. Count your PSN by DISC type\n2. Identify the gap — which type are you missing?\n3. Adjust recruitment messaging to attract the missing type\n4. Create role assignments based on natural strengths"
-},
-{
-"day": 7,
-"title": "Week 1 Review — DISC Assessment & Team Mapping",
-"objective": "Review DISC progress và complete team personality map",
-"content": "Cuối tuần đầu DISC, đã đến lúc consolidate insights và plan action.\n\nWEEK 1 REVIEW CHECKLIST:\n\n□ Self-assessment completed — bạn là D/I/S/C?\n□ 10 team members classified by DISC type\n□ Team balance analyzed (D:I:S:C ratio)\n□ Gaps identified\n□ Personalized approach planned cho 3 key members\n□ Role assignments based on types\n□ Communication style adjusted cho each type\n\nCOMMON MISTAKES:\n1. 'Tôi chỉ thuộc 1 type' — thực tế mỗi người có mixture. Một người có thể là D trong công việc nhưng S trong gia đình.\n2. 'Tôi phải change style của tôi' — không cần. Chỉ cần ADAPT trong từng situation.\n3. 'Tôi nhận diện được nhưng không biết phải làm gì' — phần này Module 6-8 sẽ giải quyết.\n4. 'Tôi gán nhãn người khác' — DISC là tool để UNDERSTAND, không phải JUDGE.\n\nKEY INSIGHTS TO DOCUMENT:\n- My primary type: ___\n- My biggest strength as leader: ___\n- My blind spot (style I overuse): ___\n- Member that surprised me (turns out different type than I thought): ___\n- Biggest challenge in adapting my style: ___\n\nAction items:\n1. Complete team personality map (spreadsheet)\n2. Schedule 1:1 với 3 members có type khác bạn nhất\n3. Share DISC insights với team (make it fun, not serious)\n4. Set goal for Week 2: Master coaching conversations với 1 type bạn struggle nhất"
-},
-{
-"day": 8,
-"title": "DISC-Based 1:1 Coaching — Master conversation",
-"objective": "Thực hành coaching conversations adapt theo từng DISC type",
-"content": "Now bạn đã biết theory — đã đến lúc practice. Module này guide bạn qua coaching conversations cho từng type, với scripts và frameworks.\n\n1:1 COACHING CHECKLIST (CHO MỌI TYPE):\n\nPRE-CALL (5 phút preparation):\n□ Review their goals, last progress, personality type\n□ Prepare talking points specific to their type\n□ Set intention for this conversation\n□ Have quiet environment, no distractions\n\nDURING CALL (30-45 phút):\n□ Start with results they achieved (D: goal review, I: celebration, S: appreciation, C: data)\n□ Discuss 1-2 key topics (not 10)\n□ Adapt your pace and style to theirs\n□ End with clear action items\n□ Schedule next check-in\n\nPOST-CALL (5 phút):\n□ Log key points in CRM\n□ Send follow-up message\n□ Update their development plan\n\nTYPE-SPECIFIC CONVERSATION FRAMEWORKS:\n\nD-TYPE 1:1:\nDuration: 15-20 phút (they're busy)\nOpening: 'Review tuần này — bạn đạt 3/5 target. Tuần sau 5 nhé?'\nFocus: Results, goals, challenges\nClose: 'Action items: ___ by ___ date. Check-in Friday.'\n\nI-TYPE 1:1:\nDuration: 30-45 phút (they love talking)\nOpening: 'Tuần này có gì fun? Share với tôi đi!'\nFocus: Experience, feelings, ideas, encouragement\nClose: 'Tuần sau bạn sẽ host sharing nhé. Tôi tin bạn!'\n\nS-TYPE 1:1:\nDuration: 30-45 phút (they need time to open up)\nOpening: 'Cảm ơn bạn đã nỗ lực tuần qua. Bạn thấy sao?'\nFocus: Feelings, challenges, support needed, personal connection\nClose: 'Đừng lo, từ từ. Tuần sau chỉ cần 1 small win thôi.'\n\nC-TYPE 1:1:\nDuration: 30-45 phút (they need details)\nOpening: 'Đây là data tuần này. Có gì bạn muốn phân tích không?'\nFocus: Data, quality, process improvements, questions\nClose: 'Đọc tài liệu này rồi cho tôi feedback. Không vội.'\n\nROLE-PLAY EXERCISE:\n1. Pair up: 1 leader, 1 member (each different type)\n2. Conduct 15-minute coaching conversation\n3. Switch roles\n4. Give feedback: 'What worked? What didn't?'\n5. Practice 3 times với mỗi type combination\n\nAction items:\n1. Schedule 3 1:1 calls tuần này (1 với mỗi type khác nhau)\n2. Practice role-play với 1 team member\n3. Create conversation templates cho từng type\n4. Log all 1:1 notes vào spreadsheet"
-},
-{
-"day": 9,
-"title": "Personalized Development Plans — Kế hoạch cá nhân hóa",
-"objective": "Tạo development plan cá nhân cho mỗi member dựa trên DISC type",
-"content": "Every member has unique strengths, weaknesses, và goals. Generic training không hoạt động. Bạn cần personalized development plan (PDP) cho mỗi người.\n\nPDP TEMPLATE:\n\nMEMBERSHIP INFO:\n- Name: ___\n- DISC Type: ___\n- Current Tier: ___\n- Months in PSN: ___\n- Last promotion: ___\n\nSTRENGTHS (dựa trên DISC):\n- [Type-specific strengths]\n- Specific examples từ performance\n\nDEVELOPMENT AREAS:\n- [Type-specific weaknesses]\n- 1-2 key areas to focus this quarter\n\nGOALS:\n- Revenue goal (monthly): ___VND\n- Recruitment goal (quarterly): ___ members\n- Skill development goal: ___\n- Timeline: ___\n\nMONTHLY ACTION PLAN:\nWeek 1-2: [Focus area 1 — specific actions]\nWeek 3-4: [Focus area 2 — specific actions]\n\nSUPPORT NEEDED:\n- Training: ___\n- Resources: ___\n- 1:1 frequency: ___/tháng\n- Buddy assignment: ___\n\nPROGRESS TRACKING:\n- Weekly: ___\n- Monthly review: [Date]\n- Quarterly assessment: [Date]\n\nPDP BY DISC TYPE:\n\nD-TYPE PDP:\n- Goal: Rank promotion, leadership position\n- Development: Patience, empathy, team building\n- Monthly target: ___, Recruitment: ___\n- Support: Give autonomy, challenge, recognition\n\nI-TYPE PDP:\n- Goal: Consistent income, event hosting, recruitment\n- Development: Focus, follow-through, follow-up\n- Monthly target: ___, Recruits: ___\n- Support: Encouragement, fun training, public praise\n\nS-TYPE PDP:\n- Goal: Stable income, personal growth, team belonging\n- Development: Proactivity, taking initiative\n- Monthly target: ___ (realistic, not aggressive)\n- Support: Patient coaching, buddy system, gradual challenges\n\nC-TYPE PDP:\n- Goal: System mastery, quality performance, training design\n- Development: Decision speed, action orientation\n- Monthly target: ___, Quality score: ___\n- Support: Data, time to plan, detailed feedback\n\nAction items:\n1. Create PDP cho 5 key members tuần này\n2. Schedule PDP review sessions (30 phút/member)\n3. Build PDP template cho consistent use\n4. Review và update PDPs monthly"
-},
-{
-"day": 10,
-"title": "Conflict Resolution — Giải quyết xung đột trong team",
-"objective": "Học cách mediate và resolve conflicts giữa members khác personality types",
-"content": "Conflict trong team là inevitable — nhưng cách bạn handle nó quyết định team culture. Một conflict được giải quyết tốt làm team mạnh hơn. Một conflict bị ignore sẽ accumulate và explode sau này.\n\nNGUYÊN NHÂN CONFLICT PHỔ BIẾN TRONG MLM:\n1. Resource competition: Leads, customers, recruits\n2. Personality clash: D vs S, I vs C\n3. Miscommunication: Different communication styles\n4. Unequal effort: 'Tôi làm nhiều hơn bạn'\n5. Leadership style: 'Leader thiên vị'\n6. Goal misalignment: Different priorities\n\nCONFLICT RESOLUTION FRAMEWORK (5 bước):\n\nBƯỚC 1: LISTEN SEPARATELY (trước khi meet cùng)\n- Gặp mỗi người riêng 15-20 phút\n- Không đưa ra judgment, chỉ lắng nghe\n- Note facts và emotions\n- 'Tôi muốn hiểu perspective của bạn'\n\nBƯỚC 2: IDENTIFY ROOT CAUSE\n- Phân biệt: Symptom vs Root cause\n- Symptom: 'Họ không nói chuyện với nhau'\n- Root cause: 'Cả hai đều muốn cùng 1 recruit, nhưng không ai dám nói'\n- Ask: 'Nếu không có vấn đề này, điều gì khác đang xảy ra?'\n\nBƯỚC 3: MEDIATE JOINT SESSION\n- Both parties present (nếu safe)\n- Set ground rules: No interrupting, no name-calling\n- Each person shares THEIR perspective (not 'what they did wrong')\n- You facilitate, don't judge\n- Look for common ground\n\nBƯỚC 4: FIND SOLUTION TOGETHER\n- Don't impose solution — let them agree\n- Brainstorm options: 'Các bạn nghĩ sao nếu...'\n- Aim for win-win, not win-lose\n- Document agreement\n\nBƯỚC 5: FOLLOW UP\n- Check in sau 1 tuần\n- Adjust if needed\n- Celebrate if resolved well\n\nDISC-BASED CONFLICT RESOLUTION:\n\nD vs I Conflict:\n- D feels I is wasting time (too much talk, no action)\n- I feels D is too cold (no recognition, no fun)\nSolution: D gives I freedom to express. I respects D's time.\n\nD vs S Conflict:\n- D pushes too hard, S withdraws\n- S's silence frustrates D\nSolution: D softens approach. S communicates concerns earlier.\n\nI vs C Conflict:\n- I's spontaneity frustrates C's need for order\n- C's criticism hurts I's feelings\nSolution: I plans more. C gives positive feedback first.\n\nD vs C Conflict:\n- D's speed frustrates C's need for analysis\n- C's questions slow down D\nSolution: D gives C 24h to analyze. C commits to decision after analysis.\n\nAction items:\n1. Practice mediation role-play với team\n2. Create conflict resolution policy cho PSN\n3. Schedule monthly 'team health check' meeting\n4. Document 1 real conflict và how you resolved it"
-},
-{
-"day": 11,
-"title": "Motivation Mastery — Inspire từng type",
-"objective": "Học cách motivate 4 DISC types một cách khác nhau",
-"content": "Motivation không phải là 'một size fit all'. Motivate D bằng challenge, I bằng recognition, S bằng appreciation, C bằng competence. Nếu bạn dùng cùng 1 approach cho cả team, bạn chỉ motivate 25% people.\n\nMOTIVATION BY DISC TYPE:\n\nD-TYPE MOTIVATION:\n- LEADERSHIP OPPORTUNITIES: 'Tôi muốn bạn lead project X'\n- COMPETITION: Leaderboard, rankings, monthly awards\n- NEW CHALLENGES: 'Bạn đã master cái này — có muốn thử cấp cao hơn không?'\n- FREEDOM: 'Tôi sẽ give you autonomy — bạn decide cách làm'\n- Direct acknowledgment: 'Great job, bạn đã vượt target'\n\nI-TYPE MOTIVATION:\n- PUBLIC RECOGNITION: Shoutout trong group meeting, social media feature\n- SOCIAL EVENTS: Team dinner, celebration, fun activities\n- CREATIVE FREEDOM: Let them design content, host events\n- ENCOURAGEMENT: 'Bạn làm được! Tôi tin bạn!'\n- Fun rewards: Gift cards, experiences, not just money\n\nS-TYPE MOTIVATION:\n- PERSONAL APPRECIATION: 1:1 thank you, handwritten note\n- STABILITY: 'Team này sẽ luôn ở đây cho bạn'\n- BELONGING: 'Bạn là phần quan trọng của team'\n- GRADUAL PROGRESS: Small wins celebrated consistently\n- CARE: Ask about their family, health, feelings\n\nC-TYPE MOTIVATION:\n- MASTERY: Training, certification, skill development\n- DATA RECOGNITION: 'Bạn có accuracy rate 95% — highest in team'\n- QUALITY ACKNOWLEDGMENT: 'Report của bạn rất thorough'\n- AUTONOMY ON TASKS: Let them design và improve systems\n- INTELLECTUAL CHALLENGE: Complex problems, strategy sessions\n\nDAILY MOTIVATION PRACTICES:\n- Morning: 1 personal message cho mỗi member (1 phút)\n- Weekly: Public recognition trong team meeting\n- Monthly: 1:1 career development conversation\n- Quarterly: Celebration of wins — big và small\n\nAction items:\n1. Write motivation plan cho từng DISC type\n2. Create recognition system cho team\n3. Practice giving type-appropriate praise tuần này\n4. Track which motivation methods work best cho từng member"
-},
-{
-"day": 12,
-"title": "Advanced DISC — Cross-type communication",
-"objective": "Làm chủ kỹ năng communicate hiệu quả giữa các types khác nhau",
-"content": "Khi bạn hiểu DISC, bạn có thể communicate với BẤT KỲ ai. Đây là superpower của leader — ability to adapt your communication để connect với bất kỳ personality type.\n\nCOMMUNICATION ADAPTATION GUIDE:\n\nKHI NÓI VỚI D-TYPE:\n- Keep it SHORT and DIRECT\n- Lead with results, not process\n- Give options, not questions\n- Be confident và decisive\n- 'Bạn muốn A hay B? Đây là pros/cons của mỗi option'\n\nKHI NÓI VỚI I-TYPE:\n- Be ENTHUSIASTIC và warm\n- Share stories và examples\n- Ask about their experience, feelings\n- Give them time to talk\n- 'Tôi có 1 idea hay! Để tôi kể cho bạn nghe...'\n\nKHI NÓI VỚI S-TYPE:\n- Be PATIENT và gentle\n- Give them time to think\n- Show you care about them as person\n- Provide reassurance và support\n- 'Không vội. Chúng ta cùng bàn từ từ nhé'\n\nKHI NÓI VỚI C-TYPE:\n- Be LOGICAL và thorough\n- Provide data, evidence, examples\n- Let them ask questions\n- Give written follow-up\n- 'Đây là data. Đây là analysis. Tôi sẽ gửi bạn report chi tiết'\n\nMEETING MANAGEMENT BY DISC:\n\nD-types: Give them agenda trước, let them lead discussion on action items\nI-types: Give them time to brainstorm, energize the room\nS-types: Make sure they're comfortable speaking, ask directly for input\nC-types: Provide data beforehand, give time to review\n\nFEEDBACK DELIVERY BY DISC:\n\nTo D: 'Kết quả tuần này đạt 70%. Target tuần sau là 100%. Đây là cách...'\nTo I: 'Tuần này bạn đã làm rất tốt! Đặc biệt là buổi presentation. Tiếp tục phát huy nhé!'\nTo S: 'Cảm ơn bạn đã nỗ lực. Tôi thấy bạn có một chút khó khăn — chúng ta cùng giải quyết nhé.'\nTo C: 'Đây là review của công việc tuần này. Có 3 điểm cần improve. Đây là data và recommendations.'\n\nAction items:\n1. Practice communication adaptation với 1 member mỗi type\n2. Record 1 conversation và identify style mismatches\n3. Create 'communication cheat sheet' cho team\n4. Schedule 1 cross-type team activity"
-},
-{
-"day": 13,
-"title": "Building DISC-Aware Team Culture",
-"objective": "Xây dựng văn hóa team tôn trọng và leverage diverse personalities",
-"content": "Khi cả team hiểu DISC, magic happens. Không còn 'leader không hiểu tôi' hay 'teammate khó giao tiếp'. Mọi người hiểu: 'Oh, anh ấy là D-type nên nói thẳng thôi' hoặc 'Chị ấy là S-type nên cần thêm time'.\n\nBUILDING DISC-AWARE CULTURE:\n\nSTEP 1: Assessment (Week 1-2)\n- Everyone takes DISC test\n- Share results voluntarily (don't force)\n- Create team personality map\n\nSTEP 2: Education (Week 3-4)\n- Workshop: DISC basics cho cả team (1-2 hours)\n- Discussion: 'Tôi là type nào? Tôi thích được communicate thế nào?'\n- Share stories: 'Lần này leader D nói với tôi S-type, tôi đã hiểu nhầm...'\n\nSTEP 3: Application (Week 5-8)\n- Type-aware meeting norms\n- Buddy system: Pair complementary types\n- Communication guidelines posted\n- Monthly 'communication health' check\n\nSTEP 4: Optimization (ongoing)\n- Quarterly DISC refresh\n- New member orientation includes DISC\n- Team building activities designed for type mixing\n\nDISC IN RECRUITMENT:\n- Job posting: 'We're looking for I-types to join our recruitment team'\n- Interview question: 'Bạn thích làm việc 1 mình hay nhóm?' (maps to C/I)\n- Role matching: Match natural strengths to roles\n\nTEAM BUILDING ACTIVITIES:\n- Personality reveal party (fun, share results)\n- Type-mix project teams (force collaboration across types)\n- Communication challenge: 'Talk only in your type's language for 5 phút'\n\nAction items:\n1. Plan DISC workshop cho entire PSN\n2. Create type-mix buddy pairs\n3. Draft team communication guidelines\n4. Set up quarterly DISC check-in schedule"
-},
-{
-"day": 14,
-"title": "M6 Graduation — Leader DNA Mastery",
-"objective": "Assess DISC mastery và plan transition to M7",
-"content": "Chúc mừng hoàn thành Module 6! Bạn đã học cách nhận diện 4 personality types và adapt coaching style. Đây là skill foundational cho mọi leadership activity — từ recruitment đến 1:1 coaching đến team building.\n\nGRADUATION CRITERIA:\n□ DISC self-assessment completed\n□ 10+ team members classified\n□ Conducted 5+ type-adapted 1:1 conversations\n□ Created PDP cho 3+ members\n□ Identified team composition imbalance\n□ Adjusted recruitment strategy by type\n□ Resolved 1 conflict using DISC framework\n\nSKILLS ASSESSMENT:\nRate yourself 1-5:\n□ Type recognition: ___\n□ Coaching adaptation: ___\n□ Communication flexibility: ___\n□ Conflict resolution: ___\n□ Motivation effectiveness: ___\n\nKEY LEARNINGS:\n- Biggest insight about myself: ___\n- Most surprising member discovery: ___\n- Biggest challenge adapting my style: ___\n- Team change I've noticed: ___\n\nPLAN FOR M7 (PSN Management):\n- M7 sẽ giúp you manage PSN như một mini-business\n- Mục tiêu: Track metrics, run meetings, optimize performance\n- Preparation: Set up tracking spreadsheet, define KPIs\n\nAction items:\n1. Complete graduation assessment\n2. Schedule review với leader\n3. Set M7 preparation tasks\n4. Celebrate growth — DISC mastery is a superpower"
-}
-]
+  "module": {
+    "id": "M6",
+    "title": "Leader DNA — DISC Personality Coaching",
+    "tier": 2,
+    "duration_days": 14,
+    "focus": "Hiểu và coaching theo 4 DISC personality types — Dominant, Influential, Steady, Conscientious",
+    "overview": "Module này dạy Chiến Binh cách nhận diện và coaching theo 4 DISC personality types. Mỗi type có motivation, communication style, và leadership approach khác nhau. Hiểu DISC = coaching hiệu quả = retention cao. Bạn sẽ học cách adapt phong cách leadership của mình để phù hợp với từng type, và xây dựng team balance với diverse personalities.",
+    "objectives": [
+      "Nhận diện 4 DISC types trong PSN members",
+      "Adapt coaching style theo từng type",
+      "Xây dựng team balance với diverse personalities",
+      "Thực hành DISC-based 1:1 coaching conversations",
+      "Tạo personalized development plan cho mỗi member"
+    ]
+  },
+  "audience_brief": {
+    "source": "Droppii leader brief 2026-05-19",
+    "product_users": "Cả gia đình từ bé 3 tuổi tới người lớn",
+    "purchase_decision_maker": "Phụ nữ 28 tuổi tới U50",
+    "recruitment_targets": "U30, U40, U50; sau này mở rộng tới sinh viên",
+    "positioning": "Medicine 3.0 / healthspan — chăm sóc sức khỏe chủ động, phòng ngừa từ thói quen, kéo dài thời gian sống khỏe mạnh"
+  },
+  "disc_types": {
+    "D": {
+      "name": "Dominant (Quyết đoán)",
+      "percentage": "10% population",
+      "traits": [
+        "Direct",
+        "Decisive",
+        "Results-oriented",
+        "Competitive",
+        "Independent"
+      ],
+      "motivators": [
+        "Achievement",
+        "Recognition",
+        "Control",
+        "New challenges"
+      ],
+      "stressors": [
+        "Wasting time",
+        "Weakness",
+        "Loss of control",
+        "Boring routine"
+      ],
+      "communication": "Nói trực tiếp, ngắn gọn. Không cần small talk. Focus trên results và options.",
+      "coaching_style": "Give them goals, not process. Let them run. Check results, not activities. Challenge them with stretch targets. Don't micromanage."
+    },
+    "I": {
+      "name": "Influential (Giao tiếp)",
+      "percentage": "30% population",
+      "traits": [
+        "Enthusiastic",
+        "Optimistic",
+        "Social",
+        "Impulsive",
+        "Talkative"
+      ],
+      "motivators": [
+        "Recognition",
+        "Social approval",
+        "Fun",
+        "Creative expression"
+      ],
+      "stressors": [
+        "Being ignored",
+        "Routine/boredom",
+        "Criticism in public",
+        "Too many details"
+      ],
+      "communication": "Nói nhiều, nhanh, với cảm xúc. Thích kể chuyện. Cần encouragement và public recognition.",
+      "coaching_style": "Encourage and praise publicly. Make training fun. Give them platform to shine. Check in personally — they need connection. Don't overwhelm with data."
+    },
+    "S": {
+      "name": "Steady (Ổn định)",
+      "percentage": "40% population",
+      "traits": [
+        "Patient",
+        "Reliable",
+        "Supportive",
+        "Calm",
+        "Team-oriented"
+      ],
+      "motivators": [
+        "Stability",
+        "Harmony",
+        "Helping others",
+        "Appreciation"
+      ],
+      "stressors": [
+        "Sudden change",
+        "Conflict",
+        "Pressure",
+        "Being rushed"
+      ],
+      "communication": "Nói nhẹ nhàng, cần thời gian suy nghĩ. Thích hỏi ý kiến trước. Cần trust trước khi mở lòng.",
+      "coaching_style": "Be patient, build trust gradually. Give them time to adapt. Appreciate their loyalty. Don't push too hard — gentle guidance works better. Give clear, step-by-step plans."
+    },
+    "C": {
+      "name": "Conscientious (Cẩn thận)",
+      "percentage": "20% population",
+      "traits": [
+        "Analytical",
+        "Precise",
+        "Systematic",
+        "Perfectionist",
+        "Cautious"
+      ],
+      "motivators": [
+        "Accuracy",
+        "Quality",
+        "Logic",
+        "Clear standards"
+      ],
+      "stressors": [
+        "Criticism",
+        "Chaos",
+        "Vagueness",
+        "Emotional pressure"
+      ],
+      "communication": "Nói có logic, cần data và facts. Hỏi nhiều câu. Cần thời gian phân tích trước khi quyết định.",
+      "coaching_style": "Give them data, reports, and systems. Let them analyze before acting. Appreciate their attention to detail. Don't rush them. Give written materials — they read and process."
+    }
+  },
+  "lessons": [
+    {
+      "day": 1,
+      "title": "DISC Overview — Bản đồ personality trong PSN",
+      "objective": "Hiểu 4 loại personality DISC và tại sao nó quan trọng với leader",
+      "content": "Chào mừng Chiến Binh đến Module 6! Trước khi bạn có thể coach người khác, bạn phải hiểu họ. DISC là công cụ đơn giản nhất để phân loại personality — đã được dùng bởi Fortune 500 companies trong 40 năm.\n\n4 NGÔN NGỮ CỦA LEADERSHIP:\nMỗi DISC type 'nói' một ngôn ngữ khác nhau. Nếu bạn nói D-language cho S-type, họ sẽ không hiểu. Nếu bạn nói C-language cho I-type, họ sẽ ngán.\n\nTỔNG QUAN 4 TYPES:\n\nD — DOMINANT (10%): 'Tôi muốn WIN'\n- Nhanh, quyết đoán, results-driven\n- Impatient với process\n- Thích leadership positions\n- Trong Droppii: Thường là top performers, muốn rank up nhanh\n\nI — INFLUENTIAL (30%): 'Tôi muốn CONNECT'\n- Nhiệt tình, social, optimistic\n- Thích giao tiếp, thuyết trình\n- Dễ bored với routine\n- Trong Droppii: Tốt cho recruitment, event hosting, content creation\n\nS — STEADY (40%): 'Tôi muốn HELP'\n- Kiên nhẫn, reliable, supportive\n- Thích stability, teamwork\n- Không thích change đột ngột\n- Trong Droppii: Lõi của PSN — loyal members, good retention, steady performers\n\nC — CONSCIENTIOUS (20%): 'Tôi muốn BE RIGHT'\n- Phân tích, detail-oriented, systematic\n- Cần data trước khi decide\n- High standards cho quality\n- Trong Droppii: Good at planning, training design, analytics\n\nĐIỀU QUAN TRỌNG NHẤT:\nKhông có type nào tốt hơn type nào. Mỗi type có strengths riêng. Great team cần balance của cả 4 types. Nếu PSN của bạn chỉ có D-types → nhiều conngười nhưng turnover cao. Nếu chỉ có S-types → team ổn định nhưng không grow.\n\nAction items:\n1. Làm DISC assessment cho bản thân (search 'DISC test free online')\n2. Phân loại 10 members trong PSN của bạn theo DISC\n3. Note lại: Bạn đang communicate theo style nào? Members nào đang bị 'misunderstood'?",
+      "activity": {
+        "title": "DISC Self-Assessment",
+        "description": "Thực hành bài test DISC cá nhân và phân tích kết quả",
+        "steps": [
+          "Làm bài DISC assessment trong 10 phút",
+          "Ghi lại điểm D, I, S, C của bạn",
+          "Phân tích: điểm mạnh, stress trigger, communication style",
+          "So sánh với cách bạn đang leadership hiện tại",
+          "Xác định 1 thay đổi nhỏ để improve communication"
+        ]
+      },
+      "reflection_prompts": [
+        "Kết quả DISC có đúng với cách bạn tự nhìn nhận?",
+        "Điểm DISC nào bạn cần phát triển thêm?",
+        "Cách leadership hiện tại có phù hợp với mọi thành viên không?"
+      ],
+      "habit_checklist": [
+        "[ ] Hoàn thành DISC self-assessment",
+        "[ ] Viết 3 điểm mạnh và 3 điểm cần cải thiện từ kết quả",
+        "[ ] Xác định 1 thay đổi nhỏ trong leadership style"
+      ]
+    },
+    {
+      "day": 2,
+      "title": "D-Type Coaching — Lãnh đạo quyết đoán",
+      "objective": "Học cách coach D-type members (Dominant) hiệu quả",
+      "content": "D-types là những người muốn WIN. Họ nhanh, quyết đoán, và muốn kết quả ngay. Nếu bạn không đưa ra goals rõ ràng và challenges thú vị, họ sẽ chán và move on.\n\nNHẬN DIỆN D-TYPE:\n- Nói nhanh, quyết định nhanh\n- Thích từ: 'win', 'top', 'target', 'result'\n- Không kiên nhẫn với explanation dài\n- Muốn làm leader ngay\n- Thích competition\n- Direct — nói thẳng, không vòng vo\n\nCOACHING D-TYPE:\n\nDO's:\n✓ Give them CHALLENGES, not instructions\n✓ Set clear GOALS with deadlines\n✓ Give them leadership opportunities early\n✓ Acknowledge results publicly\n✓ Let them do things their way (if results are good)\n✓ Be direct — don't beat around the bush\n✓ Give them autonomy — they hate micromanagement\n\nDON'Ts:\n✗ Long explanations — they stopped listening after 30 seconds\n✗ Micromanage process — give outcome, let them figure out how\n✗ Weak leadership — they will challenge you if you seem uncertain\n✗ Slow decision-making — they need speed\n✗ Public criticism — humiliates them badly\n\nCOACHING CONVERSATION WITH D-TYPE:\nLeader: 'Tuần này target của bạn là 3 recruits. Bạn nghĩ sao?'\nD: 'Được, tôi làm 5.'\nLeader: 'Great. Bạn cần support gì không?'\nD: 'Không, tôi tự lo được.'\nLeader: 'OK. Check-in cuối tuần để review.'\n\nThat's it. D-types don't need hand-holding. They need goals and autonomy.\n\nPOTENTIAL ISSUES VỚI D-TYPE:\n1. Too aggressive → Teach them empathy và soft skills\n2. Burnout → They push too hard, remind them about balance\n3. Disrespecting others → Coach onEQ và team collaboration\n4. Impatient with S/C types → Teach them to adapt communication\n\nAction items:\n1. Identify D-types trong PSN (thường là top 20% performers)\n2. Give 1 D-type member a stretch goal tuần này\n3. Practice giving direct, concise feedback\n4. Read thêm về 'situational leadership' để adapt style",
+      "activity": {
+        "title": "DISC Type Deep Dive - D and I",
+        "description": "Nghiên cứu sâu 2 DISC types: Dominant và Influential — cách nhận diện và tương tác",
+        "steps": [
+          "Đọc profile D và I trong tài liệu module",
+          "Liệt kê 3 người bạn biết thuộc type D và 3 người type I",
+          "Viết 3 cách khác nhau để communicate với mỗi type",
+          "Soạn 1 tin nhắn theo style D và 1 theo style I",
+          "Gửi tin nhắn và observe phản hồi"
+        ]
+      },
+      "reflection_prompts": [
+        "Bạn dễ dàng hơn với type nào: D hay I?",
+        "Type nào trong team hiện tại đang cần attention nhiều nhất?",
+        "Làm sao để D và I collaborate hiệu quả?"
+      ],
+      "habit_checklist": [
+        "[ ] Xác định 3 người type D và 3 người type I",
+        "[ ] Soạn 2 tin nhắn theo 2 style khác nhau",
+        "[ ] Ghi nhận phản hồi sau khi gửi tin nhắn"
+      ]
+    },
+    {
+      "day": 3,
+      "title": "I-Type Coaching — Năng động và giao tiếp",
+      "objective": "Học cách coach I-type members (Influential) hiệu quả",
+      "content": "I-types là energy của team. Họ mang enthusiasm, connection, và optimism. Nếu bạn quản lý họ đúng cách, họ sẽ là best recruiters và motivators. Nếu sai, họ sẽ distract team và lose focus.\n\nNHẬN DIỆN I-TYPE:\n- Nói nhiều, nhanh, với cảm xúc\n- Thích kể chuyện, joke, entertain\n- Enthusiastic về new ideas\n- Dễ excited, dễ bored\n- Thích spotlight — center of attention\n- Spontaneous — không thích plan chi tiết\n\nCOACHING I-TYPE:\n\nDO's:\n✓ Encourage và praise — họ cần recognition\n✓ Make training FUN — games, roleplay, challenges\n✓ Give them public platform — events, presentations\n✓ Channel their energy vào productive activities\n✓ Be warm và enthusiastic\n✓ Give variety — change activities often\n\nDON'Ts:\n✗ Criticize in front of others — họ sẽ shutdown\n✗ Boring, monotonous training — họ will check out\n✗ Overwhelm với details và data\n✗ Force them to work alone — they need social interaction\n✗ Too structured — give them flexibility\n\nMANAGING I-TYPE CHALLENGES:\n1. Losing focus → Give them short, varied tasks. Break big goals into fun milestones.\n2. Talking too much → Gently redirect: 'Great point! Bây giờ hãy lắng nghe X chia sẻ nhé'\n3. Overpromising → Teach them to under-promise, over-deliver\n4. Disorganization → Give them a buddy C-type để keep them on track\n\nCOACHING CONVERSATION WITH I-TYPE:\nLeader: 'Tuần này bạn thấy sao? Có gì fun không?'\nI: 'Ồ tuần này rồi! Tôi đã gặp 1 chị rất thích sản phẩm, chị ấy đang suy nghĩ...'\nLeader: 'Awesome! Kể thêm về chị ấy đi — bạn đã connect thế nào?'\nI: 'Ồ thì... [kể câu chuyện đầy chi tiết]'\nLeader: 'Perfect! Để tôi giúp bạn close deal này. Còn về tuần sau, tôi muốn bạn host buổi sharing nhỏ với team — bạn ok không?'\nI: 'Ồ được! Tôi sẽ chuẩn bị!'\n\nAction items:\n1. Identify I-types trong PSN — thường là most social members\n2. Assign 1 speaking task (host sharing, present at event)\n3. Give public praise cho 1 I-type member tuần này\n4. Create fun training activities cho tuần tới",
+      "activity": {
+        "title": "DISC Type Deep Dive - S and C",
+        "description": "Nghiên cứu sâu 2 DISC types: Steady và Conscientious — cách support và motivate",
+        "steps": [
+          "Đọc profile S và C trong tài liệu module",
+          "Phân biệt: S cần stability và reassurance, C cần accuracy và logic",
+          "Viết 3 cách khác nhau để motivate mỗi type",
+          "Soạn 1 lời khen theo style S và 1 theo style C",
+          "Thực hành với thành viên team thuộc type S hoặc C"
+        ]
+      },
+      "reflection_prompts": [
+        "Bạn có thiên hướng leadership thiên về D/I hay S/C?",
+        "Type nào trong team đang bị overlook nhất?",
+        "Làm sao để tạo cảm giác an toàn cho type S?"
+      ],
+      "habit_checklist": [
+        "[ ] Phân biệt cách motivate S vs C",
+        "[ ] Soạn 2 lời khen theo style S và C",
+        "[ ] Thực hành với 1 thành viên team"
+      ]
+    },
+    {
+      "day": 4,
+      "title": "S-Type Coaching — Kiên nhẫn và ổn định",
+      "objective": "Học cách coach S-type members (Steady) hiệu quả — lõi của PSN",
+      "content": "S-types là backbone của PSN. Họ không phải người nói to nhất, không phải người bán được nhiều nhất trong tháng đầu, nhưng họ là người STAY. Retention cao, loyal, và reliable. Một PSN có nhiều S-types sẽ ổn định và bền vững.\n\nNHẬN DIỆN S-TYPE:\n- Nói nhẹ nhàng, chậm rãi\n- Thích lắng nghe hơn nói\n- Team-oriented — care về group harmony\n- Không thích conflict\n- Cần thời gian để mở lòng\n- Loyal với leader và team một khi đã trust\n- Steady performers — không flashy nhưng consistent\n\nCOACHING S-TYPE:\n\nDO's:\n✓ Build TRUST first — take time để họ mở lòng\n✓ Be PATIENT — don't rush them\n✓ Show genuine CARE — ask về family, feelings\n✓ Give STABILITY — clear plans, no sudden changes\n✓ Appreciate quietly — sincere 1:1 praise > public shoutout\n✓ Give them SUPPORTIVE roles — buddy system, peer support\n✓ Provide SECURITY — stable income plan, clear path forward\n\nDON'Ts:\n✗ Push too hard — họ will withdraw\n✗ Sudden changes — give advance notice, gradual transition\n✗ Public criticism — deeply hurts them\n✗ Overwhelm với choices — give them 2 options, not 10\n✗ Ignore their input — they have valuable insights, just share quietly\n\nBUILDING TRUST WITH S-TYPES:\n- Consistency: Be on time for meetings, follow through on promises\n- Listening: Remember details about their life (family, health, goals)\n- Patience: Don't expect them to open up in first meeting\n- Safety: Create judgment-free environment\n- Small wins: Celebrate progress gradually\n\nS-TYPE TRIGGER WORDS:\n- Security, stability, team, family, support, care\n- 'Cùng nhau', 'đồng hành', 'ổn định', 'lâu dài'\n- Avoid: 'urgent', 'pressure', 'competition', 'cut throat'\n\nCOACHING CONVERSATION WITH S-TYPE:\nLeader: 'Tuần này bạn thấy thế nào? Có khó khăn gì không?'\nS: 'Ừ... có chút vất vả. Người nhà hỏi sao phải dành thời gian cho cái này.'\nLeader: 'Tôi hiểu. Tôi cũng từng vậy. Chúng ta cùng tìm cách giải thích cho gia đình nhé. Bạn có muốn tôi giúp không?'\nS: 'Cảm ơn leader. Tôi sẽ thử.'\nLeader: 'Không vội đâu. Tuần này chỉ cần share 1 post thôi, được không? Tôi sẽ cùng bạn.'\nS: 'Được rồi, cảm ơn leader nhiều.'\n\nAction items:\n1. Identify S-types trong PSN — thường là silent majority\n2. Have 1 deep 1:1 conversation với mỗi S-type (20+ phút)\n3. Assign buddy role cho 1 S-type member\n4. Write personalized encouragement note cho S-type yếu thế nhất trong team",
+      "activity": {
+        "title": "Team DISC Mapping",
+        "description": "Phân loại toàn bộ team theo DISC và tạo visual map",
+        "steps": [
+          "Liệt kê tất cả thành viên hiện tại",
+          "Đánh giá DISC type cho từng người dựa trên observation",
+          "Tạo visual team DISC map (dùng template)",
+          "Phân tích: team có balanced không? Thiếu type nào?",
+          "Lên kế hoạch bổ sung thành viên để balance team"
+        ]
+      },
+      "reflection_prompts": [
+        "Team hiện tại có balanced DISC profile không?",
+        "Type nào đang thiếu hoặc quá nhiều trong team?",
+        "Làm sao để recruit thêm thành viên với DISC type cần thiết?"
+      ],
+      "habit_checklist": [
+        "[ ] Hoàn thành DISC assessment cho 3 thành viên",
+        "[ ] Tạo visual team DISC map",
+        "[ ] Phân tích balance và lên kế hoạch"
+      ]
+    },
+    {
+      "day": 5,
+      "title": "C-Type Coaching — Cẩn thận và phân tích",
+      "objective": "Học cách coach C-type members (Conscientious) hiệu quả",
+      "content": "C-types là quality control của PSN. Hồ họ chú ý đến detail, cần data trước khi decide, và có standards cao. Nếu bạn quản lý họ đúng cách, họ sẽ làm việc chính xác, đáng tin cậy, và đóng góp ý kiến chất lượng.\n\nNHẬN DIỆN C-TYPE:\n- Nói chậm, có logic, dẫn chứng\n- Cần thông tin đầy đủ trước khi decide\n- Thích đọc, research trước khi act\n- Critical thinking — hỏi sâu, không tin ngay\n- Perfectionist — muốn làm đúng hoặc không làm\n- Tích cực nhưng cần time to process\n\nCOACHING C-TYPE:\n\nDO's:\n✓ Give them DATA — reports, numbers, research\n✓ Let them ANALYZE — don't rush their decision\n✓ Provide CLEAR, DETAILED instructions\n✓ Give them QUALITY tasks — they hate sloppy work\n✓ Respect their questions — they're trying to understand\n✓ Give WRITTEN materials — they process better by reading\n✓ Be LOGICAL — don't use emotional appeals\n\nDON'Ts:\n✗ Rush them — 'just do it, don't overthink'\n✗ Vague instructions — 'do your best' is not enough\n✗ Public criticism of their work — takes it personally\n✗ 'Trust me' without evidence\n✗ Over-the-top enthusiasm — feels fake to them\n✗ Ignoring their suggestions — they often spot problems others miss\n\nC-TYPE TRIGGER WORDS:\n- Data, analysis, systematic, quality, accuracy, research\n- 'Căn cứ vào data', 'phân tích kỹ', 'đảm bảo chất lượng'\n- Avoid: 'just do it', 'trust me', 'feel the vibe'\n\nCOACHING CONVERSATION WITH C-TYPE:\nLeader: 'Tuần này tôi muốn bạn thử cách mới để recruit'\nC: 'Làm thế nào? Có data nào chứng minh cách này hiệu quả không? Tôi đã đọc và thấy conversion rate của các method khác là...'\nLeader: 'Câu hỏi hay. Data thì tôi chưa có test rộng, nhưng 2 leader khác đã thử và kết quả tốt. Tôi sẽ gửi bạn case studies của họ.'\nC: 'OK, tôi sẽ đọc trước khi quyết định.'\nLeader: 'Perfect. Cho tôi biết sau khi bạn phân tích nhé.'\n\nAction items:\n1. Identify C-types — thường là best question-askers trong team\n2. Prepare data/reports cho C-type members trong 1:1 meeting\n3. Ask a C-type member để review training materials\n4. Don't rush — give them time to process and respond",
+      "activity": {
+        "title": "DISC-Based Coaching Practice - D Type",
+        "description": "Thực hành coaching conversation với thành viên type D",
+        "steps": [
+          "Chọn 1 thành viên type D trong team",
+          "Soạn coaching agenda: goal-focused, 15 phút",
+          "Thực hành: bắt đầu bằng results, cho options, challenge with stretch goals",
+          "Ghi lại: phản ứng của D type, cái gì work, cái gì không",
+          "Debrief và adjust cho lần tiếp theo"
+        ]
+      },
+      "reflection_prompts": [
+        "D type respond thế nào với coaching approach của bạn?",
+        "Bạn có đang quá soft hay quá direct?",
+        "D type cần gì nhất để phát triển?"
+      ],
+      "habit_checklist": [
+        "[ ] Soạn coaching agenda cho D type",
+        "[ ] Thực hành coaching 15 phút",
+        "[ ] Ghi lại reflection và bài học"
+      ]
+    },
+    {
+      "day": 6,
+      "title": "DISC Team Balance — Xây dựng PSN cân bằng",
+      "objective": "Phân tích và balance DISC composition trong PSN",
+      "content": "Một PSN healthy cần cả 4 types. Nếu thiếu 1 type, team có weaknesses rõ ràng. Module này giúp bạn audit PSN composition và build balanced team.\n\nPSN COMPOSITION ANALYSIS:\n\nĐếm số members theo từng type trong PSN của bạn:\nD-types: ___ → Role: Fast starters, rank climbers, competition drivers\nI-types: ___ → Role: Recruiters, event hosts, morale boosters\nS-types: ___ → Role: Retention, team glue, steady income\nC-types: ___ → Role: Quality, planning, systems, training\n\nIDEAL RATIO: D(15%) : I(25%) : S(40%) : C(20%)\n\nCOMMON IMBALANCES:\n\n1. Too many D-types (no S/C):\n- Team năng động nhưng unstable\n- High turnover, burnout, conflict\n- Fix: Recruit S-types với message về stability, team support\n\n2. Too many S-types (no D/I):\n- Team ổn định nhưng không grow\n- Nobody takes initiative, no urgency\n- Fix: Develop 1-2 D-types, give them stretch goals\n\n3. Too many I-types (no S/C):\n- Fun team nhưng không produce results\n- Lots of activity, little income\n- Fix: Hire C-type để build systems, S-type để stabilize\n\n4. Too many C-types (no D/I):\n- Analysis paralysis — everyone researching, nobody doing\n- Perfect plans, zero execution\n- Fix: Give them D-type buddy để push action\n\nRECRUITMENT STRATEGY BY TYPE:\n- Recruit D: 'Become a leader, build your own team, unlimited income'\n- Recruit I: 'Great community, fun events, make friends while earning'\n- Recruit S: 'Stable income, supportive team, work from home, flexible'\n- Recruit C: 'Proven system, data-driven, trackable results, quality products'\n\nTEAM ROLES BY TYPE:\nD: Target setter, competition leader, rank climber motivator\nI: Recruitment captain, event MC, content creator, team motivator\nS: Buddy coordinator, retention manager, team caretaker, peer supporter\nC: Training designer, analytics manager, quality control, system builder\n\nAction items:\n1. Count your PSN by DISC type\n2. Identify the gap — which type are you missing?\n3. Adjust recruitment messaging to attract the missing type\n4. Create role assignments based on natural strengths",
+      "activity": {
+        "title": "DISC-Based Coaching Practice - I Type",
+        "description": "Thực hành coaching conversation với thành viên type I",
+        "steps": [
+          "Chọn 1 thành viên type I trong team",
+          "Soạn coaching agenda: people-focused, energizing, 15 phút",
+          "Thực hành: bắt đầu bằng enthusiasm, acknowledge contribution, brainstorm together",
+          "Ghi lại: I type có energy hay shutdown? Approach nào work?",
+          "Debrief và compare với D type coaching"
+        ]
+      },
+      "reflection_prompts": [
+        "I type cần gì nhất từ leader?",
+        "Bạn có đang nghe đủ hay đang interrupt?",
+        "Làm sao để giữ I type focused mà không dampen enthusiasm?"
+      ],
+      "habit_checklist": [
+        "[ ] Soạn coaching agenda cho I type",
+        "[ ] Thực hành coaching 15 phút",
+        "[ ] Compare với D type coaching và ghi nhận difference"
+      ]
+    },
+    {
+      "day": 7,
+      "title": "Week 1 Review — DISC Assessment & Team Mapping",
+      "objective": "Review DISC progress và complete team personality map",
+      "content": "Cuối tuần đầu DISC, đã đến lúc consolidate insights và plan action.\n\nWEEK 1 REVIEW CHECKLIST:\n\n□ Self-assessment completed — bạn là D/I/S/C?\n□ 10 team members classified by DISC type\n□ Team balance analyzed (D:I:S:C ratio)\n□ Gaps identified\n□ Personalized approach planned cho 3 key members\n□ Role assignments based on types\n□ Communication style adjusted cho each type\n\nCOMMON MISTAKES:\n1. 'Tôi chỉ thuộc 1 type' — thực tế mỗi người có mixture. Một người có thể là D trong công việc nhưng S trong gia đình.\n2. 'Tôi phải change style của tôi' — không cần. Chỉ cần ADAPT trong từng situation.\n3. 'Tôi nhận diện được nhưng không biết phải làm gì' — phần này Module 6-8 sẽ giải quyết.\n4. 'Tôi gán nhãn người khác' — DISC là tool để UNDERSTAND, không phải JUDGE.\n\nKEY INSIGHTS TO DOCUMENT:\n- My primary type: ___\n- My biggest strength as leader: ___\n- My blind spot (style I overuse): ___\n- Member that surprised me (turns out different type than I thought): ___\n- Biggest challenge in adapting my style: ___\n\nAction items:\n1. Complete team personality map (spreadsheet)\n2. Schedule 1:1 với 3 members có type khác bạn nhất\n3. Share DISC insights với team (make it fun, not serious)\n4. Set goal for Week 2: Master coaching conversations với 1 type bạn struggle nhất",
+      "activity": {
+        "title": "DISC-Based Coaching Practice - S and C Types",
+        "description": "Thực hành coaching conversation với thành viên type S và C",
+        "steps": [
+          "Chọn 1 thành viên type S và 1 type C",
+          "S coaching: tạo không gian an toàn, hỏi open-ended, cho thời gian suy nghĩ",
+          "C coaching: chuẩn bị data, logic-based discussion, chi tiết plan",
+          "Ghi lại: S cần reassurance, C cần accuracy — bạn đáp ứng đúng không?",
+          "So sánh 4 lần coaching: D, I, S, C — tìm pattern"
+        ]
+      },
+      "reflection_prompts": [
+        "S type có chia sẻ nhiều hơn khi bạn tạo安全感 không?",
+        "C type có appreciate khi bạn bring data không?",
+        "4 DISC types cần 4 coaching styles khác nhau — bạn có thể switch fluently không?"
+      ],
+      "habit_checklist": [
+        "[ ] Coaching 1:1 với S type (15 phút)",
+        "[ ] Coaching 1:1 với C type (15 phút)",
+        "[ ] So sánh 4 coaching sessions và viết reflection"
+      ]
+    },
+    {
+      "day": 8,
+      "title": "DISC-Based 1:1 Coaching — Master conversation",
+      "objective": "Thực hành coaching conversations adapt theo từng DISC type",
+      "content": "Now bạn đã biết theory — đã đến lúc practice. Module này guide bạn qua coaching conversations cho từng type, với scripts và frameworks.\n\n1:1 COACHING CHECKLIST (CHO MỌI TYPE):\n\nPRE-CALL (5 phút preparation):\n□ Review their goals, last progress, personality type\n□ Prepare talking points specific to their type\n□ Set intention for this conversation\n□ Have quiet environment, no distractions\n\nDURING CALL (30-45 phút):\n□ Start with results they achieved (D: goal review, I: celebration, S: appreciation, C: data)\n□ Discuss 1-2 key topics (not 10)\n□ Adapt your pace and style to theirs\n□ End with clear action items\n□ Schedule next check-in\n\nPOST-CALL (5 phút):\n□ Log key points in CRM\n□ Send follow-up message\n□ Update their development plan\n\nTYPE-SPECIFIC CONVERSATION FRAMEWORKS:\n\nD-TYPE 1:1:\nDuration: 15-20 phút (they're busy)\nOpening: 'Review tuần này — bạn đạt 3/5 target. Tuần sau 5 nhé?'\nFocus: Results, goals, challenges\nClose: 'Action items: ___ by ___ date. Check-in Friday.'\n\nI-TYPE 1:1:\nDuration: 30-45 phút (they love talking)\nOpening: 'Tuần này có gì fun? Share với tôi đi!'\nFocus: Experience, feelings, ideas, encouragement\nClose: 'Tuần sau bạn sẽ host sharing nhé. Tôi tin bạn!'\n\nS-TYPE 1:1:\nDuration: 30-45 phút (they need time to open up)\nOpening: 'Cảm ơn bạn đã nỗ lực tuần qua. Bạn thấy sao?'\nFocus: Feelings, challenges, support needed, personal connection\nClose: 'Đừng lo, từ từ. Tuần sau chỉ cần 1 small win thôi.'\n\nC-TYPE 1:1:\nDuration: 30-45 phút (they need details)\nOpening: 'Đây là data tuần này. Có gì bạn muốn phân tích không?'\nFocus: Data, quality, process improvements, questions\nClose: 'Đọc tài liệu này rồi cho tôi feedback. Không vội.'\n\nROLE-PLAY EXERCISE:\n1. Pair up: 1 leader, 1 member (each different type)\n2. Conduct 15-minute coaching conversation\n3. Switch roles\n4. Give feedback: 'What worked? What didn't?'\n5. Practice 3 times với mỗi type combination\n\nAction items:\n1. Schedule 3 1:1 calls tuần này (1 với mỗi type khác nhau)\n2. Practice role-play với 1 team member\n3. Create conversation templates cho từng type\n4. Log all 1:1 notes vào spreadsheet",
+      "activity": {
+        "title": "Conflict Resolution Between DISC Types",
+        "description": "Phân tích và giải quyết 1 tình huống conflict giữa 2 thành viên có DISC type khác nhau",
+        "steps": [
+          "Xác định 1 conflict hiện tại hoặc tạo scenario (D vs S, I vs C)",
+          "Phân tích: conflict đến từ communication style khác nhau, không phải tính cách xấu",
+          "Thiết kế intervention: separate conversations trước, mediated session sau",
+          "Thực hành mediated session với framework: acknowledge → understand → resolve",
+          "Document lessons learned cho future conflicts"
+        ]
+      },
+      "reflection_prompts": [
+        "Conflict thực sự đến từ đâu: tính cách hay communication gap?",
+        "Bạn đã handle conflict tốt chưa? Cần thay đổi gì?",
+        "Làm sao để prevent conflict giữa DISC types trong tương lai?"
+      ],
+      "habit_checklist": [
+        "[ ] Xác định 1 conflict hoặc scenario",
+        "[ ] Phân tích root cause theo DISC lens",
+        "[ ] Thực hành intervention và document kết quả"
+      ]
+    },
+    {
+      "day": 9,
+      "title": "Personalized Development Plans — Kế hoạch cá nhân hóa",
+      "objective": "Tạo development plan cá nhân cho mỗi member dựa trên DISC type",
+      "content": "Every member has unique strengths, weaknesses, và goals. Generic training không hoạt động. Bạn cần personalized development plan (PDP) cho mỗi người.\n\nPDP TEMPLATE:\n\nMEMBERSHIP INFO:\n- Name: ___\n- DISC Type: ___\n- Current Tier: ___\n- Months in PSN: ___\n- Last promotion: ___\n\nSTRENGTHS (dựa trên DISC):\n- [Type-specific strengths]\n- Specific examples từ performance\n\nDEVELOPMENT AREAS:\n- [Type-specific weaknesses]\n- 1-2 key areas to focus this quarter\n\nGOALS:\n- Revenue goal (monthly): ___VND\n- Recruitment goal (quarterly): ___ members\n- Skill development goal: ___\n- Timeline: ___\n\nMONTHLY ACTION PLAN:\nWeek 1-2: [Focus area 1 — specific actions]\nWeek 3-4: [Focus area 2 — specific actions]\n\nSUPPORT NEEDED:\n- Training: ___\n- Resources: ___\n- 1:1 frequency: ___/tháng\n- Buddy assignment: ___\n\nPROGRESS TRACKING:\n- Weekly: ___\n- Monthly review: [Date]\n- Quarterly assessment: [Date]\n\nPDP BY DISC TYPE:\n\nD-TYPE PDP:\n- Goal: Rank promotion, leadership position\n- Development: Patience, empathy, team building\n- Monthly target: ___, Recruitment: ___\n- Support: Give autonomy, challenge, recognition\n\nI-TYPE PDP:\n- Goal: Consistent income, event hosting, recruitment\n- Development: Focus, follow-through, follow-up\n- Monthly target: ___, Recruits: ___\n- Support: Encouragement, fun training, public praise\n\nS-TYPE PDP:\n- Goal: Stable income, personal growth, team belonging\n- Development: Proactivity, taking initiative\n- Monthly target: ___ (realistic, not aggressive)\n- Support: Patient coaching, buddy system, gradual challenges\n\nC-TYPE PDP:\n- Goal: System mastery, quality performance, training design\n- Development: Decision speed, action orientation\n- Monthly target: ___, Quality score: ___\n- Support: Data, time to plan, detailed feedback\n\nAction items:\n1. Create PDP cho 5 key members tuần này\n2. Schedule PDP review sessions (30 phút/member)\n3. Build PDP template cho consistent use\n4. Review và update PDPs monthly",
+      "activity": {
+        "title": "Personalized Development Plans",
+        "description": "Tạo development plan cá nhânized cho 3 thành viên khác nhau",
+        "steps": [
+          "Chọn 3 thành viên: 1 D, 1 I, 1 S hoặc C",
+          "Viết development plan cho mỗi người: 30-60-90 day goals",
+          "Customize theo DISC: D cần challenge, I cần recognition, S cần support, C cần clarity",
+          "Share plans với mỗi member và get their input",
+          "Schedule follow-up meetings để track progress"
+        ]
+      },
+      "reflection_prompts": [
+        "Development plan có thực sự phù hợp với DISC type của từng người?",
+        "Member phản hồi thế nào khi thấy plan được customize cho họ?",
+        "Bạn có thể scale personalized coaching khi team lớn hơn không?"
+      ],
+      "habit_checklist": [
+        "[ ] Viết 3 development plans customized theo DISC",
+        "[ ] Share và discuss với từng member",
+        "[ ] Schedule follow-up meetings"
+      ]
+    },
+    {
+      "day": 10,
+      "title": "Conflict Resolution — Giải quyết xung đột trong team",
+      "objective": "Học cách mediate và resolve conflicts giữa members khác personality types",
+      "content": "Conflict trong team là inevitable — nhưng cách bạn handle nó quyết định team culture. Một conflict được giải quyết tốt làm team mạnh hơn. Một conflict bị ignore sẽ accumulate và explode sau này.\n\nNGUYÊN NHÂN CONFLICT PHỔ BIẾN TRONG MLM:\n1. Resource competition: Leads, customers, recruits\n2. Personality clash: D vs S, I vs C\n3. Miscommunication: Different communication styles\n4. Unequal effort: 'Tôi làm nhiều hơn bạn'\n5. Leadership style: 'Leader thiên vị'\n6. Goal misalignment: Different priorities\n\nCONFLICT RESOLUTION FRAMEWORK (5 bước):\n\nBƯỚC 1: LISTEN SEPARATELY (trước khi meet cùng)\n- Gặp mỗi người riêng 15-20 phút\n- Không đưa ra judgment, chỉ lắng nghe\n- Note facts và emotions\n- 'Tôi muốn hiểu perspective của bạn'\n\nBƯỚC 2: IDENTIFY ROOT CAUSE\n- Phân biệt: Symptom vs Root cause\n- Symptom: 'Họ không nói chuyện với nhau'\n- Root cause: 'Cả hai đều muốn cùng 1 recruit, nhưng không ai dám nói'\n- Ask: 'Nếu không có vấn đề này, điều gì khác đang xảy ra?'\n\nBƯỚC 3: MEDIATE JOINT SESSION\n- Both parties present (nếu safe)\n- Set ground rules: No interrupting, no name-calling\n- Each person shares THEIR perspective (not 'what they did wrong')\n- You facilitate, don't judge\n- Look for common ground\n\nBƯỚC 4: FIND SOLUTION TOGETHER\n- Don't impose solution — let them agree\n- Brainstorm options: 'Các bạn nghĩ sao nếu...'\n- Aim for win-win, not win-lose\n- Document agreement\n\nBƯỚC 5: FOLLOW UP\n- Check in sau 1 tuần\n- Adjust if needed\n- Celebrate if resolved well\n\nDISC-BASED CONFLICT RESOLUTION:\n\nD vs I Conflict:\n- D feels I is wasting time (too much talk, no action)\n- I feels D is too cold (no recognition, no fun)\nSolution: D gives I freedom to express. I respects D's time.\n\nD vs S Conflict:\n- D pushes too hard, S withdraws\n- S's silence frustrates D\nSolution: D softens approach. S communicates concerns earlier.\n\nI vs C Conflict:\n- I's spontaneity frustrates C's need for order\n- C's criticism hurts I's feelings\nSolution: I plans more. C gives positive feedback first.\n\nD vs C Conflict:\n- D's speed frustrates C's need for analysis\n- C's questions slow down D\nSolution: D gives C 24h to analyze. C commits to decision after analysis.\n\nAction items:\n1. Practice mediation role-play với team\n2. Create conflict resolution policy cho PSN\n3. Schedule monthly 'team health check' meeting\n4. Document 1 real conflict và how you resolved it",
+      "activity": {
+        "title": "Adaptive Leadership Style Practice",
+        "description": "Thực hành switch leadership style theo DISC type trong 1 ngày làm việc",
+        "steps": [
+          "Review DISC cheat sheet trước khi bắt đầu ngày",
+          "Giao tiếp với type D: direct, results-focused, fast-paced",
+          "Giao tiếp với type I: enthusiastic, recognition, social",
+          "Giao tiếp với type S: patient, supportive, stable",
+          "Giao tiếp với type C: detailed, accurate, logical",
+          "Ghi lại: switch style khó nhất ở đâu?"
+        ]
+      },
+      "reflection_prompts": [
+        "Switching giữa các DISC styles có tự nhiên không?",
+        "Bạn bị stuck ở style nào nhất?",
+        "Làm sao để practice daily cho đến khi becomes second nature?"
+      ],
+      "habit_checklist": [
+        "[ ] Review DISC cheat sheet mỗi sáng",
+        "[ ] Switch style ít nhất 3 lần trong ngày",
+        "[ ] Ghi reflection cuối ngày: cái nào work, cái nào cần improve"
+      ]
+    },
+    {
+      "day": 11,
+      "title": "Motivation Mastery — Inspire từng type",
+      "objective": "Học cách motivate 4 DISC types một cách khác nhau",
+      "content": "Motivation không phải là 'một size fit all'. Motivate D bằng challenge, I bằng recognition, S bằng appreciation, C bằng competence. Nếu bạn dùng cùng 1 approach cho cả team, bạn chỉ motivate 25% people.\n\nMOTIVATION BY DISC TYPE:\n\nD-TYPE MOTIVATION:\n- LEADERSHIP OPPORTUNITIES: 'Tôi muốn bạn lead project X'\n- COMPETITION: Leaderboard, rankings, monthly awards\n- NEW CHALLENGES: 'Bạn đã master cái này — có muốn thử cấp cao hơn không?'\n- FREEDOM: 'Tôi sẽ give you autonomy — bạn decide cách làm'\n- Direct acknowledgment: 'Great job, bạn đã vượt target'\n\nI-TYPE MOTIVATION:\n- PUBLIC RECOGNITION: Shoutout trong group meeting, social media feature\n- SOCIAL EVENTS: Team dinner, celebration, fun activities\n- CREATIVE FREEDOM: Let them design content, host events\n- ENCOURAGEMENT: 'Bạn làm được! Tôi tin bạn!'\n- Fun rewards: Gift cards, experiences, not just money\n\nS-TYPE MOTIVATION:\n- PERSONAL APPRECIATION: 1:1 thank you, handwritten note\n- STABILITY: 'Team này sẽ luôn ở đây cho bạn'\n- BELONGING: 'Bạn là phần quan trọng của team'\n- GRADUAL PROGRESS: Small wins celebrated consistently\n- CARE: Ask about their family, health, feelings\n\nC-TYPE MOTIVATION:\n- MASTERY: Training, certification, skill development\n- DATA RECOGNITION: 'Bạn có accuracy rate 95% — highest in team'\n- QUALITY ACKNOWLEDGMENT: 'Report của bạn rất thorough'\n- AUTONOMY ON TASKS: Let them design và improve systems\n- INTELLECTUAL CHALLENGE: Complex problems, strategy sessions\n\nDAILY MOTIVATION PRACTICES:\n- Morning: 1 personal message cho mỗi member (1 phút)\n- Weekly: Public recognition trong team meeting\n- Monthly: 1:1 career development conversation\n- Quarterly: Celebration of wins — big và small\n\nAction items:\n1. Write motivation plan cho từng DISC type\n2. Create recognition system cho team\n3. Practice giving type-appropriate praise tuần này\n4. Track which motivation methods work best cho từng member",
+      "activity": {
+        "title": "DISC-Based Recruitment",
+        "description": "Sử dụng DISC để tối ưu recruitment — tìm đúng người cho đúng role",
+        "steps": [
+          "Xác định team đang thiếu DISC type nào",
+          "Tạo recruitment content targeted cho type đó",
+          "Trong interview/talk, observe DISC signals: body language, speech patterns, priorities",
+          "Match potential member với team gap",
+          "Onboard với communication style phù hợp DISC"
+        ]
+      },
+      "reflection_prompts": [
+        "Team hiện tại cần thêm type nào nhất?",
+        "DISC observation trong recruitment có chính xác không?",
+        "Làm sao để balance giữa \"hire for skill\" và \"hire for DISC fit\"?"
+      ],
+      "habit_checklist": [
+        "[ ] Xác định team DISC gap",
+        "[ ] Tạo 1 content recruitment targeted cho missing type",
+        "[ ] Observe DISC signals trong 1 cuộc talk recruitment"
+      ]
+    },
+    {
+      "day": 12,
+      "title": "Advanced DISC — Cross-type communication",
+      "objective": "Làm chủ kỹ năng communicate hiệu quả giữa các types khác nhau",
+      "content": "Khi bạn hiểu DISC, bạn có thể communicate với BẤT KỲ ai. Đây là superpower của leader — ability to adapt your communication để connect với bất kỳ personality type.\n\nCOMMUNICATION ADAPTATION GUIDE:\n\nKHI NÓI VỚI D-TYPE:\n- Keep it SHORT and DIRECT\n- Lead with results, not process\n- Give options, not questions\n- Be confident và decisive\n- 'Bạn muốn A hay B? Đây là pros/cons của mỗi option'\n\nKHI NÓI VỚI I-TYPE:\n- Be ENTHUSIASTIC và warm\n- Share stories và examples\n- Ask about their experience, feelings\n- Give them time to talk\n- 'Tôi có 1 idea hay! Để tôi kể cho bạn nghe...'\n\nKHI NÓI VỚI S-TYPE:\n- Be PATIENT và gentle\n- Give them time to think\n- Show you care about them as person\n- Provide reassurance và support\n- 'Không vội. Chúng ta cùng bàn từ từ nhé'\n\nKHI NÓI VỚI C-TYPE:\n- Be LOGICAL và thorough\n- Provide data, evidence, examples\n- Let them ask questions\n- Give written follow-up\n- 'Đây là data. Đây là analysis. Tôi sẽ gửi bạn report chi tiết'\n\nMEETING MANAGEMENT BY DISC:\n\nD-types: Give them agenda trước, let them lead discussion on action items\nI-types: Give them time to brainstorm, energize the room\nS-types: Make sure they're comfortable speaking, ask directly for input\nC-types: Provide data beforehand, give time to review\n\nFEEDBACK DELIVERY BY DISC:\n\nTo D: 'Kết quả tuần này đạt 70%. Target tuần sau là 100%. Đây là cách...'\nTo I: 'Tuần này bạn đã làm rất tốt! Đặc biệt là buổi presentation. Tiếp tục phát huy nhé!'\nTo S: 'Cảm ơn bạn đã nỗ lực. Tôi thấy bạn có một chút khó khăn — chúng ta cùng giải quyết nhé.'\nTo C: 'Đây là review của công việc tuần này. Có 3 điểm cần improve. Đây là data và recommendations.'\n\nAction items:\n1. Practice communication adaptation với 1 member mỗi type\n2. Record 1 conversation và identify style mismatches\n3. Create 'communication cheat sheet' cho team\n4. Schedule 1 cross-type team activity",
+      "activity": {
+        "title": "Team Balance Strategy",
+        "description": "Xây dựng strategy để tạo team DISC-balanced và maximize synergy",
+        "steps": [
+          "Phân tích team DISC hiện tại: strong và weak areas",
+          "Define ideal team composition cho PSN (1D, 1I, 2S, 1C hoặc tương tự)",
+          "Lên kế hoạch recruitment 30天 để fill gaps",
+          "Tạo team roles phù hợp DISC: D = goal-setter, I = culture-builder, S = stabilizer, C = quality-checker",
+          "Announce team roles và observe impact"
+        ]
+      },
+      "reflection_prompts": [
+        "Team roles có phù hợp với natural strengths của từng người không?",
+        "Balanced team có perform better không? Evidence từ 2 tuần qua?",
+        "Bạn cần thay đổi gì trong cách assign tasks?"
+      ],
+      "habit_checklist": [
+        "[ ] Phân tích team DISC balance",
+        "[ ] Assign team roles theo DISC",
+        "[ ] Lên kế hoạch recruitment cho DISC gaps"
+      ]
+    },
+    {
+      "day": 13,
+      "title": "Building DISC-Aware Team Culture",
+      "objective": "Xây dựng văn hóa team tôn trọng và leverage diverse personalities",
+      "content": "Khi cả team hiểu DISC, magic happens. Không còn 'leader không hiểu tôi' hay 'teammate khó giao tiếp'. Mọi người hiểu: 'Oh, anh ấy là D-type nên nói thẳng thôi' hoặc 'Chị ấy là S-type nên cần thêm time'.\n\nBUILDING DISC-AWARE CULTURE:\n\nSTEP 1: Assessment (Week 1-2)\n- Everyone takes DISC test\n- Share results voluntarily (don't force)\n- Create team personality map\n\nSTEP 2: Education (Week 3-4)\n- Workshop: DISC basics cho cả team (1-2 hours)\n- Discussion: 'Tôi là type nào? Tôi thích được communicate thế nào?'\n- Share stories: 'Lần này leader D nói với tôi S-type, tôi đã hiểu nhầm...'\n\nSTEP 3: Application (Week 5-8)\n- Type-aware meeting norms\n- Buddy system: Pair complementary types\n- Communication guidelines posted\n- Monthly 'communication health' check\n\nSTEP 4: Optimization (ongoing)\n- Quarterly DISC refresh\n- New member orientation includes DISC\n- Team building activities designed for type mixing\n\nDISC IN RECRUITMENT:\n- Job posting: 'We're looking for I-types to join our recruitment team'\n- Interview question: 'Bạn thích làm việc 1 mình hay nhóm?' (maps to C/I)\n- Role matching: Match natural strengths to roles\n\nTEAM BUILDING ACTIVITIES:\n- Personality reveal party (fun, share results)\n- Type-mix project teams (force collaboration across types)\n- Communication challenge: 'Talk only in your type's language for 5 phút'\n\nAction items:\n1. Plan DISC workshop cho entire PSN\n2. Create type-mix buddy pairs\n3. Draft team communication guidelines\n4. Set up quarterly DISC check-in schedule",
+      "activity": {
+        "title": "DISC Teaching Session",
+        "description": "Dạy DISC cho team — mỗi thành viên hiểu DISC type của mình và teammates",
+        "steps": [
+          "Chuẩn bị bài presentation DISC 20 phút (dùng tài liệu module)",
+          "Giải thích 4 types: traits, motivators, stress triggers, communication style",
+          "Cho team làm DISC mini-assessment",
+          "Discuss: team DISC map và implications",
+          "Action items: mọi người adapt communication style với teammates"
+        ]
+      },
+      "reflection_prompts": [
+        "Team react thế nào với DISC knowledge?",
+        "Có member nào surprise về kết quả DISC của mình?",
+        "DISC teaching có giúp team communication tốt hơn không?"
+      ],
+      "habit_checklist": [
+        "[ ] Chuẩn bị DISC presentation 20 phút",
+        "[ ] Facilitate DISC session với team",
+        "[ ] Discuss team DISC map và action items"
+      ]
+    },
+    {
+      "day": 14,
+      "title": "M6 Graduation — Leader DNA Mastery",
+      "objective": "Assess DISC mastery và plan transition to M7",
+      "content": "Chúc mừng hoàn thành Module 6! Bạn đã học cách nhận diện 4 personality types và adapt coaching style. Đây là skill foundational cho mọi leadership activity — từ recruitment đến 1:1 coaching đến team building.\n\nGRADUATION CRITERIA:\n□ DISC self-assessment completed\n□ 10+ team members classified\n□ Conducted 5+ type-adapted 1:1 conversations\n□ Created PDP cho 3+ members\n□ Identified team composition imbalance\n□ Adjusted recruitment strategy by type\n□ Resolved 1 conflict using DISC framework\n\nSKILLS ASSESSMENT:\nRate yourself 1-5:\n□ Type recognition: ___\n□ Coaching adaptation: ___\n□ Communication flexibility: ___\n□ Conflict resolution: ___\n□ Motivation effectiveness: ___\n\nKEY LEARNINGS:\n- Biggest insight about myself: ___\n- Most surprising member discovery: ___\n- Biggest challenge adapting my style: ___\n- Team change I've noticed: ___\n\nPLAN FOR M7 (PSN Management):\n- M7 sẽ giúp you manage PSN như một mini-business\n- Mục tiêu: Track metrics, run meetings, optimize performance\n- Preparation: Set up tracking spreadsheet, define KPIs\n\nAction items:\n1. Complete graduation assessment\n2. Schedule review với leader\n3. Set M7 preparation tasks\n4. Celebrate growth — DISC mastery is a superpower",
+      "activity": {
+        "title": "Module 6 Graduation Assessment",
+        "description": "Đánh giá tổng kết Module 6 — demonstrate DISC mastery và coaching skills",
+        "steps": [
+          "Hoàn thành DISC assessment cho tất cả thành viên còn lại",
+          "Viết 1 coaching plan chi tiết cho mỗi DISC type",
+          "Thực hiện 1 recorded coaching session (15 phút)",
+          "Viết reflection: DISC journey trong 14 ngày",
+          "Set coaching development goals cho Module 7-8"
+        ]
+      },
+      "reflection_prompts": [
+        "DISC改变了 cách bạn leadership như thế nào?",
+        "Coaching skill nào bạn improved nhiều nhất?",
+        "Bạn cần tiếp tục develop thêm kỹ năng nào?"
+      ],
+      "habit_checklist": [
+        "[ ] Hoàn thành DISC assessment cho toàn bộ team",
+        "[ ] Viết coaching plans cho 4 DISC types",
+        "[ ] Viết reflection và set goals cho module tiếp theo"
+      ]
+    }
+  ],
+  "assessment": {
+    "type": "practical",
+    "items": [
+      "Hoàn thành DISC assessment cho 3 thành viên trong team",
+      "Viết personalized coaching plan cho mỗi DISC type",
+      "Thực hành 4 cuộc coaching conversation (1 per DISC type)",
+      "Hoàn thành Team DISC Map: phân loại toàn bộ team",
+      "Phân tích 1 tình huống conflict giữa 2 DISC types và đề xuất giải pháp"
+    ]
+  },
+  "resources": [
+    {
+      "title": "DISC Assessment Template",
+      "type": "template",
+      "description": "Bài test DISC để phân loại thành viên"
+    },
+    {
+      "title": "DISC Communication Cheat Sheet",
+      "type": "reference",
+      "description": "Quick reference cho từng DISC type"
+    },
+    {
+      "title": "Coaching Conversation Scripts",
+      "type": "script",
+      "description": "4 kịch bản coaching theo DISC type"
+    },
+    {
+      "title": "Team DISC Map Template",
+      "type": "template",
+      "description": "Visual map phân loại DISC team"
+    },
+    {
+      "title": "Conflict Resolution Framework",
+      "type": "guide",
+      "description": "Xử lý conflict giữa 2 DISC types"
+    }
+  ]
 }
