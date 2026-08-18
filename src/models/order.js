@@ -1,6 +1,7 @@
 /**
  * Order model — Funnel OS
  * Represents a product purchase with commission tracking
+ * Uses DatabaseAdapter for D1 persistence
  */
 
 const crypto = require('crypto');
@@ -19,20 +20,17 @@ function isoNow() {
   return new Date().toISOString();
 }
 
-function formatVND(amount) {
-  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(amount);
-}
-
 class Order {
   constructor(data = {}) {
     this.id = data.id || uid();
     this.leadId = data.leadId || null;
-    this.leadName = data.leadName || '';
-    this.leadEmail = data.leadEmail || '';
-    this.leadPhone = data.leadPhone || '';
+    this.leadName = data.leadName || null;
+    this.leadEmail = data.leadEmail || null;
+    this.leadPhone = data.leadPhone || null;
+    this.memberId = data.memberId || null;
     this.productId = data.productId || null;
-    this.productName = data.productName || '';
-    this.productTier = PRODUCT_TIERS.includes(data.productTier) ? data.productTier : 1;
+    this.productName = data.productName || null;
+    this.productTier = data.productTier || null;
     this.quantity = data.quantity || 1;
     this.unitPriceVND = data.unitPriceVND || 0;
     this.totalVND = data.totalVND || (this.unitPriceVND * this.quantity);
@@ -41,7 +39,7 @@ class Order {
     this.paymentMethod = PAYMENT_METHODS.includes(data.paymentMethod) ? data.paymentMethod : 'cod';
     this.paymentStatus = PAYMENT_STATUSES.includes(data.paymentStatus) ? data.paymentStatus : 'pending';
     this.paymentReference = data.paymentReference || null;
-    this.shippingAddress = data.shippingAddress || '';
+    this.shippingAddress = data.shippingAddress || null;
     this.notes = data.notes || '';
     this.status = ORDER_STATUSES.includes(data.status) ? data.status : 'pending';
     this.createdAt = data.createdAt || isoNow();
@@ -52,19 +50,11 @@ class Order {
     this.metadata = data.metadata || {};
   }
 
-  /* ---- Validation helpers ---- */
+  /* ---- Validation ---- */
 
-  isValidStatus(s) {
-    return ORDER_STATUSES.includes(s);
-  }
-
-  isValidPaymentStatus(s) {
-    return PAYMENT_STATUSES.includes(s);
-  }
-
-  isValidTier(t) {
-    return PRODUCT_TIERS.includes(t);
-  }
+  isValidStatus(s) { return ORDER_STATUSES.includes(s); }
+  isValidPaymentStatus(s) { return PAYMENT_STATUSES.includes(s); }
+  isValidTier(t) { return PRODUCT_TIERS.includes(t); }
 
   /* ---- Calculations ---- */
 
@@ -79,8 +69,6 @@ class Order {
   static canTransition(fromStatus, toStatus) {
     if (fromStatus === toStatus) return { ok: false, reason: 'Same status' };
     if (!ORDER_STATUSES.includes(toStatus)) return { ok: false, reason: 'Invalid target status' };
-
-    // Valid transitions
     const transitions = {
       pending: ['confirmed', 'cancelled'],
       confirmed: ['shipped', 'cancelled'],
@@ -89,7 +77,6 @@ class Order {
       cancelled: [],
       refunded: []
     };
-
     return transitions[fromStatus]?.includes(toStatus)
       ? { ok: true }
       : { ok: false, reason: `Cannot transition from ${fromStatus} to ${toStatus}` };
@@ -98,24 +85,13 @@ class Order {
   applyStatus(toStatus, actorId) {
     const result = Order.canTransition(this.status, toStatus);
     if (!result.ok) throw new Error(result.reason);
-
     const prev = this.status;
     this.status = toStatus;
     this.updatedAt = isoNow();
-
-    // Timestamps for key transitions
     if (toStatus === 'shipped') this.shippedAt = isoNow();
     if (toStatus === 'delivered') this.deliveredAt = isoNow();
     if (toStatus === 'cancelled') this.cancelledAt = isoNow();
-
-    // Log transition
-    const entry = {
-      event: 'status_transition',
-      fromStatus: prev,
-      toStatus,
-      actorId,
-      at: this.updatedAt,
-    };
+    const entry = { event: 'status_transition', fromStatus: prev, toStatus, actorId, at: this.updatedAt };
     if (!this.metadata.transitions) this.metadata.transitions = [];
     this.metadata.transitions.push(entry);
   }
@@ -125,14 +101,10 @@ class Order {
   toJSON() {
     return {
       id: this.id,
-      leadId: this.leadId,
-      leadName: this.leadName,
-      leadEmail: this.leadEmail,
-      leadPhone: this.leadPhone,
+      memberId: this.memberId,
       productId: this.productId,
       productName: this.productName,
       productTier: this.productTier,
-      tierLabel: TIER_LABELS[this.productTier],
       quantity: this.quantity,
       unitPriceVND: this.unitPriceVND,
       totalVND: this.totalVND,
@@ -152,167 +124,210 @@ class Order {
     };
   }
 
+  // Full representation including PII-ish lead fields, for authenticated detail views
   toJSON_Admin() {
-    return this.toJSON();
+    return {
+      ...this.toJSON(),
+      leadId: this.leadId,
+      leadName: this.leadName,
+      leadEmail: this.leadEmail,
+      leadPhone: this.leadPhone,
+      metadata: this.metadata,
+    };
+  }
+
+  /* ---- Database operations using DatabaseAdapter ---- */
+
+  static async findById(db, id) {
+    const row = await db.getOrder(id);
+    if (!row) return null;
+    return new Order({
+      id: row.id,
+      memberId: row.member_id,
+      productId: row.product_id,
+      quantity: row.quantity,
+      unitPriceVND: row.unit_price_vnd,
+      totalVND: row.total_vnd,
+      status: row.status,
+      paymentMethod: row.payment_method,
+      paymentStatus: row.payment_status,
+      paymentReference: row.payment_reference,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at
+    });
+  }
+
+  static async findAll(db, filters = {}) {
+    const results = await db.listOrders(filters);
+    const rows = results.results || results;
+    return rows.map(row => new Order({
+      id: row.id,
+      memberId: row.member_id,
+      productId: row.product_id,
+      quantity: row.quantity,
+      unitPriceVND: row.unit_price_vnd,
+      totalVND: row.total_vnd,
+      status: row.status,
+      paymentMethod: row.payment_method,
+      paymentStatus: row.payment_status,
+      paymentReference: row.payment_reference,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at
+    }));
+  }
+
+  static async create(db, data) {
+    const order = new Order(data);
+    order.recalculate();
+    const created = await db.createOrder({
+      id: order.id,
+      memberId: order.memberId,
+      productId: order.productId,
+      quantity: order.quantity,
+      unitPriceVND: order.unitPriceVND,
+      status: order.status,
+      paymentMethod: order.paymentMethod,
+      paymentStatus: order.paymentStatus,
+      paymentReference: order.paymentReference
+    });
+    // db.createOrder returns a raw row; wrap it back into an Order so callers
+    // can use the same toJSON()/toJSON_Admin() API as the in-memory path
+    return new Order({
+      id: created.id,
+      memberId: created.member_id,
+      productId: created.product_id,
+      quantity: created.quantity,
+      unitPriceVND: created.unit_price_vnd,
+      totalVND: created.total_vnd,
+      status: created.status,
+      paymentMethod: created.payment_method,
+      paymentStatus: created.payment_status,
+      paymentReference: created.payment_reference,
+      createdAt: created.created_at,
+      updatedAt: created.updated_at
+    });
+  }
+
+  static async update(db, id, data) {
+    const updateData = {};
+    if (data.status !== undefined) updateData.status = data.status;
+    if (data.paymentStatus !== undefined) updateData.paymentStatus = data.paymentStatus;
+    if (data.paymentReference !== undefined) updateData.paymentReference = data.paymentReference;
+    if (data.quantity !== undefined) updateData.quantity = data.quantity;
+    if (data.totalVND !== undefined) updateData.totalVND = data.totalVND;
+    const updated = await db.updateOrder(id, updateData);
+    if (!updated) return null;
+    return new Order({
+      id: updated.id,
+      memberId: updated.member_id,
+      productId: updated.product_id,
+      quantity: updated.quantity,
+      unitPriceVND: updated.unit_price_vnd,
+      totalVND: updated.total_vnd,
+      status: updated.status,
+      paymentMethod: updated.payment_method,
+      paymentStatus: updated.payment_status,
+      paymentReference: updated.payment_reference,
+      createdAt: updated.created_at,
+      updatedAt: updated.updated_at
+    });
+  }
+
+  static async delete(db, id) {
+    return await db.deleteOrder(id);
+  }
+
+  static async markPaid(db, orderId, paymentReference, paymentMethod, actorId) {
+    const order = await Order.findById(db, orderId);
+    if (!order) return null;
+    if (order.paymentStatus === 'paid') return order;
+    if (order.status === 'cancelled' || order.status === 'refunded') {
+      throw new Error(`Cannot mark paid from ${order.status}`);
+    }
+    return await Order.update(db, orderId, {
+      paymentStatus: 'paid',
+      paymentReference: paymentReference || order.paymentReference,
+      status: 'confirmed'
+    });
+  }
+
+  static async seedIfEmpty(db) {
+    const existing = await db.listOrders({ limit: 1 });
+    const rows = existing.results || existing;
+    if (rows.length > 0) return;
+
+    // Reference real member ids — Member.seedIfEmpty runs first and assigns
+    // UUIDs, so hardcoding 'admin-001' / 'pilot-001' here would violate the
+    // orders.member_id foreign key. Query the members table instead.
+    const members = (await db.listMembers({ limit: 4 })).results || [];
+    const seeds = [
+      { productId: 'health-active', quantity: 1, unitPriceVND: 1500000, status: 'delivered', paymentMethod: 'cod', paymentStatus: 'paid' },
+      { productId: 'trial-pack', quantity: 2, unitPriceVND: 500000, status: 'confirmed', paymentMethod: 'bank_transfer', paymentStatus: 'paid' },
+      { productId: 'combo-pack', quantity: 1, unitPriceVND: 3500000, status: 'shipped', paymentMethod: 'momo', paymentStatus: 'paid' },
+      { productId: 'ctv-bundle', quantity: 1, unitPriceVND: 5000000, status: 'pending', paymentMethod: 'vnpay', paymentStatus: 'pending' }
+    ];
+
+    for (let i = 0; i < seeds.length; i++) {
+      await Order.create(db, { ...seeds[i], memberId: members[i]?.id || null });
+    }
   }
 }
 
-/* ---- In-memory store ---- */
+// In-memory fallback store, used when no D1 database is configured
+let orderStore = [];
 
-let orders = [];
-let nextDisplayId = 1;
-
-Order.prototype.displayId = null;
-
-Order.createSeededOrders = function () {
-  if (orders.length) return orders.slice();
-
-  const make = (overrides) => {
-    const o = new Order(overrides);
-    o.displayId = nextDisplayId++;
-    return o;
-  };
-
-  // Seed with some test orders
-  const seededLeads = require('./lead').Lead.createSeededLeads();
-  const leads = seededLeads;
-
-  orders = [
-    make({
-      leadId: leads[0]?.id,
-      leadName: leads[0]?.getName?.() || 'Nguyễn Văn A',
-      leadEmail: leads[0]?.getEmail?.() || 'nguyena@test.vn',
-      leadPhone: leads[0]?.getPhone?.() || '+84901234567',
-      productName: 'Health Active Starter Kit',
-      productTier: 2,
-      quantity: 1,
-      unitPriceVND: 1500000,
-      commissionRate: 15,
-      paymentMethod: 'cod',
-      paymentStatus: 'paid',
-      status: 'delivered',
-      commissionVND: 225000,
-      shippingAddress: '123 Đường A, Quận 1, TP.HCM',
-    }),
-    make({
-      leadId: leads[3]?.id,
-      leadName: leads[3]?.getName?.() || 'Phạm Thị D',
-      leadEmail: leads[3]?.getEmail?.() || 'phamd@test.vn',
-      leadPhone: leads[3]?.getPhone?.() || '+84911223344',
-      productName: 'Trial Pack - Weight Loss',
-      productTier: 1,
-      quantity: 2,
-      unitPriceVND: 500000,
-      commissionRate: 10,
-      paymentMethod: 'bank_transfer',
-      paymentStatus: 'paid',
-      status: 'confirmed',
-      commissionVND: 100000,
-      shippingAddress: '456 Đường B, Quận 2, TP.HCM',
-    }),
-    make({
-      leadId: leads[7]?.id,
-      leadName: leads[7]?.getName?.() || 'Bùi Thị H',
-      leadEmail: leads[7]?.getEmail?.() || 'buih@test.vn',
-      leadPhone: leads[7]?.getPhone?.() || '+84922334455',
-      productName: 'Combo Health Active + Vitamins',
-      productTier: 3,
-      quantity: 1,
-      unitPriceVND: 3500000,
-      commissionRate: 20,
-      paymentMethod: 'momo',
-      paymentStatus: 'paid',
-      status: 'shipped',
-      commissionVND: 700000,
-      shippingAddress: '789 Đường C, Quận 3, TP.HCM',
-    }),
-    make({
-      leadId: leads[10]?.id,
-      leadName: leads[10]?.getName?.() || 'Lý Thị M',
-      leadEmail: leads[10]?.getEmail?.() || 'lym@test.vn',
-      leadPhone: leads[10]?.getPhone?.() || '+84955667722',
-      productName: 'CTV Partner Bundle',
-      productTier: 4,
-      quantity: 1,
-      unitPriceVND: 5000000,
-      commissionRate: 25,
-      paymentMethod: 'vnpay',
-      paymentStatus: 'paid',
-      status: 'pending',
-      commissionVND: 1250000,
-      shippingAddress: '321 Đường D, Quận 4, TP.HCM',
-    }),
-  ];
-
-  return orders;
-};
-
-/* ------------------------------------------------------------------ */
-/* markPaid(orderId, paymentReference, paymentMethod, actorId)       */
-/* ------------------------------------------------------------------ */
-function markPaid(orderId, paymentReference, paymentMethod, actorId) {
-  const order = findById(orderId);
-  if (!order) return null;
-  if (order.paymentStatus === 'paid') return order; // idempotent
-  if (order.status === 'cancelled' || order.status === 'refunded') {
-    throw new Error(`Cannot mark paid from ${order.status}`);
-  }
-  order.paymentStatus = 'paid';
-  order.paymentReference = paymentReference || order.paymentReference;
-  order.paymentMethod = PAYMENT_METHODS.includes(paymentMethod)
-    ? paymentMethod
-    : order.paymentMethod;
-  order.status = 'confirmed';
-  order.updatedAt = isoNow();
-  const entry = {
-    event: 'mark_paid',
-    fromStatus: 'pending',
-    toStatus: 'confirmed',
-    paymentMethod: order.paymentMethod,
-    actorId: actorId || 'system',
-    at: order.updatedAt,
-  };
-  order.metadata.transitions = order.metadata.transitions || [];
-  order.metadata.transitions.push(entry);
-  updateOrder(order.id, order);
-  return order;
+function useDb() {
+  return !!global.db;
 }
 
+function db() {
+  return global.db;
+}
+
+// Helper functions mirroring the members/leads API surface.
+// The orders API handler calls these by name without threading db through,
+// so they resolve the active adapter from global.db at call time.
 function allOrders() {
-  Order.createSeededOrders();
-  return orders;
+  if (useDb()) return Order.findAll(db());
+  return [...orderStore];
 }
 
 function findById(id) {
-  return orders.find(o => o.id === id) || null;
+  if (useDb()) return Order.findById(db(), id);
+  return orderStore.find(o => o.id === id) || null;
 }
 
 function findByLeadId(leadId) {
-  return orders.filter(o => o.leadId === leadId);
+  if (useDb()) return Order.findAll(db(), { leadId });
+  return orderStore.filter(o => o.leadId === leadId);
 }
 
 function createOrder(data) {
   const order = new Order(data);
   order.recalculate();
-  orders.unshift(order);
+  if (useDb()) return Order.create(db(), data);
+  orderStore.push(order);
   return order;
 }
 
 function updateOrder(id, data) {
-  const idx = orders.findIndex(o => o.id === id);
+  if (useDb()) return Order.update(db(), id, data);
+  const idx = orderStore.findIndex(o => o.id === id);
   if (idx === -1) return null;
-  const order = orders[idx];
-  Object.assign(order, data);
-  order.recalculate();
-  order.updatedAt = isoNow();
-  return order;
+  Object.assign(orderStore[idx], data);
+  return orderStore[idx];
 }
 
 function deleteOrder(id) {
-  const idx = orders.findIndex(o => o.id === id);
+  if (useDb()) return Order.delete(db(), id);
+  const idx = orderStore.findIndex(o => o.id === id);
   if (idx === -1) return false;
-  orders.splice(idx, 1);
+  orderStore.splice(idx, 1);
   return true;
+}
+
+function resetStore() {
+  orderStore = [];
 }
 
 module.exports = {
@@ -322,13 +337,24 @@ module.exports = {
   PAYMENT_METHODS,
   PRODUCT_TIERS,
   TIER_LABELS,
- markPaid,
   allOrders,
   findById,
   findByLeadId,
   createOrder,
   updateOrder,
   deleteOrder,
-  setStore: () => orders,
-  getStore: () => orders,
+  markPaid: (orderId, paymentReference, paymentMethod, actorId) =>
+    useDb() ? Order.markPaid(db(), orderId, paymentReference, paymentMethod, actorId) : (() => {
+      const order = orderStore.find(o => o.id === orderId);
+      if (!order) return null;
+      if (order.paymentStatus === 'paid') return order;
+      if (order.status === 'cancelled' || order.status === 'refunded') {
+        throw new Error(`Cannot mark paid from ${order.status}`);
+      }
+      order.paymentStatus = 'paid';
+      order.paymentReference = paymentReference || order.paymentReference;
+      order.status = 'confirmed';
+      return order;
+    })(),
+  resetStore,
 };
