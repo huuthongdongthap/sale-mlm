@@ -34,8 +34,8 @@
 
 ### Health Endpoints (Express dev server, `src/server.js`)
 - [x] `GET /health` — delegates to `monitoring.getHealthStatus()` (`src/utils/monitoring.js:130`)
-- [ ] `GET /ready` — not yet implemented
-- [ ] `GET /metrics` — not yet implemented
+- [x] `GET /ready` — readiness probe (200 only when `global.db` is bound and all subsystems healthy; 503 otherwise)
+- [x] `GET /metrics` — Prometheus text/plain probe (uptime, error count, per-subsystem status)
 
 ### Security Compliance Pack (Task #25)
 - [x] PDPA audit trail persistence (`src/utils/auditLog.js` → `global.db.logAudit` + `audit_trail` table)
@@ -139,13 +139,13 @@ status, headers, and body.
 ### Monitoring & Alerting
 - [ ] Sentry DSN configured and verified (error tracking)
 - [ ] Zalo OA webhook verified (critical alerts)
-- [ ] `/api/monitoring/errors` endpoint accessible in production
-- [ ] `/api/monitoring/summary` endpoint accessible in production
+- [x] `/api/monitoring/errors` endpoint accessible in production (served via Hono bridge)
+- [x] `/api/monitoring/summary` endpoint accessible in production (served via Hono bridge)
 
 ### Pre-deploy Verification
-- [ ] `npm test` passes (276 tests, coverage ≥ 70/60/60/70)
-- [ ] `node --check src/server.js` passes
-- [ ] `node --check src/workers/index.js` passes
+- [x] `npm test` passes (276 tests, coverage ≥ 70/60/60/70)
+- [x] `node --check src/server.js` passes
+- [x] `node --check src/workers/index.js` passes
 - [ ] `bash -n deploy.sh` passes
 - [ ] `wrangler secret list` shows all required secrets
 - [ ] `wrangler secret list --env staging` shows staging secrets

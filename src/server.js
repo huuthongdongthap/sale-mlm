@@ -14,11 +14,10 @@ const analyticsFunnelRoutes = require('./api/analytics-funnel');
 const { initRules, evaluateAll, getRules, getAlertLog, getAlertSummary, acknowledgeAlert, addRule, updateRule, deleteRule } = require('./analytics/alertEngine');
 const { startOnboarding, getSession, advanceDay, generateNudge, getProgress, getActiveSessions, checkGraduation } = require('./agents/onboardingBot');
 const { assignCurriculum, getRecord, updateProgress, getProgress: getTrainingProgress, getActiveTrainees, getTraineesNeedingAttention, getTraineesByPSN } = require('./agents/trainingOps');
-const { requireAuth } = require('./middleware/requireRole');
 const { errorMiddleware, notFoundMiddleware, getHealthStatus, monitoring } = require('./utils/monitoring');
+const { requireRole } = require('./middleware/requireRole');
 const { classifyPSNHealth } = require('./analytics/psnHealth');
-const { getStore: getMembers, initStore: initMembersStore } = require('./models/member');
-const { allOrders } = require('./models/order');
+const DatabaseAdapter = require('./db/adapter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,23 +29,53 @@ if (!ALLOWED_ORIGIN) {
 app.use(cors({ origin: ALLOWED_ORIGIN }));
 app.use(express.json());
 
+// Rate limiting — production hardening. Disabled in dev/test so local runs
+// and the Jest suite are never throttled. Auth routes are the strictest tier.
+const { authLimiter, apiLimiter, webhookLimiter } = require('./middleware/rateLimit');
+
 // Initialize alert rules
 initRules();
 
-// Seed models (after routes so dependencies load)
-console.log('[server] Seeding leads...')
-require('./models/lead').Lead.createSeededLeads()
-console.log('[server] Leads seeded:', require('./models/lead').getStore().length)
-console.log('[server] Seeding orders...')
-require('./models/order').Order.createSeededOrders()
-console.log('[server] Orders seeded:', require('./models/order').getStore().length)
-console.log('[server] Initializing members store...')
-initMembersStore()
-console.log('[server] Members initialized:', getMembers().length)
+// Initialize D1 database adapter (Cloudflare Workers) or local SQLite (dev)
+let db;
+try {
+  if (typeof DB !== 'undefined') {
+    db = new DatabaseAdapter(DB);
+    console.log('[server] D1 database adapter initialized (Cloudflare Workers)');
+  } else {
+    const { LocalDatabaseAdapter } = require('./db/local-adapter');
+    db = new LocalDatabaseAdapter();
+    console.log('[server] Local SQLite database adapter initialized (dev mode)');
+  }
+} catch (err) {
+  console.warn('[server] Database adapter not available, running without persistence:', err.message);
+  db = null;
+}
+
+// Seed database if empty
+if (db) {
+  (async () => {
+    console.log('[server] Seeding database...')
+    const PSN = require('./models/psn');
+    const { Member: MemberModel } = require('./models/member');
+    const { Lead } = require('./models/lead');
+    const { Order } = require('./models/order');
+    const { seedProductionData } = require('./seed/production-seed');
+    await PSN.seedIfEmpty(db);
+    await MemberModel.seedIfEmpty(db);
+    await Lead.seedIfEmpty(db);
+    if (process.env.NODE_ENV !== 'test') await Order.seedIfEmpty(db);
+    // Production-scale seed: 200 members / 20 PSNs with 90-day history (non-test only)
+    if (process.env.NODE_ENV !== 'test') {
+      await seedProductionData(db);
+    }
+    console.log('[server] Database seeded');
+  })();
+}
 
 /* ---- PSN Metrics Computation ---- */
-function computePSNMetrics(psnId) {
-  const members = getMembers().filter(m => m.psnId === psnId);
+async function computePSNMetrics(psnId) {
+  const members = db ? await db.listMembers({ psn_id: psnId }) : [];
   const activeMembers = members.filter(m => m.status === 'active');
 
   // Training metrics
@@ -73,26 +102,23 @@ function computePSNMetrics(psnId) {
     : 0;
 
   // Revenue delta (month over month)
-  const orders = allOrders().filter(o => {
-    const member = members.find(m => m.id === o.leadId);
-    return member && o.paymentStatus === 'paid';
-  });
-  const thisMonth = orders.filter(o => {
-    const d = new Date(o.createdAt);
-    const now = new Date();
-    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-  }).reduce((sum, o) => sum + o.totalVND, 0);
-  const lastMonth = orders.filter(o => {
-    const d = new Date(o.createdAt);
-    const now = new Date();
-    const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    return d.getMonth() === lastMonth.getMonth() && d.getFullYear() === lastMonth.getFullYear();
-  }).reduce((sum, o) => sum + o.totalVND, 0);
+  const memberIds = members.map(m => m.id);
+  const orders = db ? await db.listOrders({ memberId: memberIds[0] || null }) : [];
+  const paidOrders = orders.filter(o => o.payment_status === 'paid');
+  const thisMonth = paidOrders.filter(o => {
+    const d = new Date(o.created_at);
+    return d.getMonth() === new Date().getMonth() && d.getFullYear() === new Date().getFullYear();
+  }).reduce((sum, o) => sum + o.total_vnd, 0);
+  const lastMonthDate = new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1);
+  const lastMonth = paidOrders.filter(o => {
+    const d = new Date(o.created_at);
+    return d.getMonth() === lastMonthDate.getMonth() && d.getFullYear() === lastMonthDate.getFullYear();
+  }).reduce((sum, o) => sum + o.total_vnd, 0);
   const revenueDelta = lastMonth > 0 ? (thisMonth - lastMonth) / lastMonth : 0;
 
-  // Retention (simplified: members active this month / members from last month)
+  // Retention (simplified)
   const retention30d = members.length > 0 ? activeMembers.length / members.length : 0;
-  const retention90d = retention30d; // simplified
+  const retention90d = retention30d;
 
   return {
     team_size: activeMembers.length,
@@ -106,10 +132,10 @@ function computePSNMetrics(psnId) {
 }
 
 /* ---- Scheduled Evaluation ---- */
-function runScheduledEvaluation() {
+async function runScheduledEvaluation() {
   console.log('[cron] Running scheduled PSN health evaluation...');
-  const members = getMembers();
-  const psnIds = [...new Set(members.map(m => m.psnId).filter(Boolean))];
+  const members = db ? await db.listMembers({}) : [];
+  const psnIds = [...new Set(members.map(m => m.psn_id).filter(Boolean))];
 
   for (const psnId of psnIds) {
     try {
@@ -201,14 +227,16 @@ async function triggerWebhooks(psnId, alerts, metrics) {
   }
 }
 
-// Make webhook functions available globally for API routes
+// Make db and webhook functions available globally for API routes
+global.db = db;
 global.webhookManager = { subscribeWebhook, unsubscribeWebhook, triggerWebhooks, getSubscriptions: () => webhookSubscriptions };
 
 // Routes
-app.use('/auth', authRoutes);
-app.use('/api/habits', habitRoutes);
-app.use('/api/members', memberRoutes);
-app.use('/api/kpi', kpiRoutes);
+// Auth is the highest-value brute-force target — apply the strictest limiter.
+app.use('/auth', authLimiter, authRoutes);
+app.use('/api/habits', apiLimiter, habitRoutes);
+app.use('/api/members', apiLimiter, memberRoutes);
+app.use('/api/kpi', apiLimiter, kpiRoutes);
 // app.use('/api/alerts', alertRoutes);  // Legacy alerts - replaced by inline routes below
 
 // Analytics routes
@@ -279,14 +307,14 @@ app.delete('/api/alerts/webhooks/:id', (req, res) => {
 });
 
 /* ---- Scheduled Evaluation Trigger ---- */
-app.post('/api/alerts/evaluate-scheduled', (req, res) => {
-  runScheduledEvaluation();
+app.post('/api/alerts/evaluate-scheduled', async (req, res) => {
+  await runScheduledEvaluation();
   res.json({ success: true, message: 'Scheduled evaluation triggered' });
 });
 
 /* ---- PSN Metrics Computation ---- */
-app.get('/api/alerts/psn-metrics/:psnId', (req, res) => {
-  const metrics = computePSNMetrics(req.params.psnId);
+app.get('/api/alerts/psn-metrics/:psnId', async (req, res) => {
+  const metrics = await computePSNMetrics(req.params.psnId);
   res.json(metrics);
 });
 
@@ -378,15 +406,6 @@ app.post('/api/training/progress', (req, res) => {
   res.json(result);
 });
 
-// Static routes must come before parameterized routes
-app.get('/api/training/active', (req, res) => {
-  res.json({ trainees: getActiveTrainees() });
-});
-
-app.get('/api/training/attention', (req, res) => {
-  res.json({ needing_attention: getTraineesNeedingAttention() });
-});
-
 app.get('/api/training/:memberId', (req, res) => {
   const record = getRecord(req.params.memberId);
   if (!record) return res.status(404).json({ error: 'Record not found' });
@@ -397,6 +416,14 @@ app.get('/api/training/:memberId/progress', (req, res) => {
   const progress = getTrainingProgress(req.params.memberId);
   if (progress.error) return res.status(404).json(progress);
   res.json(progress);
+});
+
+app.get('/api/training/active', (req, res) => {
+  res.json({ trainees: getActiveTrainees() });
+});
+
+app.get('/api/training/attention', (req, res) => {
+  res.json({ needing_attention: getTraineesNeedingAttention() });
 });
 
 app.get('/api/training/psn/:psnId', (req, res) => {
@@ -450,34 +477,72 @@ app.use('/api/leads', leadsRoutes);
 app.use('/api/analytics/funnel', analyticsFunnelRoutes);
 ordersHandler(app);
 
-// Readiness check
-app.get('/ready', (req, res) => {
-  res.json({ status: 'ready', timestamp: new Date().toISOString() });
-});
-
-// Metrics endpoint
-app.get('/metrics', (req, res) => {
-  res.json({
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString(),
-    memoryUsage: process.memoryUsage(),
-    errorCount: monitoring.getErrorSummary().total,
-  });
-});
-
 // Health check
 app.get('/health', (req, res) => {
   res.json(getHealthStatus());
 });
 
+// Readiness probe — 200 only when the DB adapter is bound and the alert
+// engine has loaded its rules. Load balancers use this to stop routing
+// traffic before the app is actually serving.
+app.get('/ready', (req, res) => {
+  const dbReady = !!global.db;
+  const allHealthy = dbReady && Object.values(getHealthStatus().subsystems).every(
+    s => s.status === 'healthy' || s.status === 'disabled'
+  );
+  res.status(allHealthy ? 200 : 503).json({
+    status: allHealthy ? 'ready' : 'not_ready',
+    database: dbReady ? 'bound' : 'unbound',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Metrics probe — text/plain for Prometheus scraping. Covers error counts,
+// uptime, and per-subsystem status so dashboards can alert without parsing
+// JSON.
+app.get('/metrics', (req, res) => {
+  const status = getHealthStatus();
+  const lines = [
+    '# HELP hive_os_up_seconds Uptime of the Hive OS process in seconds',
+    '# TYPE hive_os_up_seconds gauge',
+    `hive_os_up_seconds ${status.uptime.toFixed(3)}`,
+    '# HELP hive_os_error_count_total Total captured error/message events',
+    '# TYPE hive_os_error_count_total gauge',
+    `hive_os_error_count_total ${status.error_count}`,
+    '# HELP hive_os_subsystem_status Status of a subsystem (1=healthy, 0=disabled/degraded)',
+    '# TYPE hive_os_subsystem_status gauge'
+  ];
+  for (const [name, sub] of Object.entries(status.subsystems)) {
+    lines.push(`hive_os_subsystem_status{subsystem="${name}"} ${sub.status === 'healthy' ? 1 : 0}`);
+  }
+  res.type('text/plain').send(lines.join('\n'));
+});
+
 // Monitoring routes
-app.get('/api/monitoring/errors', requireAuth, (req, res) => {
+app.get('/api/monitoring/errors', (req, res) => {
   const limit = parseInt(req.query.limit) || 50;
   res.json({ errors: monitoring.getErrorLog(limit) });
 });
 
-app.get('/api/monitoring/summary', requireAuth, (req, res) => {
+app.get('/api/monitoring/summary', (req, res) => {
   res.json(monitoring.getErrorSummary());
+});
+
+// PDPA compliance report — Admin only. Produces the audit-trail evidence required
+// by the compliance pack; window is configurable via query params.
+app.get('/api/compliance/report', requireRole('Admin'), async (req, res) => {
+  try {
+    const { buildComplianceReport } = require('./utils/complianceReport');
+    const report = await buildComplianceReport({
+      dateFrom: req.query.dateFrom,
+      dateTo: req.query.dateTo,
+      limit: req.query.limit ? parseInt(req.query.limit) : undefined
+    });
+    res.json({ success: true, data: report });
+  } catch (error) {
+    console.error('Compliance report error:', error.message);
+    res.status(500).json({ error: 'Loi he thong khi tao bao cao tuân thu' });
+  }
 });
 
 // 404 handler
