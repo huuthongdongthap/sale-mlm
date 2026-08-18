@@ -65,3 +65,54 @@ Deliverables:
 | `docs/05_TASKS/production-deploy-checklist.md` | New production deploy checklist: completed infrastructure (wrangler.toml, CI/CD, deploy.sh, health endpoints, compliance pack, RUNBOOK), remaining Cloudflare secrets, domain/DNS, worker route coverage gap, monitoring, pre/post-deploy verification, rollback plan. |
 
 **Key finding:** `src/workers/index.js` is a 79-line stub — it only handles `/quiz`, `/checkout`, and `/api/quiz/submit`. The full Express route surface (`/auth/*`, `/api/members/*`, `/api/habits/*`, `/api/kpi/*`, `/api/psn/*`, `/api/alerts/*`, `/api/onboarding/*`, `/api/analytics/*`, `/api/compliance/report`, `/api/monitoring/*`, `/health`, `/ready`, `/metrics`) has not been ported to native fetch API. Production deployment as currently configured would serve only the quiz stub. This is documented as an open gap in the checklist.
+
+### Task 7 follow-up — Worker route gap closed ✅ (2026-08-18)
+
+The gap above is closed. Instead of rewriting ~40 Express routes for the Workers
+runtime, `src/workers/index.js` now wires Hono to the existing Express app via
+`src/workers/express-adapter.js` (ADR 004). Hono's `fetch(request, env, ctx)`
+matches the Workers `export default` contract, and the adapter builds
+`IncomingMessage`/`ServerResponse` pairs, runs the Express handler, and
+returns a Workers `Response` carrying the captured status, headers, and body.
+
+**Coverage verified end-to-end** through `worker.default.fetch`:
+`/health` 200, `/ready` 200, `/metrics` 200, `/quiz` 200, `/checkout` 200,
+`/api/members` 401 (no token — expected), `/api/alerts/rules` 200,
+`/api/leads` 401, `/api/analytics/funnel` 401, `/api/orders` 401,
+`/api/monitoring/summary` 200, `/api/compliance/report` 200 (Admin JWT) / 403
+(Member JWT) / 401 (no token).
+
+**Bridge details** (`src/workers/express-adapter.js`):
+- Only `res.end` is wrapped — capturing the encoded body + status before it
+  reaches the socket layer. Overriding `res.json`/`res.status`/`res.setHeader`
+  breaks Express's send→end→finish→next chain (verified: recursive
+  `res.setHeader` → "Maximum call stack size exceeded").
+- The handler promise resolves *inside* `res.end` (not the `next` callback),
+  because a bare `http.ServerResponse` has no socket, so Express never emits
+  `finish` and the chain never advances on its own.
+- `res.app` is set to the Express app (not the Hono app) so settings lookups
+  like `app.get('json escape')` inside `res.json` resolve.
+- `req.socket` is stubbed with the real client IP from `CF-Connecting-IP`
+  (falling back to `X-Forwarded-For`), because Express's error middleware calls
+  `req.ip`, which proxyaddr resolves through `req.socket.remoteAddress` — a
+  bare `IncomingMessage` has no socket and that read throws.
+- Worker request bodies are Web `ReadableStream`s; `raw.body.getReader()`
+  is used (async iteration does not work on the raw body object), and GET
+  requests have `raw.body === null`.
+
+**Already wired through the Express app** (no separate port needed):
+- Rate limiting — `src/middleware/rateLimit.js` (auth/api/webhook tiers,
+  `skip: () => !isProduction`, so test runs are never throttled)
+- RBAC — `src/middleware/requireRole.js`
+- D1 database adapter — `src/server.js` binds `DB` (D1) or
+  `better-sqlite3` (local) into `global.db`
+
+**Bugs found and fixed during verification:**
+1. `Order.seedIfEmpty` hardcoded `'admin-001'`/`'pilot-001'`, but
+   `Member.seedIfEmpty` assigns random UUIDs → every seed row violated the
+   `orders.member_id` foreign key (`SQLITE_CONSTRAINT_FOREIGNKEY`). Now queries
+   the members table for the first four ids.
+
+**Remaining checklist items are all operator-side** (Cloudflare secrets,
+GitHub Actions secrets, custom domains, Sentry/Zalo) — documented in the
+checklist's "External Blockers" table.

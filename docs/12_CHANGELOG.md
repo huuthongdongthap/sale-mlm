@@ -22,6 +22,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.2] - 2026-08-18 — Security Compliance Pack + Production Deploy Checklist
+
+### Added
+- **PDPA audit persistence**: `logPIIAccess` now persists to the `audit_trail` table via `global.db.logAudit` when a database adapter is wired (survives restarts), falling back to the in-memory array. Added `getAuditLogsAsync`, `mapAuditRow`, and `normalizeAuditRows` so compliance evidence is queryable across boots.
+- **Compliance report endpoint**: `GET /api/compliance/report` (Admin only) aggregating the trailing 30-day audit window (`src/utils/complianceReport.js`).
+- **Production rate limiting**: `src/middleware/rateLimit.js` — auth (10/15min), api (300/15min), webhook (60/60s), keyed by `CF-Connecting-IP`. Enforced only when `NODE_ENV=production`; dev/test are never throttled.
+- **Production deploy checklist**: `docs/05_TASKS/production-deploy-checklist.md` — completed infrastructure, remaining secrets, domain/DNS, worker route coverage gap, pre/post-deploy verification, rollback plan.
+
+### Fixed
+- **Rate limiter startup crash**: the custom `keyGenerator` rejected IPv6 bypass protection — switched to `express-rate-limit`'s `ipKeyGenerator`. Without this, `NODE_ENV=production` threw `ERR_ERL_KEY_GEN_IPV6` and the server would not start.
+- **Audit query binding error**: `getAuditTrail` bound raw `Date` objects as SQLite params (`SQLite3 can only bind numbers, strings, bigints, buffers, and null`). Added ISO-string normalization in both `src/db/adapter.js` and `src/db/local-adapter.js`.
+
+### Security
+- PDPA_VN audit trail for all PII access (phone/email/notes) is now persisted, not in-memory-only.
+
+---
+
+## [1.1.3] - 2026-08-18 — Worker route surface, readiness/metrics probes
+
+### Added
+- **Worker route coverage**: `src/workers/index.js` now serves the full Express route surface through a Hono→Express bridge (`src/workers/express-adapter.js`, ADR 004). The ~40 routes in `src/api/*` keep serving production traffic without a rewrite.
+- **Readiness probe**: `GET /ready` returns 200 only when the D1 adapter is bound and every subsystem is healthy or disabled; otherwise 503.
+- **Metrics probe**: `GET /metrics` serves Prometheus text/plain (uptime, error count, per-subsystem status).
+
+### Fixed
+- **Order seed foreign-key failure**: `Order.seedIfEmpty` referenced hardcoded member ids that `Member.seedIfEmpty` never assigns — every seed row violated `orders.member_id`. Now queries the members table for real ids.
+
 ## [1.1.0] - 2026-07-21
 
 ### Added

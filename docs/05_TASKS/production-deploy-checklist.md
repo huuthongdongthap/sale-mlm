@@ -146,9 +146,24 @@ status, headers, and body.
 - [x] `npm test` passes (276 tests, coverage ≥ 70/60/60/70)
 - [x] `node --check src/server.js` passes
 - [x] `node --check src/workers/index.js` passes
-- [ ] `bash -n deploy.sh` passes
-- [ ] `wrangler secret list` shows all required secrets
-- [ ] `wrangler secret list --env staging` shows staging secrets
+- [x] `bash -n deploy.sh` passes
+- [ ] `wrangler secret list` shows all required secrets — external (operator runs `wrangler login` first)
+- [ ] `wrangler secret list --env staging` shows staging secrets — external (operator)
+
+### External Blockers (operator action, not code)
+The remaining items below require Cloudflare dashboard access or live
+credentials — nothing in this repo can resolve them. They are listed here
+so the deploy owner has a single view of what is left.
+
+| # | Item | Who | Notes |
+|---|------|-----|-------|
+| 1 | `CF_API_TOKEN` / `CF_ACCOUNT_ID` GitHub secrets | Operator | CI/CD needs these to deploy on push to main |
+| 2 | `api.droppii.vn` Worker custom domain | Operator | Cloudflare Dashboard > Workers > Triggers |
+| 3 | `hive.droppii.vn` Pages custom domain | Operator | Cloudflare Dashboard > Pages > Custom domains |
+| 4 | SSL auto-provision | Automatic | Cloudflare managed once domains exist |
+| 5 | Sentry DSN | Operator | Optional; error tracking |
+| 6 | Zalo OA webhook | Operator | Optional; critical alerts |
+| 7 | `wrangler secret put` × 6 secrets | Operator | See `./deploy.sh secrets` for the guide |
 
 ---
 
