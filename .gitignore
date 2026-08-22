@@ -3,3 +3,17 @@ node_modules/
 .env
 .DS_Store
 .claude/worktrees/
+
+# Build artifacts
+coverage/
+dist/
+
+# Runtime data
+data/
+*.db
+__pycache__/
+
+# Workspace noise
+Users/
+packages/yt-shorts-pipeline/
+debug-*.js
