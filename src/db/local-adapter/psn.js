@@ -5,13 +5,16 @@
 const crypto = require('crypto');
 
 function bindRun(stmt, ...params) {
-  return stmt.bind(...params).run();
+  if (params.length) stmt.bind(...params);
+  return stmt.run();
 }
 function bindAll(stmt, ...params) {
-  return stmt.bind(...params).all();
+  if (params.length) stmt.bind(...params);
+  return stmt.all();
 }
 function bindFirst(stmt, ...params) {
-  return stmt.bind(...params).first();
+  if (params.length) stmt.bind(...params);
+  return stmt.get();
 }
 
 class PsnOps {
@@ -20,15 +23,15 @@ class PsnOps {
   }
 
   async createPSN(data) {
-    return bindRun(this.db.prepare("INSERT INTO psn (id, name, leader_id, team_size, target_revenue_vnd, actual_revenue_vnd, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)").bind(
-      crypto.randomUUID(), data.name, data.leaderId || null, data.teamSize || 0,
+    return bindRun(this.db.prepare("INSERT INTO psn (id, name, leader_id, team_size, target_revenue_vnd, actual_revenue_vnd, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
+      data.id || crypto.randomUUID(), data.name, data.leaderId || null, data.teamSize || 0,
       data.targetRevenueVND || 0, data.actualRevenueVND || 0,
       new Date().toISOString(), new Date().toISOString()
-    ));
+    );
   }
 
   async getPSN(id) {
-    return bindFirst(this.db.prepare("SELECT * FROM psn WHERE id = ?").bind(id));
+    return bindFirst(this.db.prepare("SELECT * FROM psn WHERE id = ?"), id);
   }
 
   async listPSNs(filters = {}) {
@@ -53,7 +56,7 @@ class PsnOps {
   }
 
   async deletePSN(id) {
-    return bindRun(this.db.prepare("DELETE FROM psn WHERE id = ?").bind(id));
+    return bindRun(this.db.prepare("DELETE FROM psn WHERE id = ?"), id);
   }
 }
 

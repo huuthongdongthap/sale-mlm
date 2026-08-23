@@ -5,13 +5,16 @@
 const crypto = require('crypto');
 
 function bindRun(stmt, ...params) {
-  return stmt.bind(...params).run();
+  if (params.length) stmt.bind(...params);
+  return stmt.run();
 }
 function bindAll(stmt, ...params) {
-  return stmt.bind(...params).all();
+  if (params.length) stmt.bind(...params);
+  return stmt.all();
 }
 function bindFirst(stmt, ...params) {
-  return stmt.bind(...params).first();
+  if (params.length) stmt.bind(...params);
+  return stmt.get();
 }
 
 class HabitsOps {

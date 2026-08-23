@@ -5,13 +5,16 @@
 const crypto = require('crypto');
 
 function bindRun(stmt, ...params) {
-  return stmt.bind(...params).run();
+  if (params.length) stmt.bind(...params);
+  return stmt.run();
 }
 function bindAll(stmt, ...params) {
-  return stmt.bind(...params).all();
+  if (params.length) stmt.bind(...params);
+  return stmt.all();
 }
 function bindFirst(stmt, ...params) {
-  return stmt.bind(...params).first();
+  if (params.length) stmt.bind(...params);
+  return stmt.get();
 }
 
 class LeadsOps {
@@ -20,11 +23,15 @@ class LeadsOps {
   }
 
   async createLead(data) {
-    return bindRun(this.db.prepare("INSERT INTO leads (id, name, email_encrypted, phone_encrypted, notes_encrypted, lead_stage, psn_id, source, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)").bind(
-      data.id, data.name, data.encryptedEmail || '', data.encryptedPhone || '',
-      data.encryptedNotes || '', data.leadStage || 'lead_magnet', data.psnId || null,
-      data.source || 'organic', new Date().toISOString(), new Date().toISOString()
-    ));
+    // leads.email is NOT NULL in the schema; store the plaintext alongside
+    // the encrypted copy (mirrors members handling).
+    return bindRun(this.db.prepare("INSERT INTO leads (id, name, email, email_encrypted, phone_encrypted, notes_encrypted, lead_stage, psn_id, source, status, funnel_level, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
+      data.id, data.name || null, data.email || '', data.encryptedEmail || '',
+      data.encryptedPhone || '', data.encryptedNotes || null,
+      data.leadStage || 'lead_magnet', data.psnId || null,
+      data.source || 'organic', data.status || 'new', data.funnelLevel !== undefined ? 'L' + data.funnelLevel : 'L0',
+      new Date().toISOString(), new Date().toISOString()
+    );
   }
 
   async getLead(id) {

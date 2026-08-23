@@ -66,16 +66,21 @@ class LocalDatabaseAdapter {
   }
 
   _runMigrations() {
-    const migrationPath = path.join(__dirname, '../../migrations/0001_initial_schema.sql');
-    if (fs.existsSync(migrationPath)) {
-      const sql = fs.readFileSync(migrationPath, 'utf8');
+    // Apply every migration in migrations/ in filename order so tables
+    // added by later files (leads/orders/psn in 0004_funnel_tables.sql)
+    // exist alongside the base schema.
+    const migrationsDir = path.join(__dirname, '../../../migrations');
+    if (!fs.existsSync(migrationsDir)) return;
+    const files = fs.readdirSync(migrationsDir).filter(f => f.endsWith('.sql')).sort();
+    for (const file of files) {
+      const sql = fs.readFileSync(path.join(migrationsDir, file), 'utf8');
       const statements = sql.split(';').filter(s => s.trim());
       for (const stmt of statements) {
         try {
           this.db.exec(stmt);
         } catch (err) {
           if (!err.message.includes('already exists')) {
-            console.warn('[local-adapter] Migration warning:', err.message);
+            console.warn('[local-adapter] Migration warning (' + file + '):', err.message);
           }
         }
       }
@@ -83,14 +88,18 @@ class LocalDatabaseAdapter {
   }
 
   prepare(sql) {
+    // Wrap the native statement so callers can chain .bind(...).run/all/get
+    // (get replaces the non-existent .first from the D1-style API).
     const stmt = this.db.prepare(sql);
     return {
       bind: (...params) => {
-        const bound = stmt.bind(...params);
+        if (params.length) stmt.bind(...params);
         return {
-          run: () => bound.run(),
-          all: () => bound.all(),
-          first: () => bound.first(),
+          run: () => stmt.run(),
+          all: () => stmt.all(),
+          get: () => stmt.get(),
+          // Legacy alias — better-sqlite3 v13 has no .first()
+          first: () => stmt.get(),
         };
       },
     };

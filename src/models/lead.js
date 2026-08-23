@@ -123,6 +123,35 @@ class Lead {
    * Validate transition from `fromLevel` → `toLevel`.
    * Returns `{ ok: boolean, reason?: string }` and may mutate `lastContactedAt`.
    */
+  /**
+   * Seed the database-backed leads table if empty.
+   * Mirrors Order.seedIfEmpty so server.js startup seeding works for
+   * both the D1 adapter and the local SQLite adapter.
+   */
+  static async seedIfEmpty(db) {
+    if (!db || typeof db.listLeads !== 'function') return;
+    const rows = await db.listLeads({});
+    const existing = Array.isArray(rows) ? rows : (rows.results || []);
+    if (existing.length > 0) return;
+    for (const lead of Lead.createSeededLeads()) {
+      await db.createLead({
+        id: lead.id,
+        name: lead.getName(),
+        email: lead.getEmail() || '',
+        phone_encrypted: lead._encryptedPhone || '',
+        source: lead.source,
+        funnel_level: 'L' + lead.funnelLevel,
+        status: lead.status,
+        notes: lead.getNotes() || null,
+        assigned_ctv_id: lead.assignedCtvId
+      });
+    }
+  }
+  /* ---- Transition helpers ---- */
+  /**
+   * Validate transition from `fromLevel` → `toLevel`.
+   * Returns `{ ok: boolean, reason?: string }` and may mutate `lastContactedAt`.
+   */
   static canTransition(fromLevel, toLevel, lead = null) {
     if (fromLevel === toLevel) return { ok: false, reason: 'Same level' };
     if (!FUNNEL_LEVELS.includes(toLevel)) return { ok: false, reason: 'Invalid target' };

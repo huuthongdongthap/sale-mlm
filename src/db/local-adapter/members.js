@@ -5,15 +5,17 @@
 const crypto = require('crypto');
 
 function bindFirst(stmt) {
-  return stmt.bind().first();
+  return stmt.get();
 }
 
 function bindAll(stmt, ...params) {
-  return stmt.bind(...params).all();
+  if (params.length) stmt.bind(...params);
+  return stmt.all();
 }
 
 function bindRun(stmt, ...params) {
-  return stmt.bind(...params).run();
+  if (params.length) stmt.bind(...params);
+  return stmt.run();
 }
 
 class MembersOps {

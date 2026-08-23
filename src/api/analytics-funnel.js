@@ -39,7 +39,7 @@ function daysBetween(a, b) {
 /*  GET /api/analytics/funnel                                          */
 /* ------------------------------------------------------------------ */
 
-router.get('/', requireAuth, (req, res) => {
+router.get('/', requireAuth, async (req, res) => {
   const scope = visibleLeadScope(req);
 
   // Count by tier
@@ -64,7 +64,7 @@ router.get('/', requireAuth, (req, res) => {
   const totalLeads = counts.reduce((s, c) => s + c.count, 0);
 
   // Revenue: sum order totals per tier
-  const allOrders = require('../models/order').allOrders();
+  const allOrders = await require('../models/order').allOrders();
   const revenue = FUNNEL_LEVELS.map(level => {
     const tierLabel = TIER_LABELS[level];
     // Find orders matching this tier (productTier matches funnel level)

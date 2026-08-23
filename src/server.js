@@ -15,7 +15,7 @@ const { initRules, evaluateAll, getRules, getAlertLog, getAlertSummary, acknowle
 const { startOnboarding, getSession, advanceDay, generateNudge, getProgress, getActiveSessions, checkGraduation } = require('./agents/onboardingBot');
 const { assignCurriculum, getRecord, updateProgress, getProgress: getTrainingProgress, getActiveTrainees, getTraineesNeedingAttention, getTraineesByPSN } = require('./agents/trainingOps');
 const { errorMiddleware, notFoundMiddleware, getHealthStatus, monitoring } = require('./utils/monitoring');
-const { requireRole } = require('./middleware/requireRole');
+const { requireRole, requireAuth } = require('./middleware/requireRole');
 const { classifyPSNHealth } = require('./analytics/psnHealth');
 const DatabaseAdapter = require('./db/adapter');
 
@@ -406,6 +406,16 @@ app.post('/api/training/progress', (req, res) => {
   res.json(result);
 });
 
+// Static segments must be registered before the :memberId parameterized
+// route, otherwise Express matches "active"/"attention" as a memberId.
+app.get('/api/training/active', (req, res) => {
+  res.json({ trainees: getActiveTrainees() });
+});
+
+app.get('/api/training/attention', (req, res) => {
+  res.json({ needing_attention: getTraineesNeedingAttention() });
+});
+
 app.get('/api/training/:memberId', (req, res) => {
   const record = getRecord(req.params.memberId);
   if (!record) return res.status(404).json({ error: 'Record not found' });
@@ -416,14 +426,6 @@ app.get('/api/training/:memberId/progress', (req, res) => {
   const progress = getTrainingProgress(req.params.memberId);
   if (progress.error) return res.status(404).json(progress);
   res.json(progress);
-});
-
-app.get('/api/training/active', (req, res) => {
-  res.json({ trainees: getActiveTrainees() });
-});
-
-app.get('/api/training/attention', (req, res) => {
-  res.json({ needing_attention: getTraineesNeedingAttention() });
 });
 
 app.get('/api/training/psn/:psnId', (req, res) => {
@@ -497,34 +499,43 @@ app.get('/ready', (req, res) => {
   });
 });
 
-// Metrics probe — text/plain for Prometheus scraping. Covers error counts,
-// uptime, and per-subsystem status so dashboards can alert without parsing
-// JSON.
+// Metrics probe — JSON health snapshot (uptime, timestamp, subsystems).
+// Prometheus-style text output is available via content negotiation:
+// clients sending Accept: text/plain get the scrape format instead.
 app.get('/metrics', (req, res) => {
   const status = getHealthStatus();
-  const lines = [
-    '# HELP hive_os_up_seconds Uptime of the Hive OS process in seconds',
-    '# TYPE hive_os_up_seconds gauge',
-    `hive_os_up_seconds ${status.uptime.toFixed(3)}`,
-    '# HELP hive_os_error_count_total Total captured error/message events',
-    '# TYPE hive_os_error_count_total gauge',
-    `hive_os_error_count_total ${status.error_count}`,
-    '# HELP hive_os_subsystem_status Status of a subsystem (1=healthy, 0=disabled/degraded)',
-    '# TYPE hive_os_subsystem_status gauge'
-  ];
-  for (const [name, sub] of Object.entries(status.subsystems)) {
-    lines.push(`hive_os_subsystem_status{subsystem="${name}"} ${sub.status === 'healthy' ? 1 : 0}`);
+  if (req.accepts(['json', 'text/plain']) === 'text/plain') {
+    const lines = [
+      '# HELP hive_os_up_seconds Uptime of the Hive OS process in seconds',
+      '# TYPE hive_os_up_seconds gauge',
+      `hive_os_up_seconds ${status.uptime.toFixed(3)}`,
+      '# HELP hive_os_error_count_total Total captured error/message events',
+      '# TYPE hive_os_error_count_total gauge',
+      `hive_os_error_count_total ${status.error_count}`,
+      '# HELP hive_os_subsystem_status Status of a subsystem (1=healthy, 0=disabled/degraded)',
+      '# TYPE hive_os_subsystem_status gauge'
+    ];
+    for (const [name, sub] of Object.entries(status.subsystems)) {
+      lines.push(`hive_os_subsystem_status{subsystem="${name}"} ${sub.status === 'healthy' ? 1 : 0}`);
+    }
+    return res.type('text/plain').send(lines.join('\n'));
   }
-  res.type('text/plain').send(lines.join('\n'));
+  res.json({
+    uptime: status.uptime,
+    timestamp: status.timestamp,
+    status: status.status,
+    error_count: status.error_count,
+    subsystems: status.subsystems
+  });
 });
 
 // Monitoring routes
-app.get('/api/monitoring/errors', (req, res) => {
+app.get('/api/monitoring/errors', requireAuth, (req, res) => {
   const limit = parseInt(req.query.limit) || 50;
   res.json({ errors: monitoring.getErrorLog(limit) });
 });
 
-app.get('/api/monitoring/summary', (req, res) => {
+app.get('/api/monitoring/summary', requireAuth, (req, res) => {
   res.json(monitoring.getErrorSummary());
 });
 

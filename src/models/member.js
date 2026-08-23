@@ -193,6 +193,33 @@ class Member {
 
     return members;
   }
+
+  /**
+   * Seed the database-backed members table if empty.
+   * Mirrors Order.seedIfEmpty so server.js startup seeding works for
+   * both the D1 adapter and the local SQLite adapter.
+   */
+  static async seedIfEmpty(db) {
+    if (!db || typeof db.listMembers !== 'function') return;
+    const rows = (await db.listMembers({ limit: 1 }));
+    const existing = Array.isArray(rows) ? rows : (rows.results || []);
+    if (existing.length > 0) return;
+    for (const member of this.createSeededMembers()) {
+      await db.createMember({
+        id: member.id,
+        name: member.name,
+        // members.email is NOT NULL in the schema; store the plaintext
+        // alongside the encrypted copy (same as DatabaseAdapter.createMember).
+        email: member.getEmail() || '',
+        email_encrypted: member._encryptedEmail || '',
+        phone_encrypted: member._encryptedPhone || '',
+        password_hash: member.passwordHash || '',
+        role: member.role,
+        tier: member.tier,
+        psn_id: member.psnId
+      });
+    }
+  }
 }
 
 module.exports = {

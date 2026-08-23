@@ -5,13 +5,16 @@
 const crypto = require('crypto');
 
 function bindRun(stmt, ...params) {
-  return stmt.bind(...params).run();
+  if (params.length) stmt.bind(...params);
+  return stmt.run();
 }
 function bindAll(stmt, ...params) {
-  return stmt.bind(...params).all();
+  if (params.length) stmt.bind(...params);
+  return stmt.all();
 }
 function bindFirst(stmt, ...params) {
-  return stmt.bind(...params).first();
+  if (params.length) stmt.bind(...params);
+  return stmt.get();
 }
 
 class OrdersOps {
@@ -59,7 +62,9 @@ class OrdersOps {
     if (data.totalVND !== undefined) { fields.push("total_vnd = ?"); params.push(data.totalVND); }
     fields.push("updated_at = ?");
     params.push(new Date().toISOString(), id);
-    return bindRun(this.db.prepare(`UPDATE orders SET ${fields.join(", ")} WHERE id = ?`), ...params);
+    bindRun(this.db.prepare(`UPDATE orders SET ${fields.join(", ")} WHERE id = ?`), ...params);
+    // Return the updated row so model wrappers can rehydrate the Order.
+    return this.getOrder(id);
   }
 
   async deleteOrder(id) {

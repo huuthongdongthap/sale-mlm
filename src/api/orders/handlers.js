@@ -92,7 +92,9 @@ function registerOrders(app) {
         return res.status(400).json({ error: err.message, code: err.code });
       }
 
-      const order = createOrder(buildOrderPayload(req.body));
+      // createOrder is async when the DB adapter is active — await so the
+      // resolved Order (not a pending Promise) is serialized below.
+      const order = await createOrder(buildOrderPayload(req.body));
 
       console.log('[orders:create] done id=', order?.id); res.status(201).json({ order: order.toJSON() });
     } catch (err) {
@@ -149,7 +151,9 @@ function registerOrders(app) {
     try {
       const { orderId, paymentReference, paymentMethod } = req.body;
       if (!orderId) return res.status(400).json({ error: 'orderId required', code: 'INVALID_ORDER' });
-      const order = markPaid(orderId, paymentReference, paymentMethod, req.user?.id);
+      // markPaid is async when the DB adapter is active — await the
+      // resolved Order before serializing.
+      const order = await markPaid(orderId, paymentReference, paymentMethod, req.user?.id);
       if (!order) return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
       res.json({ order: order.toJSON() });
     } catch (err) {
