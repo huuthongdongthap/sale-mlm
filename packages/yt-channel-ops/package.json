@@ -1,0 +1,16 @@
+{
+  "name": "yt-channel-ops",
+  "version": "0.1.0",
+  "description": "Post-publish YouTube channel operations — performance learning loop with approval gates. Companion to yt-shorts-pipeline (video generation). Pattern adapted from darkzOGx/youtube-automation-agent (MIT).",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --silent"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
