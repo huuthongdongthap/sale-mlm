@@ -25,17 +25,26 @@ pieces a fresh channel actually needs.
    evidence only.
 2. **Recommendations stay pending until an explicit decision.**
    `engine.decide(id, 'approved'|'rejected', note)` is the only path.
-3. **No upload without a consumed token.** The pipeline's upload step must
-   verify `--approve <token>` via this package before pushing to YouTube.
+3. **No upload without a consumed token.** `yt-shorts-pipeline`'s upload
+   step enforces this itself: it reads `$YT_CHANNEL_OPS_DATA/publish-tokens.json`,
+   verifies the token against the draft id, and consumes it on use.
 
 ## Usage
 
 ```bash
-node src/cli.js approve <videoId> "approved by Thong after factual review"
-node src/cli.js verify <token> <videoId>
+node src/cli.js approve <draftId> "approved by Thong after factual review"
+# → pass token to pipeline:
+python3 -m verticals upload --draft draft.json --approve pub_<hex> \
+  -e YT_CHANNEL_OPS_DATA=$PWD/data/channel-ops
+node src/cli.js verify <token> <draftId>
 node src/cli.js recommendations pending
 node src/cli.js decide outperform:vid:24h:views approved "validated"
 ```
+
+Pipeline integration (already wired in `yt-shorts-pipeline`):
+- drafts get a stable `id` field at generation time (`draft-<12 hex>`)
+- `verticals/upload.py` blocks every upload without a valid unconsumed
+  token bound to that id
 
 Data lives in `$YT_CHANNEL_OPS_DATA` (default `./data/channel-ops/`) — add it
 to `.gitignore`; it is runtime state, not source.
