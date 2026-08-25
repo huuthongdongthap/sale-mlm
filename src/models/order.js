@@ -42,6 +42,7 @@ class Order {
     this.shippingAddress = data.shippingAddress || null;
     this.notes = data.notes || '';
     this.status = ORDER_STATUSES.includes(data.status) ? data.status : 'pending';
+    this.orgId = data.orgId || data.org_id || null;
     this.createdAt = data.createdAt || isoNow();
     this.updatedAt = data.updatedAt || isoNow();
     this.shippedAt = data.shippedAt || null;
@@ -116,6 +117,7 @@ class Order {
       shippingAddress: this.shippingAddress,
       notes: this.notes,
       status: this.status,
+      orgId: this.orgId,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       shippedAt: this.shippedAt,
@@ -144,6 +146,7 @@ class Order {
     return new Order({
       id: row.id,
       memberId: row.member_id,
+      orgId: row.org_id,
       productId: row.product_id,
       quantity: row.quantity,
       unitPriceVND: row.unit_price_vnd,
@@ -163,6 +166,7 @@ class Order {
     return rows.map(row => new Order({
       id: row.id,
       memberId: row.member_id,
+      orgId: row.org_id,
       productId: row.product_id,
       quantity: row.quantity,
       unitPriceVND: row.unit_price_vnd,
@@ -182,6 +186,7 @@ class Order {
     const created = await db.createOrder({
       id: order.id,
       memberId: order.memberId,
+      org_id: order.orgId,
       productId: order.productId,
       productName: order.productName,
       productTier: order.productTier,
@@ -280,6 +285,18 @@ class Order {
 // In-memory fallback store, used when no D1 database is configured
 let orderStore = [];
 
+function initStore() {
+  // Orders are seeded via Order.seedIfEmpty(db) at DB level; no in-memory seeds by default
+}
+
+function setStore(newOrders) {
+  orderStore.length = 0;
+  if (newOrders && Array.isArray(newOrders)) {
+    orderStore.push(...newOrders);
+  }
+  return orderStore;
+}
+
 function useDb() {
   return !!global.db;
 }
@@ -291,8 +308,8 @@ function db() {
 // Helper functions mirroring the members/leads API surface.
 // The orders API handler calls these by name without threading db through,
 // so they resolve the active adapter from global.db at call time.
-function allOrders() {
-  if (useDb()) return Order.findAll(db());
+async function allOrders() {
+  if (useDb()) return await Order.findAll(db());
   return [...orderStore];
 }
 
@@ -301,8 +318,8 @@ function findById(id) {
   return orderStore.find(o => o.id === id) || null;
 }
 
-function findByLeadId(leadId) {
-  if (useDb()) return Order.findAll(db(), { leadId });
+async function findByLeadId(leadId) {
+  if (useDb()) return await Order.findAll(db(), { leadId });
   return orderStore.filter(o => o.leadId === leadId);
 }
 
@@ -361,4 +378,6 @@ module.exports = {
       return order;
     })(),
   resetStore,
+  initStore,
+  getStore: () => orderStore,
 };

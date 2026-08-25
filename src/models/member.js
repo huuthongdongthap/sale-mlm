@@ -40,6 +40,7 @@ class Member {
     this.role = data.role || 'Member';      // Member, PSN Leader, Core Leader, Admin
     this.tier = data.tier || 1;            // 1=Tân Binh, 2=Chiến Binh, 3=Chỉ Huy
     this.psnId = data.psnId || null;
+    this.orgId = data.orgId || data.org_id || null;
     this.buddyId = data.buddyId || null;
     this.habitScore = data.habitScore || 0;
     this.joinDate = data.joinDate || new Date().toISOString();
@@ -161,7 +162,8 @@ class Member {
         email: 'admin@droppii.vn',
         phone: '+84901234567',
         role: 'Admin',
-        tier: 3
+        tier: 3,
+        orgId: null // System admin - no org scope
       }),
       new Member({
         id: 'core-001',
@@ -169,7 +171,8 @@ class Member {
         email: 'core@droppii.vn',
         phone: '+84902345678',
         role: 'Core Leader',
-        tier: 3
+        tier: 3,
+        orgId: 'org-default'
       }),
       new Member({
         id: 'psn-001',
@@ -178,7 +181,8 @@ class Member {
         phone: '+84903456789',
         role: 'PSN Leader',
         tier: 2,
-        psnId: 'psn-001'
+        psnId: 'psn-001',
+        orgId: 'org-default'
       }),
       new Member({
         id: 'member-001',
@@ -187,7 +191,8 @@ class Member {
         phone: '+84904567890',
         role: 'Member',
         tier: 1,
-        psnId: 'psn-001'
+        psnId: 'psn-001',
+        orgId: 'org-default'
       })
     ];
 
@@ -216,7 +221,8 @@ class Member {
         password_hash: member.passwordHash || '',
         role: member.role,
         tier: member.tier,
-        psn_id: member.psnId
+        psn_id: member.psnId,
+        org_id: member.orgId
       });
     }
   }

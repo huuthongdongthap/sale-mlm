@@ -4,12 +4,22 @@
 
 const { getStore } = require('../../models/member');
 const { logPIIAccessForMember } = require('./pii-logger');
+const { isSystemAdmin } = require('../../middleware/requireRole');
 
 function getMember(req, res) {
   try {
     const members = getStore();
     const member = members.find(m => m.id === req.params.id);
     if (!member) {
+      return res.status(404).json({
+        error: 'Khong tim thay thanh vien',
+        code: 'MEMBER_NOT_FOUND'
+      });
+    }
+
+    // Org isolation - non system admins cannot view members of other orgs
+    if (!isSystemAdmin(req.user) && member.orgId !== req.user.orgId) {
+      // Return 404 to avoid leaking the existence of cross-org members
       return res.status(404).json({
         error: 'Khong tim thay thanh vien',
         code: 'MEMBER_NOT_FOUND'

@@ -33,6 +33,7 @@ const { OnboardingOps } = require('./onboarding');
 const { LeadsOps } = require('./leads');
 const { OrdersOps } = require('./orders');
 const { PsnOps } = require('./psn');
+const { OrgsOps } = require('./orgs');
 
 class LocalDatabaseAdapter {
   constructor(dbPath = null, wipe = false) {
@@ -63,6 +64,7 @@ class LocalDatabaseAdapter {
     this.leads = new LeadsOps(this.db);
     this.orders = new OrdersOps(this.db);
     this.psn = new PsnOps(this.db);
+    this.orgs = new OrgsOps(this.db);
   }
 
   _runMigrations() {
@@ -79,7 +81,8 @@ class LocalDatabaseAdapter {
         try {
           this.db.exec(stmt);
         } catch (err) {
-          if (!err.message.includes('already exists')) {
+          const msg = err.message.toLowerCase();
+          if (!msg.includes('already exists') && !msg.includes('duplicate column name')) {
             console.warn('[local-adapter] Migration warning (' + file + '):', err.message);
           }
         }
@@ -159,6 +162,12 @@ class LocalDatabaseAdapter {
   async listPSNs(filters = {}) { return this.psn.listPSNs(filters); }
   async updatePSN(id, data) { return this.psn.updatePSN(id, data); }
   async deletePSN(id) { return this.psn.deletePSN(id); }
+
+  async createOrg(data) { return this.orgs.createOrg(data); }
+  async getOrg(id) { return this.orgs.getOrg(id); }
+  async listOrgs(filters = {}) { return this.orgs.listOrgs(filters); }
+  async updateOrg(id, data) { return this.orgs.updateOrg(id, data); }
+  async deleteOrg(id) { return this.orgs.deleteOrg(id); }
 
   close() {
     this.db.close();

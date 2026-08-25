@@ -34,9 +34,10 @@ router.post('/login', async (req, res) => {
   }
   const member = new Member(user.member);
   member.lastLoginAt = new Date().toISOString();
+  const orgId = member.orgId || (member.role === 'Admin' ? null : 'org-default');
   const token = jwt.sign({
     id: member.id, email: member.email,
-    role: member.role, name: member.name
+    role: member.role, name: member.name, orgId
   });
   res.json({ success: true, token, user: member.toJSON(), message: 'Đăng nhập thành công' });
 });

@@ -93,6 +93,7 @@ const findByLeadId = async (leadId) => {
     return (rows || []).map(row => new Order({
       id: row.id,
       memberId: row.member_id,
+      orgId: row.org_id,
       productId: row.product_id,
       productName: row.product_name,
       productTier: row.product_tier,

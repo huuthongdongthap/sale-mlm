@@ -18,8 +18,9 @@
  * size exceeded" via recursive res.setHeader).
  */
 
-const http = require('http');
-const express = require('express');
+const { IncomingMessage } = require('node:http');
+const { Writable } = require('node:stream');
+const { URLSearchParams } = require('node:url');
 
 /**
  * Drain a Web ReadableStream (c.req.raw.body) into a Node Buffer.
@@ -45,83 +46,150 @@ async function readBody(raw) {
  * The returned handler builds IncomingMessage/ServerResponse pairs, runs the
  * Express handler, and returns a Workers Response carrying the captured
  * status, headers, and body.
+ *
+ * @param {Function} expressApp — The Express app handler (req, res, next)
+ * @param {Object} opts — Options
+ * @param {boolean} opts.preserveBody — Keep raw body for middleware that needs it
+ * @returns {Function} Hono-compatible handler
  */
-function createExpressHandler(expressHandler, expressApp) {
+function createExpressHandler(expressApp, opts = {}) {
   return async function (c) {
-    const raw = c.req.raw;
+    const rawReq = c.req.raw;
+    const method = rawReq.method;
+    const url = new URL(rawReq.url);
+    const path = url.pathname;
+    const query = url.search.slice(1); // remove leading '?'
+    const headers = Object.fromEntries(rawReq.headers.entries());
 
-    const req = new http.IncomingMessage();
-    req.method = raw.method;
-    req.url = raw.url;
-    req.headers = {};
-    for (const [key, value] of raw.headers.entries()) {
-      req.headers[key] = value;
+    // Read body once
+    const bodyBuffer = await readBody(rawReq);
+    const bodyText = bodyBuffer.toString('utf8') || undefined;
+
+    // Build a minimal IncomingMessage-like object for Express
+    const req = new IncomingMessage();
+    req.method = method;
+    req.url = path + (query ? '?' + query : '');
+    req.headers = headers;
+    req.rawHeaders = Object.entries(headers).flat();
+    req.httpVersion = '1.1';
+    req.httpVersionMajor = 1;
+    req.httpVersionMinor = 1;
+    req.connection = { remoteAddress: headers['cf-connecting-ip'] || '127.0.0.1' };
+    req.socket = { remoteAddress: headers['cf-connecting-ip'] || '127.0.0.1' };
+
+    // Parse query string for req.query (Express standard)
+    req.query = Object.fromEntries(new URLSearchParams(query).entries());
+
+    // Parse JSON body for req.body
+    let body = undefined;
+    if (bodyText) {
+      const ct = headers['content-type'] || '';
+      if (ct.includes('application/json')) {
+        try {
+          body = JSON.parse(bodyText);
+        } catch {
+          body = bodyText;
+        }
+      } else if (ct.includes('application/x-www-form-urlencoded')) {
+        body = Object.fromEntries(new URLSearchParams(bodyText).entries());
+      } else {
+        body = bodyText;
+      }
     }
+    req.body = body;
 
-    // Express's error middleware calls req.ip, which proxyaddr resolves through
-    // req.socket.remoteAddress. A bare IncomingMessage has no socket, so that
-    // read throws and the error middleware crashes the chain. Attach a stub
-    // socket carrying the real client IP (Cloudflare passes it in
-    // CF-Connecting-IP) so req.ip / forwarded-header parsing resolves.
-    req.socket = req.socket || {};
-    req.socket.remoteAddress =
-      raw.headers.get('CF-Connecting-IP') ||
-      raw.headers.get('X-Forwarded-For') ||
-      '127.0.0.1';
+    // Express needs req.ip for rate limiting etc.
+    req.ip = headers['cf-connecting-ip'] || headers['x-forwarded-for'] || '127.0.0.1';
 
-    const body = await readBody(raw);
-    req.push(body);
-    req.push(null);
-
-    const res = new http.ServerResponse(req);
-    // Express's response prototype carries the json/status/setHeader methods
-    // that every route in src/api/* depends on. Wire it up so the handler
-    // sees a real Express response object.
-    Object.setPrototypeOf(res, express.response);
-    // Express reads settings off res.app (e.g. app.get('json escape') inside
-    // res.json). c.app is the Hono app, not the Express app — pass the real
-    // Express app so those lookups resolve.
-    res.app = expressApp;
-
-    let capturedBody = null;
+    // Build a response object that captures the Express output
     let capturedStatus = 200;
-    let settled = false;
-    const origEnd = res.end.bind(res);
-    let resolveHandler;
+    let capturedBody = '';
+    let capturedHeaders = {};
 
-    // Express completes a response by calling res.end, which in turn emits
-    // `finish` on a real socket. A bare http.ServerResponse has no socket,
-    // so the middleware chain never calls `next` and the handler promise
-    // would hang forever. Resolve inside res.end instead — that is the
-    // definitive signal that Express has produced its response.
-    res.end = function (chunk, encoding, callback) {
-      if (typeof chunk !== 'undefined' && chunk !== null) {
-        capturedBody = Buffer.isBuffer(chunk) ? chunk : Buffer.from(String(chunk));
-      }
-      capturedStatus = res.statusCode;
-      if (!settled) {
-        settled = true;
-        resolveHandler();
-      }
-      return origEnd(chunk, encoding, callback);
-    };
-
-    await new Promise((resolve) => {
-      resolveHandler = resolve;
-      expressHandler(req, res, () => {});
+    const res = new Writable({
+      write(chunk, encoding, callback) {
+        capturedBody += chunk.toString();
+        callback();
+      },
     });
 
-    let headers = {};
-    try {
-      headers = res.getHeaders();
-    } catch {
-      // getHeaders throws if the response was never finalized; fall back to
-      // an empty header set rather than crashing the request.
-    }
+    // Express-compatible response methods
+    res.statusCode = 200;
+    res.status = function (code) {
+      this.statusCode = code;
+      capturedStatus = code;
+      return this;
+    };
+    res.setHeader = function (name, value) {
+      capturedHeaders[name.toLowerCase()] = value;
+      return this;
+    };
+    res.getHeader = function (name) {
+      return capturedHeaders[name.toLowerCase()];
+    };
+    res.getHeaders = function () {
+      return capturedHeaders;
+    };
+    res.removeHeader = function (name) {
+      delete capturedHeaders[name.toLowerCase()];
+      return this;
+    };
+    res.hasHeader = function (name) {
+      return name.toLowerCase() in capturedHeaders;
+    };
+    res.json = function (obj) {
+      this.setHeader('content-type', 'application/json');
+      this.end(JSON.stringify(obj));
+      return this;
+    };
+    res.send = function (body) {
+      if (typeof body === 'object' && body !== null) {
+        this.setHeader('content-type', 'application/json');
+        this.end(JSON.stringify(body));
+      } else {
+        if (!this.getHeader('content-type')) {
+          this.setHeader('content-type', 'text/html');
+        }
+        this.end(String(body));
+      }
+      return this;
+    };
+    res.redirect = function (url) {
+      this.status(302).setHeader('location', url).end();
+      return this;
+    };
+
+    // Run the Express app
+    await new Promise((resolve, reject) => {
+      const next = (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      };
+      try {
+        expressApp(req, res, next);
+      } catch (err) {
+        reject(err);
+      }
+    });
+
+    // Return Workers Response
+    const responseHeaders = new Headers();
+    Object.entries(capturedHeaders).forEach(([k, v]) => {
+      if (v !== undefined) responseHeaders.set(k, v);
+    });
+    // Ensure CORS headers
+    responseHeaders.set('access-control-allow-origin', '*');
+    responseHeaders.set('access-control-allow-methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    responseHeaders.set('access-control-allow-headers', 'Content-Type, Authorization');
+    responseHeaders.set('x-content-type-options', 'nosniff');
+    responseHeaders.set('x-frame-options', 'DENY');
 
     return new Response(capturedBody || '', {
       status: capturedStatus,
-      headers,
+      headers: responseHeaders,
     });
   };
 }

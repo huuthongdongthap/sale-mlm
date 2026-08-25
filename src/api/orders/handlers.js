@@ -1,7 +1,7 @@
 /**
  * Orders API — route handlers
  */
-const { requireRole } = require('../../middleware/requireRole');
+const { requireRole, isSystemAdmin } = require('../../middleware/requireRole');
 const {
   allOrders,
   findById,
@@ -24,7 +24,14 @@ function registerOrders(app) {
   app.get('/api/orders', requireRole(['Member', 'PSN Leader', 'Core Leader', 'Admin']), async (req, res) => {
     try {
       const filters = parseQuery(req.query);
-      const filtered = filterOrders(allOrders(), filters);
+
+      // Org scoping - system admin sees all, others see only their org
+      let orders = await allOrders();
+      if (!isSystemAdmin(req.user)) {
+        orders = orders.filter(o => o.orgId === req.user.orgId);
+      }
+
+      const filtered = filterOrders(orders, filters);
       const paginated = paginate(filtered, filters.page, filters.limit);
 
       res.json({
@@ -56,6 +63,12 @@ function registerOrders(app) {
       if (!order) {
         return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
       }
+
+      // Org isolation - non system admins cannot view orders of other orgs
+      if (!isSystemAdmin(req.user) && order.orgId !== req.user.orgId) {
+        return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
+      }
+
       // Members can only see their own orders (via metadata.ctvId)
       if (req.user.role === 'Member' && order.metadata?.ctvId !== req.user.id) {
         return res.status(403).json({ error: 'Forbidden', code: 'FORBIDDEN' });
@@ -94,9 +107,11 @@ function registerOrders(app) {
 
       // createOrder is async when the DB adapter is active — await so the
       // resolved Order (not a pending Promise) is serialized below.
-      const order = await createOrder(buildOrderPayload(req.body));
+      const payload = buildOrderPayload(req.body);
+      payload.orgId = isSystemAdmin(req.user) ? null : req.user.orgId;
+      const order = await createOrder(payload);
 
-      console.log('[orders:create] done id=', order?.id); res.status(201).json({ order: order.toJSON() });
+      res.status(201).json({ order: order.toJSON() });
     } catch (err) {
       res.status(400).json({ error: err.message, code: 'ORDER_CREATE_FAILED' });
     }
@@ -108,6 +123,11 @@ function registerOrders(app) {
       const { status, paymentStatus, paymentReference, shippingAddress, notes, commissionRate, metadata } = req.body;
       const order = findById(req.params.id);
       if (!order) {
+        return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
+      }
+
+      // Org isolation - non system admins cannot update orders of other orgs
+      if (!isSystemAdmin(req.user) && order.orgId !== req.user.orgId) {
         return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
       }
 
@@ -151,11 +171,19 @@ function registerOrders(app) {
     try {
       const { orderId, paymentReference, paymentMethod } = req.body;
       if (!orderId) return res.status(400).json({ error: 'orderId required', code: 'INVALID_ORDER' });
+
+      // Check org access first
+      const order = findById(orderId);
+      if (!order) return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
+      if (!isSystemAdmin(req.user) && order.orgId !== req.user.orgId) {
+        return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
+      }
+
       // markPaid is async when the DB adapter is active — await the
       // resolved Order before serializing.
-      const order = await markPaid(orderId, paymentReference, paymentMethod, req.user?.id);
-      if (!order) return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
-      res.json({ order: order.toJSON() });
+      const updated = await markPaid(orderId, paymentReference, paymentMethod, req.user?.id);
+      if (!updated) return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
+      res.json({ order: updated.toJSON() });
     } catch (err) {
       res.status(400).json({ error: err.message, code: 'MARK_PAID_FAILED' });
     }
@@ -164,6 +192,16 @@ function registerOrders(app) {
   // DELETE /api/orders/:id — admin only
   app.delete('/api/orders/:id', requireRole(['Admin']), async (req, res) => {
     try {
+      const order = findById(req.params.id);
+      if (!order) {
+        return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
+      }
+
+      // Org isolation - non system admins cannot delete orders of other orgs
+      if (!isSystemAdmin(req.user) && order.orgId !== req.user.orgId) {
+        return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
+      }
+
       const ok = deleteOrder(req.params.id);
       if (!ok) {
         return res.status(404).json({ error: 'Order not found', code: 'ORDER_NOT_FOUND' });
@@ -177,8 +215,12 @@ function registerOrders(app) {
   // GET /api/orders/leads/:leadId — orders for a lead
   app.get('/api/orders/leads/:leadId', requireRole(['Member', 'PSN Leader', 'Core Leader', 'Admin']), async (req, res) => {
     try {
-      const orders = findByLeadId(req.params.leadId).map(o => o.toJSON());
-      res.json({ orders });
+      // Org scoping
+      let orders = await findByLeadId(req.params.leadId);
+      if (!isSystemAdmin(req.user)) {
+        orders = orders.filter(o => o.orgId === req.user.orgId);
+      }
+      res.json({ orders: orders.map(o => o.toJSON()) });
     } catch (err) {
       res.status(500).json({ error: err.message, code: 'LEAD_ORDERS_FETCH_FAILED' });
     }

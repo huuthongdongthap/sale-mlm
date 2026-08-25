@@ -25,6 +25,7 @@ class Lead {
     this.promotedFromId = data.promotedFromId || null; // member.id when converted
     this.quizAnswers = data.quizAnswers || null;
     this.notes = data.notes || null;
+    this.orgId = data.orgId || data.org_id || null;
     this.createdAt = data.createdAt || isoNow();
     this.updatedAt = data.updatedAt || isoNow();
     this.lastContactedAt = data.lastContactedAt || null;
@@ -114,6 +115,7 @@ class Lead {
       promoted_from_id: this.promotedFromId,
       quiz_answers: this.quizAnswers ? JSON.stringify(this.quizAnswers) : null,
       notes: this.notes,
+      org_id: this.orgId,
       created_at: this.createdAt,
       updated_at: this.updatedAt,
       last_contacted_at: this.lastContactedAt,
@@ -183,7 +185,7 @@ Lead.createSeededLeads = function () {
 
   let nextId = 1;
   const make = (overrides) => {
-    const l = new Lead(overrides);
+    const l = new Lead({ ...overrides, org_id: 'org-default' });
     l.displayId = nextId++;
     return l;
   };

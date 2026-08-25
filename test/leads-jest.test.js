@@ -8,13 +8,14 @@ const jwt = require('../src/auth/jwt');
 process.env.JWT_SECRET = 'test-secret';
 process.env.ENCRYPTION_KEY = 'test-encryption-key-32b!!';
 process.env.ALLOWED_ORIGIN = 'http://localhost';
+process.env.NODE_ENV = 'test';
 
 // Import the full server app for integration tests
 const { app: serverApp } = require('../src/server');
 
-const testToken = jwt.sign({ id: 'test-user', role: 'Admin' });
-const psnLeaderToken = jwt.sign({ id: 'psn-leader-001', role: 'PSN Leader' });
-const memberToken = jwt.sign({ id: 'member-001', role: 'Member' });
+const testToken = jwt.sign({ id: 'test-user', role: 'Admin', orgId: null });
+const psnLeaderToken = jwt.sign({ id: 'psn-leader-001', role: 'PSN Leader', orgId: 'org-default' });
+const memberToken = jwt.sign({ id: 'member-001', role: 'Member', orgId: 'org-default' });
 
 describe('T-021: Leads API', () => {
   describe('GET /api/leads', () => {
@@ -228,10 +229,10 @@ describe('T-021: Leads API', () => {
     });
 
     test('archives lead for PSN Leader (soft delete)', async () => {
-      // Create a lead first
+      // Create a lead first using PSN Leader token (same org)
       const createRes = await request(serverApp)
         .post('/api/leads')
-        .set('Authorization', `Bearer ${testToken}`)
+        .set('Authorization', `Bearer ${psnLeaderToken}`)
         .send({
           name: 'Lead to Archive',
           phone: '+84944556677',

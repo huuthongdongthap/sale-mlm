@@ -33,5 +33,6 @@ module.exports = {
   isoNow,
   getStore,
   setStore,
+  initStore,
   uid
 };

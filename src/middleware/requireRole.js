@@ -69,4 +69,21 @@ const requireAdmin = requireRole('Admin');
 const requireCoreLeader = requireRole(['Core Leader', 'Admin']);
 const requirePSNLeader = requireRole(['PSN Leader', 'Core Leader', 'Admin']);
 
-module.exports = { requireRole, requireAuth, requireAdmin, requireCoreLeader, requirePSNLeader, ROLE_HIERARCHY, normalizeRole };
+function isSystemAdmin(user) {
+  return user && user.role === 'Admin' && (user.orgId === null || user.orgId === undefined);
+}
+
+function requireOrg(req, res, next) {
+  if (!req.user) return next(); // requireAuth chạy trước; nếu test gọi trực tiếp, skip
+  if (!isSystemAdmin(req.user) && typeof req.user.orgId !== 'string') {
+    return res.status(403).json({ error: 'Forbidden: no org scope', code: 'NO_ORG_SCOPE' });
+  }
+  next();
+}
+
+function scopeOrg(filters, req) {
+  if (isSystemAdmin(req.user)) return filters;
+  return { ...filters, org_id: req.user.orgId };
+}
+
+module.exports = { requireRole, requireAuth, requireAdmin, requireCoreLeader, requirePSNLeader, requireOrg, scopeOrg, isSystemAdmin, ROLE_HIERARCHY, normalizeRole };

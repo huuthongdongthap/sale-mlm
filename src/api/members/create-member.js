@@ -24,7 +24,8 @@ async function createMember(req, res) {
         password_hash: member.passwordHash || '',
         role: member.role,
         tier: member.tier,
-        psn_id: member.psnId
+        psn_id: member.psnId,
+        org_id: member.orgId
       });
     }
     logPIIAccessForMember('create', member, req.user.id, req.user.role, req);

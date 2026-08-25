@@ -26,6 +26,7 @@ class Order {
     this.leadEmail = data.leadEmail || null;
     this.leadPhone = data.leadPhone || null;
     this.memberId = data.memberId || null;
+    this.orgId = data.orgId || data.org_id || null;
     this.productId = data.productId || null;
     this.productName = data.productName || null;
     this.productTier = data.productTier || null;
@@ -100,6 +101,7 @@ class Order {
     return {
       id: this.id,
       memberId: this.memberId,
+      orgId: this.orgId,
       productId: this.productId,
       productName: this.productName,
       productTier: this.productTier,
@@ -130,6 +132,7 @@ class Order {
       leadName: this.leadName,
       leadEmail: this.leadEmail,
       leadPhone: this.leadPhone,
+      orgId: this.orgId,
       metadata: this.metadata,
     };
   }

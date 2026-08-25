@@ -9,8 +9,17 @@ function getStore() {
   return leads;
 }
 
-function setStore() {
+function setStore(newLeads) {
+  leads.length = 0;
+  if (newLeads && Array.isArray(newLeads)) {
+    leads.push(...newLeads);
+  }
   return leads;
 }
 
-module.exports = { leads, getStore, setStore };
+function initStore() {
+  const { Lead } = require('./lead');
+  leads.push(...Lead.createSeededLeads());
+}
+
+module.exports = { leads, getStore, setStore, initStore };

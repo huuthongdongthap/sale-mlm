@@ -25,10 +25,10 @@ class LeadsOps {
   async createLead(data) {
     // leads.email is NOT NULL in the schema; store the plaintext alongside
     // the encrypted copy (mirrors members handling).
-    return bindRun(this.db.prepare("INSERT INTO leads (id, name, email, email_encrypted, phone_encrypted, notes_encrypted, lead_stage, psn_id, source, status, funnel_level, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
+    return bindRun(this.db.prepare("INSERT INTO leads (id, name, email, email_encrypted, phone_encrypted, notes_encrypted, lead_stage, psn_id, org_id, source, status, funnel_level, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
       data.id, data.name || null, data.email || '', data.encryptedEmail || '',
       data.encryptedPhone || '', data.encryptedNotes || null,
-      data.leadStage || 'lead_magnet', data.psnId || null,
+      data.leadStage || 'lead_magnet', data.psnId || null, data.org_id || null,
       data.source || 'organic', data.status || 'new', data.funnelLevel !== undefined ? 'L' + data.funnelLevel : 'L0',
       new Date().toISOString(), new Date().toISOString()
     );
@@ -42,6 +42,7 @@ class LeadsOps {
     let sql = "SELECT * FROM leads WHERE 1=1";
     const params = [];
     if (filters.psnId) { sql += " AND psn_id = ?"; params.push(filters.psnId); }
+    if (filters.org_id) { sql += " AND org_id = ?"; params.push(filters.org_id); }
     if (filters.stage) { sql += " AND lead_stage = ?"; params.push(filters.stage); }
     if (filters.status) { sql += " AND status = ?"; params.push(filters.status); }
     sql += " ORDER BY created_at DESC";

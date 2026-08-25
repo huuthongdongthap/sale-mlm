@@ -10,6 +10,7 @@ function rowToOrder(row) {
   return new Order({
     id: row.id,
     memberId: row.member_id,
+    orgId: row.org_id,
     productId: row.product_id,
     productName: row.product_name,
     productTier: row.product_tier,
@@ -42,6 +43,7 @@ async function create(db, data) {
   const created = await db.createOrder({
     id: order.id,
     memberId: order.memberId,
+    org_id: order.orgId,
     productId: order.productId,
     productName: order.productName,
     productTier: order.productTier,

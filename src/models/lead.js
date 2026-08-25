@@ -41,6 +41,7 @@ class Lead {
     this.promotedFromId = data.promotedFromId || null; // member.id when converted
     this.quizAnswers = data.quizAnswers || null;
     this.notes = data.notes || null;
+    this.orgId = data.orgId || data.org_id || null;
     this.createdAt = data.createdAt || isoNow();
     this.updatedAt = data.updatedAt || isoNow();
     this.lastContactedAt = data.lastContactedAt || null;
@@ -95,6 +96,7 @@ class Lead {
       promotedFromId: this.promotedFromId,
       quizAnswers: this.quizAnswers,
       notesMasked: !!this._encryptedNotes,
+      orgId: this.orgId,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       lastContactedAt: this.lastContactedAt,
@@ -199,7 +201,7 @@ Lead.createSeededLeads = function () {
 
   /** Helper to build lead then assign a fake 1-based display id */
   const make = (overrides) => {
-    const l = new Lead(overrides);
+    const l = new Lead({ ...overrides, orgId: 'org-default' });
     l.displayId = nextId++;
     return l;
   };
@@ -240,6 +242,18 @@ Lead.createSeededLeads = function () {
   return leads;
 };
 
+function initStore() {
+  leads.push(...Lead.createSeededLeads());
+}
+
+function setStore(newLeads) {
+  leads.length = 0;
+  if (newLeads && Array.isArray(newLeads)) {
+    leads.push(...newLeads);
+  }
+  return leads;
+}
+
 module.exports = {
   Lead,
   STATUSES,
@@ -248,5 +262,6 @@ module.exports = {
   TIER_COLORS,
   SOURCES,
   getStore: () => leads,
-  setStore: () => leads,
+  setStore,
+  initStore,
 };

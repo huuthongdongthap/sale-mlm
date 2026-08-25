@@ -23,9 +23,9 @@ class PsnOps {
   }
 
   async createPSN(data) {
-    return bindRun(this.db.prepare("INSERT INTO psn (id, name, leader_id, team_size, target_revenue_vnd, actual_revenue_vnd, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
+    return bindRun(this.db.prepare("INSERT INTO psn (id, name, leader_id, team_size, target_revenue_vnd, actual_revenue_vnd, org_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"),
       data.id || crypto.randomUUID(), data.name, data.leaderId || null, data.teamSize || 0,
-      data.targetRevenueVND || 0, data.actualRevenueVND || 0,
+      data.targetRevenueVND || 0, data.actualRevenueVND || 0, data.org_id || null,
       new Date().toISOString(), new Date().toISOString()
     );
   }
@@ -38,6 +38,7 @@ class PsnOps {
     let sql = "SELECT * FROM psn WHERE 1=1";
     const params = [];
     if (filters.leaderId) { sql += " AND leader_id = ?"; params.push(filters.leaderId); }
+    if (filters.org_id) { sql += " AND org_id = ?"; params.push(filters.org_id); }
     sql += " ORDER BY created_at DESC";
     return bindAll(this.db.prepare(sql), ...params);
   }

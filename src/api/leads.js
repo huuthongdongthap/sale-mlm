@@ -19,7 +19,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { requireAuth, requirePSNLeader, requireAdmin } = require('../middleware/requireRole');
+const { requireAuth, requirePSNLeader, requireAdmin, isSystemAdmin, scopeOrg } = require('../middleware/requireRole');
 const { Lead, STATUSES, FUNNEL_LEVELS, TIER_LABELS, TIER_COLORS } = require('../models/lead');
 const { ROLE_HIERARCHY } = require('../middleware/requireRole');
 
@@ -37,16 +37,24 @@ function visibleLeadScope(req) {
 
   if (!role || !userId) return []; // unauthenticated edge case
 
-  const level = ROLE_HIERARCHY[role] || 1;
-  if (level >= 3) return allLeads(); // Core / Admin → all
-
-  if (role === 'PSN Leader') {
-    // PSN Leader: all leads (downline scoping deferred to referral tree query)
+  // System admin bypasses all org scoping
+  if (isSystemAdmin(req.user)) {
     return allLeads();
   }
 
-  // Member: own leads only
-  return allLeads().filter(l => l.assignedCtvId === userId);
+  // Filter by org_id first
+  const orgScoped = allLeads().filter(l => l.orgId === req.user.orgId);
+
+  const level = ROLE_HIERARCHY[role] || 1;
+  if (level >= 3) return orgScoped; // Core / Admin → all in own org
+
+  if (role === 'PSN Leader') {
+    // PSN Leader: all leads in own org (downline scoping deferred to referral tree query)
+    return orgScoped;
+  }
+
+  // Member: own leads only in own org
+  return orgScoped.filter(l => l.assignedCtvId === userId);
 }
 
 function pluck(lead, isAdmin) {
@@ -130,6 +138,7 @@ router.post('/', requirePSNLeader, (req, res) => {
     return res.status(400).json({ error: 'name is required', code: 'MISSING_NAME' });
   }
 
+  const isSystemAdmin = req.user?.orgId === null;
   const lead = new Lead({
     name,
     phone,
@@ -140,6 +149,7 @@ router.post('/', requirePSNLeader, (req, res) => {
     quizAnswers,
     metadata,
     promotedFromId,
+    orgId: isSystemAdmin ? null : req.user.orgId,
   });
   lead.displayId = allLeads().length ? Math.max(...allLeads().map(l => l.displayId || 0)) + 1 : 1;
 

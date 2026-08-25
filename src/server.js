@@ -22,12 +22,20 @@ const DatabaseAdapter = require('./db/adapter');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Detect if running in Cloudflare Workers (D1 binding available)
+const isWorkers = typeof DB !== 'undefined';
+
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
 if (!ALLOWED_ORIGIN) {
   throw new Error('ALLOWED_ORIGIN environment variable is required — refusing to start with wide-open CORS');
 }
 app.use(cors({ origin: ALLOWED_ORIGIN }));
-app.use(express.json());
+
+// In Workers, body parsing is handled by express-adapter.js to avoid
+// bundling body-parser (which requires Node.js streams not available in Workers)
+if (!isWorkers) {
+  app.use(express.json());
+}
 
 // Rate limiting — production hardening. Disabled in dev/test so local runs
 // and the Jest suite are never throttled. Auth routes are the strictest tier.

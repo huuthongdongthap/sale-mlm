@@ -3,7 +3,8 @@
 * Wired to actual migration schema (0001_initial_schema.sql)
 *
 * Tables used: members, habits, kpi_rollups, training_progress,
-* psn_health_history, alerts_log, audit_trail, referrals, onboarding_sessions
+* psn_health_history, alerts_log, audit_trail, referrals, onboarding_sessions,
+* leads, orders, psn, orgs
 */
 
 class DatabaseAdapter {
@@ -14,17 +15,18 @@ this.db = db;
 // ─── Members ───
 async getMember(id) {
 const result = await this.db.prepare(
-'SELECT id, name, email, email_encrypted, role, tier, psn_id, created_at FROM members WHERE id = ?'
+'SELECT id, name, email, email_encrypted, role, tier, psn_id, org_id, created_at FROM members WHERE id = ?'
 ).bind(id).first();
 return result;
 }
 
 async listMembers(filters = {}) {
-let query = 'SELECT id, name, email, role, tier, psn_id, created_at FROM members WHERE 1=1';
+let query = 'SELECT id, name, email, role, tier, psn_id, org_id, created_at FROM members WHERE 1=1';
 const params = [];
 if (filters.tier) { query += ' AND tier = ?'; params.push(filters.tier); }
 if (filters.role) { query += ' AND role = ?'; params.push(filters.role); }
 if (filters.psn_id) { query += ' AND psn_id = ?'; params.push(filters.psn_id); }
+if (filters.org_id) { query += ' AND org_id = ?'; params.push(filters.org_id); }
 query += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
 params.push(filters.limit || 50, filters.offset || 0);
 return await this.db.prepare(query).bind(...params).all();
@@ -33,15 +35,15 @@ return await this.db.prepare(query).bind(...params).all();
 async createMember(data) {
 const id = crypto.randomUUID();
 await this.db.prepare(
-'INSERT INTO members (id, name, email, email_encrypted, password_hash, role, tier, psn_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+'INSERT INTO members (id, name, email, email_encrypted, password_hash, role, tier, psn_id, org_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
 ).bind(
-id, data.name, data.email, data.email || '', data.password_hash || '', data.role || 'Member', data.tier || 1, data.psn_id || null
+id, data.name, data.email, data.email || '', data.password_hash || '', data.role || 'Member', data.tier || 1, data.psn_id || null, data.org_id || null
 ).run();
 return this.getMember(id);
 }
 
 async updateMember(id, data) {
-const allowed = ['name', 'email', 'role', 'tier', 'psn_id', 'password_hash'];
+const allowed = ['name', 'email', 'role', 'tier', 'psn_id', 'org_id', 'password_hash'];
 const fields = Object.keys(data).filter(k => allowed.includes(k));
 if (!fields.length) return this.getMember(id);
 const setClause = fields.map(f => `${f} = ?`).join(', ');
@@ -190,6 +192,43 @@ async updateOnboardingSession(id, status) {
 await this.db.prepare(
 "UPDATE onboarding_sessions SET status = ? WHERE id = ?"
 ).bind(status, id).run();
+}
+
+// ─── Orgs ───
+async getOrg(id) {
+return await this.db.prepare('SELECT * FROM orgs WHERE id = ?').bind(id).first();
+}
+
+async listOrgs(filters = {}) {
+let query = 'SELECT * FROM orgs WHERE 1=1';
+const params = [];
+if (filters.slug) { query += ' AND slug = ?'; params.push(filters.slug); }
+query += ' ORDER BY created_at DESC';
+return await this.db.prepare(query).bind(...params).all();
+}
+
+async createOrg(data) {
+const id = data.id || crypto.randomUUID();
+await this.db.prepare(
+'INSERT INTO orgs (id, name, slug, created_at) VALUES (?, ?, ?, ?)'
+).bind(id, data.name, data.slug || null, new Date().toISOString()).run();
+return this.getOrg(id);
+}
+
+async updateOrg(id, data) {
+const allowed = ['name', 'slug'];
+const fields = Object.keys(data).filter(k => allowed.includes(k));
+if (!fields.length) return this.getOrg(id);
+const setClause = fields.map(f => `${f} = ?`).join(', ');
+const values = fields.map(f => data[f]);
+await this.db.prepare(
+`UPDATE orgs SET ${setClause} WHERE id = ?`
+).bind(...values, id).run();
+return this.getOrg(id);
+}
+
+async deleteOrg(id) {
+return await this.db.prepare('DELETE FROM orgs WHERE id = ?').bind(id).run();
 }
 }
 

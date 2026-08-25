@@ -24,12 +24,13 @@ class OrdersOps {
 
   async createOrder(data) {
     const totalVND = Math.round((data.unitPriceVND || 0) * (data.quantity || 1));
-    bindRun(this.db.prepare("INSERT INTO orders (id, member_id, product_id, product_name, product_tier, quantity, unit_price_vnd, total_vnd, status, payment_method, payment_status, payment_reference, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)").bind(
+    bindRun(this.db.prepare("INSERT INTO orders (id, member_id, product_id, product_name, product_tier, quantity, unit_price_vnd, total_vnd, status, payment_method, payment_status, payment_reference, org_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)").bind(
       data.id, data.memberId || null, data.productId || null,
       data.productName || null, data.productTier || null,
       data.quantity || 1, data.unitPriceVND || 0, totalVND,
       data.status || 'pending', data.paymentMethod || 'cod',
       data.paymentStatus || 'pending', data.paymentReference || null,
+      data.org_id || null,
       new Date().toISOString(), new Date().toISOString()
     ));
     return this.getOrder(data.id);
@@ -43,6 +44,7 @@ class OrdersOps {
     let sql = "SELECT * FROM orders WHERE 1=1";
     const params = [];
     if (filters.memberId) { sql += " AND member_id = ?"; params.push(filters.memberId); }
+    if (filters.org_id) { sql += " AND org_id = ?"; params.push(filters.org_id); }
     if (filters.status) { sql += " AND status = ?"; params.push(filters.status); }
     if (filters.paymentStatus) { sql += " AND payment_status = ?"; params.push(filters.paymentStatus); }
     if (filters.productTier) { sql += " AND product_tier = ?"; params.push(filters.productTier); }

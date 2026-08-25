@@ -4,12 +4,18 @@
 
 const { getStore } = require('../../models/member');
 const { logPIIAccessForMember } = require('./pii-logger');
+const { isSystemAdmin } = require('../../middleware/requireRole');
 
 function listMembers(req, res) {
   try {
     const members = getStore();
     const { tier, status, role, limit = '50', offset = '0', includePII = 'false' } = req.query;
+
+    // Org scoping - system admin sees all, others see only their org
     let result = [...members];
+    if (!isSystemAdmin(req.user)) {
+      result = result.filter(m => m.orgId === req.user.orgId);
+    }
 
     if (tier) {
       const tierNum = parseInt(tier);
