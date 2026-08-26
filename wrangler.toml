@@ -42,8 +42,10 @@ name = "hive-warfare-os-staging"
 NODE_ENV = "staging"
 [[env.staging.d1_databases]]
 binding = "DB"
-database_name = "hive-warfare-db"
-database_id = "def140e1-c5bb-48e5-a79f-e9368321c9d0"
+database_name = "hive-warfare-db-staging"
+database_id = "05434b11-2512-4710-999d-acc33966340b"
+# Isolation: separate DB from prod. ID 05434b11 reused from inactive pymid-tag-cache
+# slot (0 tables, 0 queries/24h) since free tier D1 quota is exhausted.
 [[env.staging.kv_namespaces]]
 binding = "CACHE"
 id = "b6bbaefaf3984faa8f47d2b65fdcbfa4"
@@ -55,5 +57,15 @@ bucket_name = "hive-warfare-storage"
 name = "hive-warfare-os"
 [env.production.vars]
 NODE_ENV = "production"
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "hive-warfare-db"
+database_id = "def140e1-c5bb-48e5-a79f-e9368321c9d0"
+[[env.production.kv_namespaces]]
+binding = "CACHE"
+id = "b6bbaefaf3984faa8f47d2b65fdcbfa4"
+[[env.production.r2_buckets]]
+binding = "STORAGE"
+bucket_name = "hive-warfare-storage"
 
 
