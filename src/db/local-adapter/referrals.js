@@ -12,24 +12,33 @@ function bindAll(stmt, ...params) {
   if (params.length) stmt.bind(...params);
   return stmt.all();
 }
-function bindFirst(stmt, ...params) {
-  if (params.length) stmt.bind(...params);
-  return stmt.get();
-}
 
 class ReferralsOps {
   constructor(db) {
     this.db = db;
   }
 
-  async createReferral(referrerId, refereeId, refereeEmail, refereeName) {
-    return bindRun(this.db.prepare('INSERT INTO referrals (id, referrer_id, referee_id, referee_email, referee_name, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)').bind(
-      crypto.randomUUID(), referrerId, refereeId, refereeEmail, refereeName, 'pending', new Date().toISOString()
+  async createReferral(referralId, referrerId, refereeId) {
+    return bindRun(this.db.prepare('INSERT INTO referrals (id, referrer_id, referee_id, referee_email, reward_status, created_at) VALUES (?, ?, ?, ?, ?, ?)').bind(
+      referralId || crypto.randomUUID(), referrerId, refereeId, '', 'pending', new Date().toISOString()
     ));
   }
 
   async getReferralsByReferrer(referrerId) {
     return bindAll(this.db.prepare('SELECT * FROM referrals WHERE referrer_id = ? ORDER BY created_at DESC').bind(referrerId));
+  }
+
+  async activateReferral(referralId) {
+    await bindRun(this.db.prepare("UPDATE referrals SET reward_status = 'active' WHERE id = ? AND reward_status = 'pending'").bind(referralId));
+    return bindAll(this.db.prepare('SELECT * FROM referrals WHERE id = ?').bind(referralId))[0] || null;
+  }
+
+  async findPendingByReferee(refereeId) {
+    return bindAll(this.db.prepare("SELECT * FROM referrals WHERE referee_id = ? AND reward_status = 'pending'").bind(refereeId));
+  }
+
+  async getActiveReferralCounts() {
+    return bindAll(this.db.prepare("SELECT referrer_id, COUNT(*) AS active_count FROM referrals WHERE reward_status = 'active' GROUP BY referrer_id ORDER BY active_count DESC"));
   }
 }
 

@@ -11,6 +11,8 @@ const alertRoutes = require('./api/alerts');
 const leadsRoutes = require('./api/leads');
 const ordersHandler = require('./api/orders').handler;
 const analyticsFunnelRoutes = require('./api/analytics-funnel');
+const leaderDashboardRoutes = require('./features/leaderDashboard');
+const referral = require('./features/referral');
 const { initRules, evaluateAll, getRules, getAlertLog, getAlertSummary, acknowledgeAlert, addRule, updateRule, deleteRule } = require('./analytics/alertEngine');
 const { startOnboarding, getSession, advanceDay, generateNudge, getProgress, getActiveSessions, checkGraduation } = require('./agents/onboardingBot');
 const { assignCurriculum, getRecord, updateProgress, getProgress: getTrainingProgress, getActiveTrainees, getTraineesNeedingAttention, getTraineesByPSN } = require('./agents/trainingOps');
@@ -58,6 +60,9 @@ try {
 } catch (err) {
   console.warn('[server] Database adapter not available, running without persistence:', err.message);
   db = null;
+} finally {
+  // Expose for route handlers that need data access (e.g. /scaling/progress)
+  app.set('db', db);
 }
 
 // Seed database if empty
@@ -246,6 +251,9 @@ app.use('/api/habits', apiLimiter, habitRoutes);
 app.use('/api/members', apiLimiter, memberRoutes);
 app.use('/api/kpi', apiLimiter, kpiRoutes);
 // app.use('/api/alerts', alertRoutes);  // Legacy alerts - replaced by inline routes below
+// Referral + leader dashboard (persisted via DB adapter)
+if (db) referral.setReferralStore(db);
+app.use('/scaling', apiLimiter, requireAuth, leaderDashboardRoutes);
 
 // Analytics routes
 app.post('/api/analytics/psn-health', (req, res) => {

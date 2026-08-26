@@ -2,18 +2,14 @@
  * PHASE 5: Referral System
  *
  * Incentivize existing members to recruit new members.
- * Features:
- *   - Referral tracking
- *   - Reward tiers
- *   - Leaderboard
- *   - Payout calculation
+ * Persistence goes through the database adapter's referrals ops so records
+ * survive Worker cold starts (previously in-memory arrays).
+ *
+ * Schema note: the referrals table tracks reward state in reward_status
+ * ('pending' | 'active' | 'paid'), not a bare status column.
  */
 
 const crypto = require('crypto');
-
-// In-memory referral storage
-const referrals = [];
-const rewards = [];
 
 /**
  * Reward tiers
@@ -26,6 +22,21 @@ const REWARD_TIERS = [
   { level: 5, referrals: 20, reward: 'Elite status + 3M bonus' }
 ];
 
+let db = null;
+
+/**
+ * Bind the feature to a persistence adapter exposing referral operations.
+ * Accepts the LocalDatabaseAdapter/D1 adapter directly or its referrals ops.
+ */
+function setReferralStore(adapter) {
+  db = adapter && adapter.referrals ? adapter.referrals : adapter;
+}
+
+function requireStore() {
+  if (!db) throw new Error('Referral store not initialized — call setReferralStore(db)');
+  return db;
+}
+
 /**
  * Create referral code for a member
  */
@@ -37,133 +48,82 @@ function createReferralCode(memberId) {
 /**
  * Record a referral
  */
-function recordReferral(referrerId, newMemberId) {
-  const referral = {
-    id: crypto.randomUUID(),
+async function recordReferral(referrerId, newMemberId) {
+  const store = requireStore();
+  const id = crypto.randomUUID();
+  await store.createReferral(id, referrerId, newMemberId);
+  return {
+    id,
     referrerId,
-    newMemberId,
-    referredAt: new Date().toISOString(),
-    status: 'pending', // pending, active, rewarded
-    newMemberJoinDate: new Date().toISOString()
+    refereeId: newMemberId,
+    status: 'pending',
+    createdAt: new Date().toISOString()
   };
-
-  referrals.push(referral);
-
-  // Check if referrer qualifies for reward
-  checkReferralReward(referrerId);
-
-  return referral;
-}
-
-/**
- * Check if referrer qualifies for reward
- */
-function checkReferralReward(referrerId) {
-  const referrerReferrals = referrals.filter(r => r.referrerId === referrerId && r.status === 'active');
-  const count = referrerReferrals.length;
-
-  for (const tier of REWARD_TIERS) {
-    if (count >= tier.referrals) {
-      // Check if already rewarded for this tier
-      const existingReward = rewards.find(r => r.referrerId === referrerId && r.level === tier.level);
-      if (!existingReward) {
-        const reward = {
-          id: crypto.randomUUID(),
-          referrerId,
-          level: tier.level,
-          referrals: count,
-          reward: tier.reward,
-          awardedAt: new Date().toISOString()
-        };
-        rewards.push(reward);
-        return reward;
-      }
-    }
-  }
-
-  return null;
 }
 
 /**
  * Get referral stats for a member
  */
-function getReferralStats(memberId) {
-  const memberReferrals = referrals.filter(r => r.referrerId === memberId);
-  const activeReferrals = memberReferrals.filter(r => r.status === 'active');
-  const memberRewards = rewards.filter(r => r.referrerId === memberId);
-
+async function getReferralStats(memberId) {
+  const store = requireStore();
+  const rows = await store.getReferralsByReferrer(memberId);
+  const activeCount = rows.filter(r => r.reward_status === 'active').length;
+  const tier = REWARD_TIERS.filter(t => activeCount >= t.referrals).pop() || null;
   return {
-    totalReferrals: memberReferrals.length,
-    activeReferrals: activeReferrals.length,
-    rewards: memberRewards,
-    nextTier: getNextTier(activeReferrals.length),
-    referralCode: createReferralCode(memberId)
+    memberId,
+    totalReferrals: rows.length,
+    activeReferrals: activeCount,
+    currentTier: tier ? tier.level : 0,
+    nextTier: REWARD_TIERS.find(t => t.referrals > activeCount) || null
   };
 }
 
 /**
- * Get next reward tier
+ * Get leaderboard of top referrers by active referrals
  */
-function getNextTier(currentCount) {
-  for (const tier of REWARD_TIERS) {
-    if (currentCount < tier.referrals) {
-      return {
-        level: tier.level,
-        referralsNeeded: tier.referrals - currentCount,
-        reward: tier.reward
-      };
-    }
-  }
-  return null; // Max tier reached
+async function getLeaderboard(limit = 10) {
+  const store = requireStore();
+  const allRows = await store.getActiveReferralCounts();
+  return allRows
+    .slice(0, limit)
+    .map(r => ({
+      referrerId: r.referrer_id,
+      count: r.active_count
+    }));
 }
 
 /**
- * Get referral leaderboard
+ * Activate a referral (when the referred member completes onboarding)
  */
-function getLeaderboard(limit = 10) {
-  const stats = {};
-
-  for (const referral of referrals) {
-    if (referral.status === 'active') {
-      if (!stats[referral.referrerId]) {
-        stats[referral.referrerId] = { referrerId: referral.referrerId, count: 0, rewards: 0 };
-      }
-      stats[referral.referrerId].count++;
-    }
-  }
-
-  for (const reward of rewards) {
-    if (stats[reward.referrerId]) {
-      stats[reward.referrerId].rewards++;
-    }
-  }
-
-  return Object.values(stats)
-    .sort((a, b) => b.count - a.count)
-    .slice(0, limit);
+async function activateReferral(referralId) {
+  const store = requireStore();
+  const updated = await store.activateReferral(referralId);
+  if (!updated) return null;
+  const stats = await getReferralStats(updated.referrer_id);
+  const tier = REWARD_TIERS.find(t => t.referrals === stats.activeReferrals) || null;
+  return tier || { level: null, reward: 'No tier change' };
 }
 
 /**
- * Activate referral (when new member completes onboarding)
+ * Auto-activate all pending referrals whose referee just became a member
+ * (called from the member-create flow).
  */
-function activateReferral(referralId) {
-  const referral = referrals.find(r => r.id === referralId);
-  if (!referral) return null;
-
-  referral.status = 'active';
-  referral.activatedAt = new Date().toISOString();
-
-  // Check for reward
-  return checkReferralReward(referral.referrerId);
+async function autoActivateForReferee(memberId) {
+  const store = requireStore();
+  const rows = await store.findPendingByReferee(memberId);
+  for (const row of rows) {
+    await activateReferral(row.id);
+  }
+  return rows.length;
 }
 
 module.exports = {
+  setReferralStore,
   createReferralCode,
   recordReferral,
   getReferralStats,
   getLeaderboard,
   activateReferral,
-  REWARD_TIERS,
-  referrals,
-  rewards
+  autoActivateForReferee,
+  REWARD_TIERS
 };

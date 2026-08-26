@@ -134,8 +134,11 @@ class LocalDatabaseAdapter {
   async getAuditTrail(filters = {}) { return this.audit.getAuditTrail(filters); }
   async logAudit(data) { return this.audit.logAudit(data); }
 
-  async createReferral(referrerId, refereeId, refereeEmail, refereeName) { return this.referrals.createReferral(referrerId, refereeId, refereeEmail, refereeName); }
+  async createReferral(referrerId, refereeId) { return this.referrals.createReferral(null, referrerId, refereeId); }
   async getReferralsByReferrer(referrerId) { return this.referrals.getReferralsByReferrer(referrerId); }
+  async activateReferral(referralId) { return this.referrals.activateReferral(referralId); }
+  async getActiveReferralCounts() { return this.referrals.getActiveReferralCounts(); }
+  async findPendingByReferee(refereeId) { return this.referrals.findPendingByReferee(refereeId); }
 
   async recordTrainingProgress(memberId, type, value = {}) { return this.training.recordTrainingProgress(memberId, type, value); }
   async getTrainingProgress(memberId, type) { return this.training.getTrainingProgress(memberId, type); }
