@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
   JEST_JUNIT_OUTPUT_DIR: ./coverage/junit
 
 jobs:
@@ -59,7 +59,7 @@ jobs:
         run: npm ci --silent
 
       - name: Run Jest tests with coverage
-        run: npx jest --coverage --silent --reporters=default --reporters=jest-junit
+        run: npx jest --coverage --silent --runInBand --reporters=default --reporters=jest-junit
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v4
