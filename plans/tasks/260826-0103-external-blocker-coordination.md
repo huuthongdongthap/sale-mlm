@@ -12,7 +12,8 @@ Updated 2026-08-26 via `wrangler secret list` (prod worker `hive-warfare-os`, st
 | ENCRYPTION_KEY | CF secret | ✅ Set | ⚠️ Verify | Operator confirm |
 | ADMIN_TOKEN | CF secret | ✅ Set | — | Done |
 | PASSWORD_SALT | CF secret | ✅ Set | ⚠️ Verify | Operator confirm |
-| ALLOWED_ORIGIN | CF secret/var | ❌ **Not set** | ❌ Not set | **Blocker** — server refuses boot without it (`src/server.js:30-34`) |
+| ALLOWED_ORIGIN | CF secret/var | ✅ Set (`https://hive-dashboard-0rc.pages.dev`) | ✅ Set | Done 2026-08-26 |
+| api.droppii.vn DNS | — | ❌ Points to Droppii's own infra (404 on /health), NOT this Worker | n/a | ~~Blocker~~ **Workaround live:** workers.dev URL `https://hive-warfare-os.sadec-marketing-hub.workers.dev` verified `/health` 200 + CORS locked |
 | SENTRY_DSN | CF secret | ❌ Not set | ❌ Not set | Optional pre-pilot, required before scale |
 | ZALO_ALERT_WEBHOOK | CF secret | ❌ Not set | ❌ Not set | Optional pre-pilot |
 | api.droppii.vn DNS | — | ❌ Points to Droppii's own infra (404 on /health), NOT this Worker | n/a | **Blocker** — wire Custom Domain in CF dashboard or use workers.dev URL |
@@ -43,11 +44,19 @@ Updated 2026-08-26 via `wrangler secret list` (prod worker `hive-warfare-os`, st
 - RUNBOOK §136-141 documents setup flow for ZALO + SENTRY
 - `wrangler secret list --name hive-warfare-os` → `[ADMIN_TOKEN, ENCRYPTION_KEY, JWT_SECRET, PASSWORD_SALT]`
 
+### 2026-08-26 (afternoon) — CORS + deploy progress
+1. **ALLOWED_ORIGIN set on both workers** via local wrangler OAuth (`hive-dashboard-0rc.pages.dev`, the live Pages frontend — HTTP 200 verified).
+2. **Security fix shipped (`ae5ae2a`):** worker entry `src/workers/index-native.js` hardcoded `origin: '*'` — secret was never read. Now fail-closed: echoes only configured origin; 503 if secret missing. Verified live: evil origin gets no ACAO header, dashboard origin echoed.
+3. **Backend deployed to prod** version `247bdbff`+ (manual wrangler, OAuth). `/health` 200 at workers.dev URL.
+4. **CI deploys still no-op** — GitHub secrets `CF_API_TOKEN`/`CF_API_ACCOUNT_ID` unset; "Deploy to Production" job skips silently. Operator must add repo secrets for push-to-deploy.
+5. **Cron trigger partial error** on deploy ("account plan limits") — script+routes deploy fine, schedules API call fails. Non-blocking.
+
 ## Acceptance
-- [ ] ALLOWED_ORIGIN set as secret on both workers
-- [ ] api.droppii.vn resolves to the Worker (curl /health returns `{"ok":true}`) OR pilot uses workers.dev URL
+- [x] ALLOWED_ORIGIN set as secret on both workers (2026-08-26)
+- [x] Pilot uses workers.dev URL — `https://hive-warfare-os.sadec-marketing-hub.workers.dev` `/health` → `{"ok":true}` (custom domain still pending, demoted to nice-to-have)
 - [ ] PASSWORD_SALT verified against seed-account hashes
 - [ ] Seed passwords rotated
+- [ ] GitHub secrets CF_API_TOKEN + CF_API_ACCOUNT_ID set (CI deploy gate)
 - [ ] SENTRY_DSN + ZALO_ALERT_WEBHOOK set before scale-up (not launch-blocking)
 
 This task ticket remains open until manual confirmation.
