@@ -15,12 +15,20 @@ import { randomUUID } from 'node:crypto';
 
 const app = new Hono();
 
-// CORS
-app.use('*', cors({
-  origin: '*',
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization'],
-}));
+// CORS — locked to the ALLOWED_ORIGIN secret (dashboard Pages origin).
+// Fail-closed: refuse to serve if the secret is missing, mirroring
+// src/server.js so a wide-open wildcard can never ship silently.
+app.use('*', async (c, next) => {
+  const allowed = c.env.ALLOWED_ORIGIN;
+  if (!allowed) {
+    return c.json({ error: 'ALLOWED_ORIGIN not configured', code: 'CORS_NOT_CONFIGURED' }, 503);
+  }
+  return cors({
+    origin: allowed,
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+  })(c, next);
+});
 
 // Error handling
 app.onError((err, c) => {
