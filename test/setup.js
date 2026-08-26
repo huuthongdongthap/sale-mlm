@@ -3,9 +3,14 @@
  */
 
 const crypto = require('crypto');
+const { hashPassword } = require('../src/auth/password');
 
 // Suppress console.error in tests unless needed
 global.console.error = jest.fn();
+
+// PASSWORD_SALT must exist before hashPassword() runs below (the canonical
+// default is set with the other env vars further down; idempotent either way).
+process.env.PASSWORD_SALT = process.env.PASSWORD_SALT || 'test-salt-change-in-production';
 
 // Reset modules before each test
 beforeEach(() => {
@@ -14,14 +19,6 @@ beforeEach(() => {
 
 // Global test utilities
 global.sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-/**
- * Initialize test database with pilot members
- */
-function hashPassword(password) {
-  const salt = process.env.PASSWORD_SALT || 'test-salt';
-  return crypto.pbkdf2Sync(password, salt, 600000, 64, 'sha512').toString('hex');
-}
 
 // Test members with password hashes
 const TEST_MEMBERS = [

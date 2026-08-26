@@ -19,7 +19,7 @@ beforeAll(async () => {
       id: 'admin-001', name: 'Admin', email: 'admin@droppii.vn',
       role: 'Admin', tier: 3, psnId: 'psn-rising-dragon', status: 'active'
     },
-    passwordHash: require('crypto').pbkdf2Sync('admin123', process.env.PASSWORD_SALT, 600000, 64, 'sha512').toString('hex')
+    passwordHash: require('../src/auth/password').hashPassword('admin123')
   }]);
 
   const { app: serverApp } = require('../src/server');

@@ -1,15 +1,9 @@
 const express = require('express');
-const crypto = require('crypto');
 const jwt = require('../auth/jwt');
+const { hashPassword } = require('../auth/password');
 const { Member } = require('../models/member');
 
 const router = express.Router();
-
-function hashPassword(password) {
-  const salt = process.env.PASSWORD_SALT;
-  if (!salt) throw new Error('PASSWORD_SALT env var required');
-  return crypto.pbkdf2Sync(password, salt, 600000, 64, 'sha512').toString('hex');
-}
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;

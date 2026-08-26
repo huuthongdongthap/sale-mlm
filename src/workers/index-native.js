@@ -98,28 +98,10 @@ app.post('/auth/login', async (c) => {
   if (!user) {
     return c.json({ error: 'Invalid credentials', code: 'INVALID_CREDENTIALS' }, 401);
   }
-  // Verify password using PBKDF2 (matching Node.js server implementation).
-  // Web Crypto caps iterations at 100,000 — the Node side uses the same cap.
-  const { subtle } = globalThis.crypto;
-  const encoder = new TextEncoder();
-  const salt = encoder.encode(c.env.PASSWORD_SALT || '');
-  const key = await subtle.importKey(
-    'raw',
-    encoder.encode(body.password),
-    { name: 'PBKDF2' },
-    false,
-    ['deriveBits']
-  );
-  const derivedBits = await subtle.deriveBits(
-    { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-512' },
-    key,
-    512
-  );
-  const passwordHash = Array.from(new Uint8Array(derivedBits))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
-
-  if (passwordHash !== user.password_hash) {
+  // Verify password via the shared PBKDF2 module (same params as Node side).
+  const { verifyWebCrypto } = await import('../auth/password.js');
+  const { ok } = await verifyWebCrypto(body.password, user.password_hash, c.env.PASSWORD_SALT);
+  if (!ok) {
     return c.json({ error: 'Invalid credentials', code: 'INVALID_CREDENTIALS' }, 401);
   }
 
