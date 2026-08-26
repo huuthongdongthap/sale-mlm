@@ -14,7 +14,7 @@
  * 8. Vi Địa (Enclosed) - Limited options, urgent action needed
  * 9. Tử Địa (Death) - Critical situation, do or die
  *
- * Implementation lives in src/api/mock/psn-health/ (focused sub-modules).
- * This file is a thin re-export barrel preserving the original ESM public API.
+ * Implementation lives in src/api/mock/psn-health/ (ESM sub-modules).
+ * This file is a thin re-export barrel preserving the original public API.
  */
-export { handlePSNHealthRequest, mockPSNHealthData } from './psn-health/index.js';
+export { generateMockPSNHealth, generateTrajectory, handlePSNHealthRequest, mockPSNHealthData } from './psn-health/index.js';

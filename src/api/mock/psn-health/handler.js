@@ -1,7 +1,7 @@
 /**
  * Mock PSN Health API — request handler
  */
-const { generateMockPSNHealth } = require('./states');
+import { generateMockPSNHealth } from './states.js';
 
 // Mock API endpoint handler
 function handlePSNHealthRequest(request) {
@@ -17,4 +17,4 @@ function handlePSNHealthRequest(request) {
   });
 }
 
-module.exports = { handlePSNHealthRequest };
+export { handlePSNHealthRequest };

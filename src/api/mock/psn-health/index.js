@@ -13,18 +13,11 @@
  * 7. Bì Địa (Bad) - Difficult terrain, needs support
  * 8. Vi Địa (Enclosed) - Limited options, urgent action needed
  * 9. Tử Địa (Death) - Critical situation, do or die
- *
- * Implementation lives in src/api/mock/psn-health/
  */
-const { generateMockPSNHealth, generateTrajectory } = require('./states');
-const { handlePSNHealthRequest } = require('./handler');
+import { generateMockPSNHealth, generateTrajectory } from './states.js';
+import { handlePSNHealthRequest } from './handler.js';
 
 // For direct import usage
 const mockPSNHealthData = generateMockPSNHealth();
 
-module.exports = {
-  generateMockPSNHealth,
-  generateTrajectory,
-  handlePSNHealthRequest,
-  mockPSNHealthData
-};
+export { generateMockPSNHealth, generateTrajectory, handlePSNHealthRequest, mockPSNHealthData };

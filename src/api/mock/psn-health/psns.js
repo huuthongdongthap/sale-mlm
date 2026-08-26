@@ -71,4 +71,4 @@ function generateMockPSN(i, states, generateTrajectory) {
   };
 }
 
-module.exports = { generateMockPSN };
+export { generateMockPSN };

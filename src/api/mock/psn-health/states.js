@@ -1,7 +1,7 @@
 /**
  * Mock PSN Health API — 9-state definitions
  */
-const { generateMockPSN } = require('./psns');
+import { generateMockPSN } from './psns.js';
 
 /**
  * Mock data generator for 9-state PSN health classifier
@@ -139,4 +139,4 @@ function generateTrajectory(currentState, weeks) {
   return trajectory;
 }
 
-module.exports = { generateMockPSNHealth, generateTrajectory };
+export { generateMockPSNHealth, generateTrajectory };
